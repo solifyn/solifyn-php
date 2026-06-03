@@ -6,6 +6,7 @@ All URIs are relative to http://localhost:8000, except if the operation defines 
 | ------------- | ------------- | ------------- |
 | [**checkoutCreate()**](CheckoutApi.md#checkoutCreate) | **POST** /v1/checkout/create | Create Checkout Session |
 | [**checkoutCreateCollection()**](CheckoutApi.md#checkoutCreateCollection) | **POST** /v1/checkout/collection/create | Create Collection Checkout Session |
+| [**checkoutCreateSetup()**](CheckoutApi.md#checkoutCreateSetup) | **POST** /v1/checkout/setup-configuration | Create Setup Checkout Configuration |
 | [**checkoutGetSession()**](CheckoutApi.md#checkoutGetSession) | **GET** /v1/checkout/session/{id} | Get Checkout Session Details |
 | [**checkoutPricePreview()**](CheckoutApi.md#checkoutPricePreview) | **GET** /v1/checkout/price-preview | Get Converted Price Preview |
 | [**checkoutSupportedCurrencies()**](CheckoutApi.md#checkoutSupportedCurrencies) | **GET** /v1/checkout/supported-currencies | Get Supported Currencies |
@@ -118,6 +119,61 @@ No authorization required
 
 - **Content-Type**: `application/json`
 - **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `checkoutCreateSetup()`
+
+```php
+checkoutCreateSetup($create_setup_checkout_dto)
+```
+
+Create Setup Checkout Configuration
+
+Create a new checkout session in setup mode for collecting cards without immediate charge.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Solifyn\Api\CheckoutApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$create_setup_checkout_dto = new \Solifyn\Model\CreateSetupCheckoutDto(); // \Solifyn\Model\CreateSetupCheckoutDto
+
+try {
+    $apiInstance->checkoutCreateSetup($create_setup_checkout_dto);
+} catch (Exception $e) {
+    echo 'Exception when calling CheckoutApi->checkoutCreateSetup: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **create_setup_checkout_dto** | [**\Solifyn\Model\CreateSetupCheckoutDto**](../Model/CreateSetupCheckoutDto.md)|  | |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

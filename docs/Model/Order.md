@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **customer** | [**\Solifyn\Model\OrderCustomer**](OrderCustomer.md) | Customer details. |
 **total_amount** | **int** | Total paid amount in cents. |
 **subtotal** | **int** | Subtotal amount in cents. |
+**usd_total** | **float** | Total paid amount converted to USD. | [optional]
 **tax_amount** | **int** | Tax amount in cents. |
 **application_fee** | **int** | Application fee in cents. |
 **amount_after_fees** | **int** | Net amount after fees in cents. |

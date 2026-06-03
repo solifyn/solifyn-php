@@ -81,6 +81,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => 'int',
         'activation_limit' => 'int',
         'is_listed' => 'bool',
+        'is_free' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
         'is_permanently_deleted' => 'bool',
@@ -123,6 +124,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => null,
         'activation_limit' => null,
         'is_listed' => null,
+        'is_free' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
         'is_permanently_deleted' => null,
@@ -163,6 +165,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => false,
         'activation_limit' => false,
         'is_listed' => false,
+        'is_free' => false,
         'created_at' => false,
         'updated_at' => false,
         'is_permanently_deleted' => false,
@@ -283,6 +286,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => 'stock',
         'activation_limit' => 'activationLimit',
         'is_listed' => 'isListed',
+        'is_free' => 'isFree',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
         'is_permanently_deleted' => 'isPermanentlyDeleted',
@@ -323,6 +327,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => 'setStock',
         'activation_limit' => 'setActivationLimit',
         'is_listed' => 'setIsListed',
+        'is_free' => 'setIsFree',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'is_permanently_deleted' => 'setIsPermanentlyDeleted',
@@ -363,6 +368,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => 'getStock',
         'activation_limit' => 'getActivationLimit',
         'is_listed' => 'getIsListed',
+        'is_free' => 'getIsFree',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'is_permanently_deleted' => 'getIsPermanentlyDeleted',
@@ -490,6 +496,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('stock', $data ?? [], null);
         $this->setIfExists('activation_limit', $data ?? [], null);
         $this->setIfExists('is_listed', $data ?? [], null);
+        $this->setIfExists('is_free', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('is_permanently_deleted', $data ?? [], null);
@@ -611,6 +618,9 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['is_listed'] === null) {
             $invalidProperties[] = "'is_listed' can't be null";
+        }
+        if ($this->container['is_free'] === null) {
+            $invalidProperties[] = "'is_free' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -1291,6 +1301,33 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable is_listed cannot be null');
         }
         $this->container['is_listed'] = $is_listed;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_free
+     *
+     * @return bool
+     */
+    public function getIsFree()
+    {
+        return $this->container['is_free'];
+    }
+
+    /**
+     * Sets is_free
+     *
+     * @param bool $is_free Whether the product is free.
+     *
+     * @return self
+     */
+    public function setIsFree($is_free)
+    {
+        if (is_null($is_free)) {
+            throw new \InvalidArgumentException('non-nullable is_free cannot be null');
+        }
+        $this->container['is_free'] = $is_free;
 
         return $this;
     }

@@ -63,6 +63,7 @@ class Order implements ModelInterface, ArrayAccess, \JsonSerializable
         'customer' => '\Solifyn\Model\OrderCustomer',
         'total_amount' => 'int',
         'subtotal' => 'int',
+        'usd_total' => 'float',
         'tax_amount' => 'int',
         'application_fee' => 'int',
         'amount_after_fees' => 'int',
@@ -98,6 +99,7 @@ class Order implements ModelInterface, ArrayAccess, \JsonSerializable
         'customer' => null,
         'total_amount' => null,
         'subtotal' => null,
+        'usd_total' => null,
         'tax_amount' => null,
         'application_fee' => null,
         'amount_after_fees' => null,
@@ -131,6 +133,7 @@ class Order implements ModelInterface, ArrayAccess, \JsonSerializable
         'customer' => false,
         'total_amount' => false,
         'subtotal' => false,
+        'usd_total' => false,
         'tax_amount' => false,
         'application_fee' => false,
         'amount_after_fees' => false,
@@ -244,6 +247,7 @@ class Order implements ModelInterface, ArrayAccess, \JsonSerializable
         'customer' => 'customer',
         'total_amount' => 'total_amount',
         'subtotal' => 'subtotal',
+        'usd_total' => 'usdTotal',
         'tax_amount' => 'tax_amount',
         'application_fee' => 'application_fee',
         'amount_after_fees' => 'amount_after_fees',
@@ -277,6 +281,7 @@ class Order implements ModelInterface, ArrayAccess, \JsonSerializable
         'customer' => 'setCustomer',
         'total_amount' => 'setTotalAmount',
         'subtotal' => 'setSubtotal',
+        'usd_total' => 'setUsdTotal',
         'tax_amount' => 'setTaxAmount',
         'application_fee' => 'setApplicationFee',
         'amount_after_fees' => 'setAmountAfterFees',
@@ -310,6 +315,7 @@ class Order implements ModelInterface, ArrayAccess, \JsonSerializable
         'customer' => 'getCustomer',
         'total_amount' => 'getTotalAmount',
         'subtotal' => 'getSubtotal',
+        'usd_total' => 'getUsdTotal',
         'tax_amount' => 'getTaxAmount',
         'application_fee' => 'getApplicationFee',
         'amount_after_fees' => 'getAmountAfterFees',
@@ -394,6 +400,7 @@ class Order implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('customer', $data ?? [], null);
         $this->setIfExists('total_amount', $data ?? [], null);
         $this->setIfExists('subtotal', $data ?? [], null);
+        $this->setIfExists('usd_total', $data ?? [], null);
         $this->setIfExists('tax_amount', $data ?? [], null);
         $this->setIfExists('application_fee', $data ?? [], null);
         $this->setIfExists('amount_after_fees', $data ?? [], null);
@@ -637,6 +644,33 @@ class Order implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable subtotal cannot be null');
         }
         $this->container['subtotal'] = $subtotal;
+
+        return $this;
+    }
+
+    /**
+     * Gets usd_total
+     *
+     * @return float|null
+     */
+    public function getUsdTotal()
+    {
+        return $this->container['usd_total'];
+    }
+
+    /**
+     * Sets usd_total
+     *
+     * @param float|null $usd_total Total paid amount converted to USD.
+     *
+     * @return self
+     */
+    public function setUsdTotal($usd_total)
+    {
+        if (is_null($usd_total)) {
+            throw new \InvalidArgumentException('non-nullable usd_total cannot be null');
+        }
+        $this->container['usd_total'] = $usd_total;
 
         return $this;
     }

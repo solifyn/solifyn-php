@@ -22,7 +22,7 @@ All URIs are relative to http://localhost:8000, except if the operation defines 
 ## `disputeCreatedPost()`
 
 ```php
-disputeCreatedPost($unknown_base_type)
+disputeCreatedPost($webhook_dispute_payload)
 ```
 
 Dispute Created
@@ -46,10 +46,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$unknown_base_type = new \Solifyn\Model\UNKNOWN_BASE_TYPE(); // \Solifyn\Model\UNKNOWN_BASE_TYPE
+$webhook_dispute_payload = new \Solifyn\Model\WebhookDisputePayload(); // \Solifyn\Model\WebhookDisputePayload
 
 try {
-    $apiInstance->disputeCreatedPost($unknown_base_type);
+    $apiInstance->disputeCreatedPost($webhook_dispute_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->disputeCreatedPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -59,7 +59,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **unknown_base_type** | [**\Solifyn\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)|  | [optional] |
+| **webhook_dispute_payload** | [**\Solifyn\Model\WebhookDisputePayload**](../Model/WebhookDisputePayload.md)|  | [optional] |
 
 ### Return type
 
@@ -81,7 +81,7 @@ void (empty response body)
 ## `disputeLostPost()`
 
 ```php
-disputeLostPost($unknown_base_type)
+disputeLostPost($webhook_dispute_payload)
 ```
 
 Dispute Lost
@@ -105,10 +105,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$unknown_base_type = new \Solifyn\Model\UNKNOWN_BASE_TYPE(); // \Solifyn\Model\UNKNOWN_BASE_TYPE
+$webhook_dispute_payload = new \Solifyn\Model\WebhookDisputePayload(); // \Solifyn\Model\WebhookDisputePayload
 
 try {
-    $apiInstance->disputeLostPost($unknown_base_type);
+    $apiInstance->disputeLostPost($webhook_dispute_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->disputeLostPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -118,7 +118,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **unknown_base_type** | [**\Solifyn\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)|  | [optional] |
+| **webhook_dispute_payload** | [**\Solifyn\Model\WebhookDisputePayload**](../Model/WebhookDisputePayload.md)|  | [optional] |
 
 ### Return type
 
@@ -140,7 +140,7 @@ void (empty response body)
 ## `disputeWonPost()`
 
 ```php
-disputeWonPost($unknown_base_type)
+disputeWonPost($webhook_dispute_payload)
 ```
 
 Dispute Won
@@ -164,10 +164,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$unknown_base_type = new \Solifyn\Model\UNKNOWN_BASE_TYPE(); // \Solifyn\Model\UNKNOWN_BASE_TYPE
+$webhook_dispute_payload = new \Solifyn\Model\WebhookDisputePayload(); // \Solifyn\Model\WebhookDisputePayload
 
 try {
-    $apiInstance->disputeWonPost($unknown_base_type);
+    $apiInstance->disputeWonPost($webhook_dispute_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->disputeWonPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -177,7 +177,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **unknown_base_type** | [**\Solifyn\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)|  | [optional] |
+| **webhook_dispute_payload** | [**\Solifyn\Model\WebhookDisputePayload**](../Model/WebhookDisputePayload.md)|  | [optional] |
 
 ### Return type
 
@@ -199,7 +199,7 @@ void (empty response body)
 ## `licenseCreatedPost()`
 
 ```php
-licenseCreatedPost($license)
+licenseCreatedPost($webhook_license_payload)
 ```
 
 License Created
@@ -223,10 +223,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$license = new \Solifyn\Model\License(); // \Solifyn\Model\License
+$webhook_license_payload = new \Solifyn\Model\WebhookLicensePayload(); // \Solifyn\Model\WebhookLicensePayload
 
 try {
-    $apiInstance->licenseCreatedPost($license);
+    $apiInstance->licenseCreatedPost($webhook_license_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->licenseCreatedPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -236,7 +236,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **license** | [**\Solifyn\Model\License**](../Model/License.md)|  | [optional] |
+| **webhook_license_payload** | [**\Solifyn\Model\WebhookLicensePayload**](../Model/WebhookLicensePayload.md)|  | [optional] |
 
 ### Return type
 
@@ -258,7 +258,7 @@ void (empty response body)
 ## `licenseRevokedPost()`
 
 ```php
-licenseRevokedPost($license)
+licenseRevokedPost($webhook_license_payload)
 ```
 
 License Revoked
@@ -282,10 +282,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$license = new \Solifyn\Model\License(); // \Solifyn\Model\License
+$webhook_license_payload = new \Solifyn\Model\WebhookLicensePayload(); // \Solifyn\Model\WebhookLicensePayload
 
 try {
-    $apiInstance->licenseRevokedPost($license);
+    $apiInstance->licenseRevokedPost($webhook_license_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->licenseRevokedPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -295,7 +295,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **license** | [**\Solifyn\Model\License**](../Model/License.md)|  | [optional] |
+| **webhook_license_payload** | [**\Solifyn\Model\WebhookLicensePayload**](../Model/WebhookLicensePayload.md)|  | [optional] |
 
 ### Return type
 
@@ -317,7 +317,7 @@ void (empty response body)
 ## `paymentCreatedPost()`
 
 ```php
-paymentCreatedPost($unknown_base_type)
+paymentCreatedPost($webhook_payment_payload)
 ```
 
 Payment Created
@@ -341,10 +341,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$unknown_base_type = {"id":"pay_123","status":"created","substatus":"incomplete","customerId":"usr_123","customerEmail":"customer@example.com","customerName":"John Doe","customerUsername":"johndoe","productTitle":"SaaS Pro Access","productRoute":"saas-pro-access","planId":"plan_123","membershipId":"mem_123","membershipStatus":"drafted","billingReason":"subscription_create","amount":"29.00","subtotal":"29.00","usdTotal":"29.00","feeAmount":"1.50","amountAfterFees":"27.50","taxAmount":null,"taxBehavior":null,"taxRefundedAmount":null,"refundedAmount":"0","settlementAmount":"29.00","settlementCurrency":"usd","settlementExchangeRate":null,"currency":"USD","refundable":false,"retryable":false,"autoRefunded":false,"paymentMethod":null,"cardBrand":null,"cardLast4":null,"cardExpMonth":null,"cardExpYear":null,"billingAddress":{"name":"John Doe","line1":"123 Main St","line2":"","city":"San Francisco","state":"CA","country":"US","postal_code":"94105"},"licenseKey":null,"filesSnapshot":null,"checkoutId":null,"discountCode":null,"failureMessage":null,"paidAt":"2026-05-25T20:20:05.000Z","refundedAt":null,"disputeAlertedAt":null,"lastPaymentAttempt":null,"nextPaymentAttempt":"2026-05-25T20:20:05.000Z","createdAt":"2026-05-25T20:20:06.000Z","updatedAt":"2026-05-25T20:20:06.000Z","paymentEventType":"payment.created","lastEventType":"payment.created","businessId":"biz_123"}; // \Solifyn\Model\UNKNOWN_BASE_TYPE
+$webhook_payment_payload = {"id":"pay_123","status":"created","substatus":"incomplete","customerId":"usr_123","customerEmail":"customer@example.com","customerName":"John Doe","customerUsername":"johndoe","productTitle":"SaaS Pro Access","productRoute":"saas-pro-access","planId":"plan_123","membershipId":"mem_123","membershipStatus":"drafted","billingReason":"subscription_create","amount":"29.00","subtotal":"29.00","usdTotal":"29.00","feeAmount":"1.50","amountAfterFees":"27.50","taxAmount":null,"taxBehavior":null,"taxRefundedAmount":null,"refundedAmount":"0","settlementAmount":"29.00","settlementCurrency":"usd","settlementExchangeRate":null,"currency":"USD","refundable":false,"retryable":false,"autoRefunded":false,"paymentMethod":null,"cardBrand":null,"cardLast4":null,"cardExpMonth":null,"cardExpYear":null,"billingAddress":{"name":"John Doe","line1":"123 Main St","line2":"","city":"San Francisco","state":"CA","country":"US","postal_code":"94105"},"licenseKey":null,"filesSnapshot":null,"checkoutId":null,"discountCode":null,"failureMessage":null,"paidAt":"2026-05-25T20:20:05.000Z","refundedAt":null,"disputeAlertedAt":null,"lastPaymentAttempt":null,"nextPaymentAttempt":"2026-05-25T20:20:05.000Z","createdAt":"2026-05-25T20:20:06.000Z","updatedAt":"2026-05-25T20:20:06.000Z","paymentEventType":"payment.created","lastEventType":"payment.created","businessId":"biz_123"}; // \Solifyn\Model\WebhookPaymentPayload
 
 try {
-    $apiInstance->paymentCreatedPost($unknown_base_type);
+    $apiInstance->paymentCreatedPost($webhook_payment_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->paymentCreatedPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -354,7 +354,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **unknown_base_type** | [**\Solifyn\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)|  | [optional] |
+| **webhook_payment_payload** | [**\Solifyn\Model\WebhookPaymentPayload**](../Model/WebhookPaymentPayload.md)|  | [optional] |
 
 ### Return type
 
@@ -494,7 +494,7 @@ void (empty response body)
 ## `refundFailedPost()`
 
 ```php
-refundFailedPost($unknown_base_type)
+refundFailedPost($webhook_refund_payload)
 ```
 
 Refund Failed
@@ -518,10 +518,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$unknown_base_type = new \Solifyn\Model\UNKNOWN_BASE_TYPE(); // \Solifyn\Model\UNKNOWN_BASE_TYPE
+$webhook_refund_payload = new \Solifyn\Model\WebhookRefundPayload(); // \Solifyn\Model\WebhookRefundPayload
 
 try {
-    $apiInstance->refundFailedPost($unknown_base_type);
+    $apiInstance->refundFailedPost($webhook_refund_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->refundFailedPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -531,7 +531,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **unknown_base_type** | [**\Solifyn\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)|  | [optional] |
+| **webhook_refund_payload** | [**\Solifyn\Model\WebhookRefundPayload**](../Model/WebhookRefundPayload.md)|  | [optional] |
 
 ### Return type
 
@@ -553,7 +553,7 @@ void (empty response body)
 ## `refundSucceededPost()`
 
 ```php
-refundSucceededPost($unknown_base_type)
+refundSucceededPost($webhook_refund_payload)
 ```
 
 Refund Succeeded
@@ -577,10 +577,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$unknown_base_type = new \Solifyn\Model\UNKNOWN_BASE_TYPE(); // \Solifyn\Model\UNKNOWN_BASE_TYPE
+$webhook_refund_payload = new \Solifyn\Model\WebhookRefundPayload(); // \Solifyn\Model\WebhookRefundPayload
 
 try {
-    $apiInstance->refundSucceededPost($unknown_base_type);
+    $apiInstance->refundSucceededPost($webhook_refund_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->refundSucceededPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -590,7 +590,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **unknown_base_type** | [**\Solifyn\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)|  | [optional] |
+| **webhook_refund_payload** | [**\Solifyn\Model\WebhookRefundPayload**](../Model/WebhookRefundPayload.md)|  | [optional] |
 
 ### Return type
 
@@ -612,7 +612,7 @@ void (empty response body)
 ## `subscriptionCreatedPost()`
 
 ```php
-subscriptionCreatedPost($unknown_base_type)
+subscriptionCreatedPost($webhook_subscription_payload)
 ```
 
 Subscription Created
@@ -636,10 +636,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$unknown_base_type = new \Solifyn\Model\UNKNOWN_BASE_TYPE(); // \Solifyn\Model\UNKNOWN_BASE_TYPE
+$webhook_subscription_payload = new \Solifyn\Model\WebhookSubscriptionPayload(); // \Solifyn\Model\WebhookSubscriptionPayload
 
 try {
-    $apiInstance->subscriptionCreatedPost($unknown_base_type);
+    $apiInstance->subscriptionCreatedPost($webhook_subscription_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->subscriptionCreatedPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -649,7 +649,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **unknown_base_type** | [**\Solifyn\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)|  | [optional] |
+| **webhook_subscription_payload** | [**\Solifyn\Model\WebhookSubscriptionPayload**](../Model/WebhookSubscriptionPayload.md)|  | [optional] |
 
 ### Return type
 
@@ -671,7 +671,7 @@ void (empty response body)
 ## `subscriptionDeactivatedPost()`
 
 ```php
-subscriptionDeactivatedPost($unknown_base_type)
+subscriptionDeactivatedPost($webhook_subscription_payload)
 ```
 
 Subscription Deactivated
@@ -695,10 +695,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$unknown_base_type = new \Solifyn\Model\UNKNOWN_BASE_TYPE(); // \Solifyn\Model\UNKNOWN_BASE_TYPE
+$webhook_subscription_payload = new \Solifyn\Model\WebhookSubscriptionPayload(); // \Solifyn\Model\WebhookSubscriptionPayload
 
 try {
-    $apiInstance->subscriptionDeactivatedPost($unknown_base_type);
+    $apiInstance->subscriptionDeactivatedPost($webhook_subscription_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->subscriptionDeactivatedPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -708,7 +708,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **unknown_base_type** | [**\Solifyn\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)|  | [optional] |
+| **webhook_subscription_payload** | [**\Solifyn\Model\WebhookSubscriptionPayload**](../Model/WebhookSubscriptionPayload.md)|  | [optional] |
 
 ### Return type
 
@@ -730,7 +730,7 @@ void (empty response body)
 ## `subscriptionUpdatedPost()`
 
 ```php
-subscriptionUpdatedPost($unknown_base_type)
+subscriptionUpdatedPost($webhook_subscription_payload)
 ```
 
 Subscription Updated
@@ -754,10 +754,10 @@ $apiInstance = new Solifyn\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$unknown_base_type = new \Solifyn\Model\UNKNOWN_BASE_TYPE(); // \Solifyn\Model\UNKNOWN_BASE_TYPE
+$webhook_subscription_payload = new \Solifyn\Model\WebhookSubscriptionPayload(); // \Solifyn\Model\WebhookSubscriptionPayload
 
 try {
-    $apiInstance->subscriptionUpdatedPost($unknown_base_type);
+    $apiInstance->subscriptionUpdatedPost($webhook_subscription_payload);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->subscriptionUpdatedPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -767,7 +767,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **unknown_base_type** | [**\Solifyn\Model\UNKNOWN_BASE_TYPE**](../Model/UNKNOWN_BASE_TYPE.md)|  | [optional] |
+| **webhook_subscription_payload** | [**\Solifyn\Model\WebhookSubscriptionPayload**](../Model/WebhookSubscriptionPayload.md)|  | [optional] |
 
 ### Return type
 

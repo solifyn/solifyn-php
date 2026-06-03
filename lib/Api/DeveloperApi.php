@@ -71,31 +71,34 @@ class DeveloperApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'developerControllerCreateApiKey' => [
+        'developerCreateApiKey' => [
             'application/json',
         ],
-        'developerControllerCreateWebhookEndpoint' => [
+        'developerCreateWebhook' => [
             'application/json',
         ],
-        'developerControllerDeleteApiKey' => [
+        'developerDeleteWebhook' => [
             'application/json',
         ],
-        'developerControllerDeleteWebhookEndpoint' => [
+        'developerGetAppPortal' => [
             'application/json',
         ],
-        'developerControllerGetApiKeys' => [
+        'developerGetWebhook' => [
             'application/json',
         ],
-        'developerControllerGetAppPortalUrl' => [
+        'developerListApiKeys' => [
             'application/json',
         ],
-        'developerControllerGetWebhookDeliveries' => [
+        'developerListWebhookDeliveries' => [
             'application/json',
         ],
-        'developerControllerGetWebhookEndpoints' => [
+        'developerListWebhooks' => [
             'application/json',
         ],
-        'developerControllerUpdateWebhookEndpoint' => [
+        'developerRevokeApiKey' => [
+            'application/json',
+        ],
+        'developerUpdateWebhook' => [
             'application/json',
         ],
     ];
@@ -147,31 +150,651 @@ class DeveloperApi
     }
 
     /**
-     * Operation developerControllerCreateApiKey
+     * Operation developerCreateApiKey
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerCreateApiKey'] to see the possible values for this operation
+     * Create Developer API Key
+     *
+     * @param  \Solifyn\Model\CreateApiKeyDto $create_api_key_dto create_api_key_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerCreateApiKey'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Solifyn\Model\ApiKeyResponseDto
+     */
+    public function developerCreateApiKey($create_api_key_dto, string $contentType = self::contentTypes['developerCreateApiKey'][0])
+    {
+        list($response) = $this->developerCreateApiKeyWithHttpInfo($create_api_key_dto, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation developerCreateApiKeyWithHttpInfo
+     *
+     * Create Developer API Key
+     *
+     * @param  \Solifyn\Model\CreateApiKeyDto $create_api_key_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerCreateApiKey'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Solifyn\Model\ApiKeyResponseDto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function developerCreateApiKeyWithHttpInfo($create_api_key_dto, string $contentType = self::contentTypes['developerCreateApiKey'][0])
+    {
+        $request = $this->developerCreateApiKeyRequest($create_api_key_dto, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    if ('\Solifyn\Model\ApiKeyResponseDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Solifyn\Model\ApiKeyResponseDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\ApiKeyResponseDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Solifyn\Model\ApiKeyResponseDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Solifyn\Model\ApiKeyResponseDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation developerCreateApiKeyAsync
+     *
+     * Create Developer API Key
+     *
+     * @param  \Solifyn\Model\CreateApiKeyDto $create_api_key_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerCreateApiKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerCreateApiKeyAsync($create_api_key_dto, string $contentType = self::contentTypes['developerCreateApiKey'][0])
+    {
+        return $this->developerCreateApiKeyAsyncWithHttpInfo($create_api_key_dto, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation developerCreateApiKeyAsyncWithHttpInfo
+     *
+     * Create Developer API Key
+     *
+     * @param  \Solifyn\Model\CreateApiKeyDto $create_api_key_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerCreateApiKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerCreateApiKeyAsyncWithHttpInfo($create_api_key_dto, string $contentType = self::contentTypes['developerCreateApiKey'][0])
+    {
+        $returnType = '\Solifyn\Model\ApiKeyResponseDto';
+        $request = $this->developerCreateApiKeyRequest($create_api_key_dto, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'developerCreateApiKey'
+     *
+     * @param  \Solifyn\Model\CreateApiKeyDto $create_api_key_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerCreateApiKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function developerCreateApiKeyRequest($create_api_key_dto, string $contentType = self::contentTypes['developerCreateApiKey'][0])
+    {
+
+        // verify the required parameter 'create_api_key_dto' is set
+        if ($create_api_key_dto === null || (is_array($create_api_key_dto) && count($create_api_key_dto) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_api_key_dto when calling developerCreateApiKey'
+            );
+        }
+
+
+        $resourcePath = '/v1/developer/api-keys';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($create_api_key_dto)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_api_key_dto));
+            } else {
+                $httpBody = $create_api_key_dto;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation developerCreateWebhook
+     *
+     * Create Webhook Endpoint
+     *
+     * @param  \Solifyn\Model\CreateWebhookEndpointDto $create_webhook_endpoint_dto create_webhook_endpoint_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerCreateWebhook'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Solifyn\Model\WebhookEndpointResponseDto
+     */
+    public function developerCreateWebhook($create_webhook_endpoint_dto, string $contentType = self::contentTypes['developerCreateWebhook'][0])
+    {
+        list($response) = $this->developerCreateWebhookWithHttpInfo($create_webhook_endpoint_dto, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation developerCreateWebhookWithHttpInfo
+     *
+     * Create Webhook Endpoint
+     *
+     * @param  \Solifyn\Model\CreateWebhookEndpointDto $create_webhook_endpoint_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerCreateWebhook'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Solifyn\Model\WebhookEndpointResponseDto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function developerCreateWebhookWithHttpInfo($create_webhook_endpoint_dto, string $contentType = self::contentTypes['developerCreateWebhook'][0])
+    {
+        $request = $this->developerCreateWebhookRequest($create_webhook_endpoint_dto, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    if ('\Solifyn\Model\WebhookEndpointResponseDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Solifyn\Model\WebhookEndpointResponseDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\WebhookEndpointResponseDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Solifyn\Model\WebhookEndpointResponseDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Solifyn\Model\WebhookEndpointResponseDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation developerCreateWebhookAsync
+     *
+     * Create Webhook Endpoint
+     *
+     * @param  \Solifyn\Model\CreateWebhookEndpointDto $create_webhook_endpoint_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerCreateWebhook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerCreateWebhookAsync($create_webhook_endpoint_dto, string $contentType = self::contentTypes['developerCreateWebhook'][0])
+    {
+        return $this->developerCreateWebhookAsyncWithHttpInfo($create_webhook_endpoint_dto, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation developerCreateWebhookAsyncWithHttpInfo
+     *
+     * Create Webhook Endpoint
+     *
+     * @param  \Solifyn\Model\CreateWebhookEndpointDto $create_webhook_endpoint_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerCreateWebhook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerCreateWebhookAsyncWithHttpInfo($create_webhook_endpoint_dto, string $contentType = self::contentTypes['developerCreateWebhook'][0])
+    {
+        $returnType = '\Solifyn\Model\WebhookEndpointResponseDto';
+        $request = $this->developerCreateWebhookRequest($create_webhook_endpoint_dto, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'developerCreateWebhook'
+     *
+     * @param  \Solifyn\Model\CreateWebhookEndpointDto $create_webhook_endpoint_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerCreateWebhook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function developerCreateWebhookRequest($create_webhook_endpoint_dto, string $contentType = self::contentTypes['developerCreateWebhook'][0])
+    {
+
+        // verify the required parameter 'create_webhook_endpoint_dto' is set
+        if ($create_webhook_endpoint_dto === null || (is_array($create_webhook_endpoint_dto) && count($create_webhook_endpoint_dto) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_webhook_endpoint_dto when calling developerCreateWebhook'
+            );
+        }
+
+
+        $resourcePath = '/v1/developer/webhooks';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($create_webhook_endpoint_dto)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_webhook_endpoint_dto));
+            } else {
+                $httpBody = $create_webhook_endpoint_dto;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation developerDeleteWebhook
+     *
+     * Delete Webhook Endpoint
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerDeleteWebhook'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function developerControllerCreateApiKey(string $contentType = self::contentTypes['developerControllerCreateApiKey'][0])
+    public function developerDeleteWebhook($id, string $contentType = self::contentTypes['developerDeleteWebhook'][0])
     {
-        $this->developerControllerCreateApiKeyWithHttpInfo($contentType);
+        $this->developerDeleteWebhookWithHttpInfo($id, $contentType);
     }
 
     /**
-     * Operation developerControllerCreateApiKeyWithHttpInfo
+     * Operation developerDeleteWebhookWithHttpInfo
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerCreateApiKey'] to see the possible values for this operation
+     * Delete Webhook Endpoint
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerDeleteWebhook'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function developerControllerCreateApiKeyWithHttpInfo(string $contentType = self::contentTypes['developerControllerCreateApiKey'][0])
+    public function developerDeleteWebhookWithHttpInfo($id, string $contentType = self::contentTypes['developerDeleteWebhook'][0])
     {
-        $request = $this->developerControllerCreateApiKeyRequest($contentType);
+        $request = $this->developerDeleteWebhookRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -206,16 +829,19 @@ class DeveloperApi
     }
 
     /**
-     * Operation developerControllerCreateApiKeyAsync
+     * Operation developerDeleteWebhookAsync
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerCreateApiKey'] to see the possible values for this operation
+     * Delete Webhook Endpoint
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerDeleteWebhook'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function developerControllerCreateApiKeyAsync(string $contentType = self::contentTypes['developerControllerCreateApiKey'][0])
+    public function developerDeleteWebhookAsync($id, string $contentType = self::contentTypes['developerDeleteWebhook'][0])
     {
-        return $this->developerControllerCreateApiKeyAsyncWithHttpInfo($contentType)
+        return $this->developerDeleteWebhookAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -224,17 +850,20 @@ class DeveloperApi
     }
 
     /**
-     * Operation developerControllerCreateApiKeyAsyncWithHttpInfo
+     * Operation developerDeleteWebhookAsyncWithHttpInfo
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerCreateApiKey'] to see the possible values for this operation
+     * Delete Webhook Endpoint
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerDeleteWebhook'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function developerControllerCreateApiKeyAsyncWithHttpInfo(string $contentType = self::contentTypes['developerControllerCreateApiKey'][0])
+    public function developerDeleteWebhookAsyncWithHttpInfo($id, string $contentType = self::contentTypes['developerDeleteWebhook'][0])
     {
         $returnType = '';
-        $request = $this->developerControllerCreateApiKeyRequest($contentType);
+        $request = $this->developerDeleteWebhookRequest($id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -260,14 +889,914 @@ class DeveloperApi
     }
 
     /**
-     * Create request for operation 'developerControllerCreateApiKey'
+     * Create request for operation 'developerDeleteWebhook'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerCreateApiKey'] to see the possible values for this operation
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerDeleteWebhook'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function developerControllerCreateApiKeyRequest(string $contentType = self::contentTypes['developerControllerCreateApiKey'][0])
+    public function developerDeleteWebhookRequest($id, string $contentType = self::contentTypes['developerDeleteWebhook'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling developerDeleteWebhook'
+            );
+        }
+
+
+        $resourcePath = '/v1/developer/webhooks/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            [],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation developerGetAppPortal
+     *
+     * Retrieve Hosted Webhooks Portal URL
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerGetAppPortal'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Solifyn\Model\AppPortalUrlResponseDto
+     */
+    public function developerGetAppPortal(string $contentType = self::contentTypes['developerGetAppPortal'][0])
+    {
+        list($response) = $this->developerGetAppPortalWithHttpInfo($contentType);
+        return $response;
+    }
+
+    /**
+     * Operation developerGetAppPortalWithHttpInfo
+     *
+     * Retrieve Hosted Webhooks Portal URL
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerGetAppPortal'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Solifyn\Model\AppPortalUrlResponseDto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function developerGetAppPortalWithHttpInfo(string $contentType = self::contentTypes['developerGetAppPortal'][0])
+    {
+        $request = $this->developerGetAppPortalRequest($contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Solifyn\Model\AppPortalUrlResponseDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Solifyn\Model\AppPortalUrlResponseDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\AppPortalUrlResponseDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Solifyn\Model\AppPortalUrlResponseDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Solifyn\Model\AppPortalUrlResponseDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation developerGetAppPortalAsync
+     *
+     * Retrieve Hosted Webhooks Portal URL
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerGetAppPortal'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerGetAppPortalAsync(string $contentType = self::contentTypes['developerGetAppPortal'][0])
+    {
+        return $this->developerGetAppPortalAsyncWithHttpInfo($contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation developerGetAppPortalAsyncWithHttpInfo
+     *
+     * Retrieve Hosted Webhooks Portal URL
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerGetAppPortal'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerGetAppPortalAsyncWithHttpInfo(string $contentType = self::contentTypes['developerGetAppPortal'][0])
+    {
+        $returnType = '\Solifyn\Model\AppPortalUrlResponseDto';
+        $request = $this->developerGetAppPortalRequest($contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'developerGetAppPortal'
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerGetAppPortal'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function developerGetAppPortalRequest(string $contentType = self::contentTypes['developerGetAppPortal'][0])
+    {
+
+
+        $resourcePath = '/v1/developer/webhooks/app-portal';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation developerGetWebhook
+     *
+     * Retrieve Webhook Endpoint Details
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerGetWebhook'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Solifyn\Model\WebhookEndpointResponseDto
+     */
+    public function developerGetWebhook($id, string $contentType = self::contentTypes['developerGetWebhook'][0])
+    {
+        list($response) = $this->developerGetWebhookWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation developerGetWebhookWithHttpInfo
+     *
+     * Retrieve Webhook Endpoint Details
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerGetWebhook'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Solifyn\Model\WebhookEndpointResponseDto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function developerGetWebhookWithHttpInfo($id, string $contentType = self::contentTypes['developerGetWebhook'][0])
+    {
+        $request = $this->developerGetWebhookRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Solifyn\Model\WebhookEndpointResponseDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Solifyn\Model\WebhookEndpointResponseDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\WebhookEndpointResponseDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Solifyn\Model\WebhookEndpointResponseDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Solifyn\Model\WebhookEndpointResponseDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation developerGetWebhookAsync
+     *
+     * Retrieve Webhook Endpoint Details
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerGetWebhook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerGetWebhookAsync($id, string $contentType = self::contentTypes['developerGetWebhook'][0])
+    {
+        return $this->developerGetWebhookAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation developerGetWebhookAsyncWithHttpInfo
+     *
+     * Retrieve Webhook Endpoint Details
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerGetWebhook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerGetWebhookAsyncWithHttpInfo($id, string $contentType = self::contentTypes['developerGetWebhook'][0])
+    {
+        $returnType = '\Solifyn\Model\WebhookEndpointResponseDto';
+        $request = $this->developerGetWebhookRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'developerGetWebhook'
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerGetWebhook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function developerGetWebhookRequest($id, string $contentType = self::contentTypes['developerGetWebhook'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling developerGetWebhook'
+            );
+        }
+
+
+        $resourcePath = '/v1/developer/webhooks/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation developerListApiKeys
+     *
+     * List Developer API Keys
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListApiKeys'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Solifyn\Model\ApiKeyResponseDto[]
+     */
+    public function developerListApiKeys(string $contentType = self::contentTypes['developerListApiKeys'][0])
+    {
+        list($response) = $this->developerListApiKeysWithHttpInfo($contentType);
+        return $response;
+    }
+
+    /**
+     * Operation developerListApiKeysWithHttpInfo
+     *
+     * List Developer API Keys
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListApiKeys'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Solifyn\Model\ApiKeyResponseDto[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function developerListApiKeysWithHttpInfo(string $contentType = self::contentTypes['developerListApiKeys'][0])
+    {
+        $request = $this->developerListApiKeysRequest($contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Solifyn\Model\ApiKeyResponseDto[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Solifyn\Model\ApiKeyResponseDto[]' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\ApiKeyResponseDto[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Solifyn\Model\ApiKeyResponseDto[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Solifyn\Model\ApiKeyResponseDto[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation developerListApiKeysAsync
+     *
+     * List Developer API Keys
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListApiKeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerListApiKeysAsync(string $contentType = self::contentTypes['developerListApiKeys'][0])
+    {
+        return $this->developerListApiKeysAsyncWithHttpInfo($contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation developerListApiKeysAsyncWithHttpInfo
+     *
+     * List Developer API Keys
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListApiKeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerListApiKeysAsyncWithHttpInfo(string $contentType = self::contentTypes['developerListApiKeys'][0])
+    {
+        $returnType = '\Solifyn\Model\ApiKeyResponseDto[]';
+        $request = $this->developerListApiKeysRequest($contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'developerListApiKeys'
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListApiKeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function developerListApiKeysRequest(string $contentType = self::contentTypes['developerListApiKeys'][0])
     {
 
 
@@ -283,7 +1812,7 @@ class DeveloperApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            [],
+            ['application/json', ],
             $contentType,
             $multipart
         );
@@ -328,7 +1857,7 @@ class DeveloperApi
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -336,31 +1865,38 @@ class DeveloperApi
     }
 
     /**
-     * Operation developerControllerCreateWebhookEndpoint
+     * Operation developerListWebhookDeliveries
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerCreateWebhookEndpoint'] to see the possible values for this operation
+     * Retrieve Webhook Delivery Logs
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListWebhookDeliveries'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \Solifyn\Model\WebhookDeliveryResponseDto[]
      */
-    public function developerControllerCreateWebhookEndpoint(string $contentType = self::contentTypes['developerControllerCreateWebhookEndpoint'][0])
+    public function developerListWebhookDeliveries($id, string $contentType = self::contentTypes['developerListWebhookDeliveries'][0])
     {
-        $this->developerControllerCreateWebhookEndpointWithHttpInfo($contentType);
+        list($response) = $this->developerListWebhookDeliveriesWithHttpInfo($id, $contentType);
+        return $response;
     }
 
     /**
-     * Operation developerControllerCreateWebhookEndpointWithHttpInfo
+     * Operation developerListWebhookDeliveriesWithHttpInfo
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerCreateWebhookEndpoint'] to see the possible values for this operation
+     * Retrieve Webhook Delivery Logs
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListWebhookDeliveries'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Solifyn\Model\WebhookDeliveryResponseDto[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function developerControllerCreateWebhookEndpointWithHttpInfo(string $contentType = self::contentTypes['developerControllerCreateWebhookEndpoint'][0])
+    public function developerListWebhookDeliveriesWithHttpInfo($id, string $contentType = self::contentTypes['developerListWebhookDeliveries'][0])
     {
-        $request = $this->developerControllerCreateWebhookEndpointRequest($contentType);
+        $request = $this->developerListWebhookDeliveriesRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -385,26 +1921,106 @@ class DeveloperApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    if ('\Solifyn\Model\WebhookDeliveryResponseDto[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Solifyn\Model\WebhookDeliveryResponseDto[]' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\WebhookDeliveryResponseDto[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Solifyn\Model\WebhookDeliveryResponseDto[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Solifyn\Model\WebhookDeliveryResponseDto[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation developerControllerCreateWebhookEndpointAsync
+     * Operation developerListWebhookDeliveriesAsync
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerCreateWebhookEndpoint'] to see the possible values for this operation
+     * Retrieve Webhook Delivery Logs
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListWebhookDeliveries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function developerControllerCreateWebhookEndpointAsync(string $contentType = self::contentTypes['developerControllerCreateWebhookEndpoint'][0])
+    public function developerListWebhookDeliveriesAsync($id, string $contentType = self::contentTypes['developerListWebhookDeliveries'][0])
     {
-        return $this->developerControllerCreateWebhookEndpointAsyncWithHttpInfo($contentType)
+        return $this->developerListWebhookDeliveriesAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -413,23 +2029,39 @@ class DeveloperApi
     }
 
     /**
-     * Operation developerControllerCreateWebhookEndpointAsyncWithHttpInfo
+     * Operation developerListWebhookDeliveriesAsyncWithHttpInfo
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerCreateWebhookEndpoint'] to see the possible values for this operation
+     * Retrieve Webhook Delivery Logs
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListWebhookDeliveries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function developerControllerCreateWebhookEndpointAsyncWithHttpInfo(string $contentType = self::contentTypes['developerControllerCreateWebhookEndpoint'][0])
+    public function developerListWebhookDeliveriesAsyncWithHttpInfo($id, string $contentType = self::contentTypes['developerListWebhookDeliveries'][0])
     {
-        $returnType = '';
-        $request = $this->developerControllerCreateWebhookEndpointRequest($contentType);
+        $returnType = '\Solifyn\Model\WebhookDeliveryResponseDto[]';
+        $request = $this->developerListWebhookDeliveriesRequest($id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -449,14 +2081,318 @@ class DeveloperApi
     }
 
     /**
-     * Create request for operation 'developerControllerCreateWebhookEndpoint'
+     * Create request for operation 'developerListWebhookDeliveries'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerCreateWebhookEndpoint'] to see the possible values for this operation
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListWebhookDeliveries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function developerControllerCreateWebhookEndpointRequest(string $contentType = self::contentTypes['developerControllerCreateWebhookEndpoint'][0])
+    public function developerListWebhookDeliveriesRequest($id, string $contentType = self::contentTypes['developerListWebhookDeliveries'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling developerListWebhookDeliveries'
+            );
+        }
+
+
+        $resourcePath = '/v1/developer/webhooks/{id}/deliveries';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation developerListWebhooks
+     *
+     * List Webhook Endpoints
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListWebhooks'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Solifyn\Model\WebhookEndpointResponseDto[]
+     */
+    public function developerListWebhooks(string $contentType = self::contentTypes['developerListWebhooks'][0])
+    {
+        list($response) = $this->developerListWebhooksWithHttpInfo($contentType);
+        return $response;
+    }
+
+    /**
+     * Operation developerListWebhooksWithHttpInfo
+     *
+     * List Webhook Endpoints
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListWebhooks'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Solifyn\Model\WebhookEndpointResponseDto[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function developerListWebhooksWithHttpInfo(string $contentType = self::contentTypes['developerListWebhooks'][0])
+    {
+        $request = $this->developerListWebhooksRequest($contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Solifyn\Model\WebhookEndpointResponseDto[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Solifyn\Model\WebhookEndpointResponseDto[]' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\WebhookEndpointResponseDto[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Solifyn\Model\WebhookEndpointResponseDto[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Solifyn\Model\WebhookEndpointResponseDto[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation developerListWebhooksAsync
+     *
+     * List Webhook Endpoints
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListWebhooks'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerListWebhooksAsync(string $contentType = self::contentTypes['developerListWebhooks'][0])
+    {
+        return $this->developerListWebhooksAsyncWithHttpInfo($contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation developerListWebhooksAsyncWithHttpInfo
+     *
+     * List Webhook Endpoints
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListWebhooks'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function developerListWebhooksAsyncWithHttpInfo(string $contentType = self::contentTypes['developerListWebhooks'][0])
+    {
+        $returnType = '\Solifyn\Model\WebhookEndpointResponseDto[]';
+        $request = $this->developerListWebhooksRequest($contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'developerListWebhooks'
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerListWebhooks'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function developerListWebhooksRequest(string $contentType = self::contentTypes['developerListWebhooks'][0])
     {
 
 
@@ -472,7 +2408,7 @@ class DeveloperApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            [],
+            ['application/json', ],
             $contentType,
             $multipart
         );
@@ -517,7 +2453,7 @@ class DeveloperApi
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -525,33 +2461,37 @@ class DeveloperApi
     }
 
     /**
-     * Operation developerControllerDeleteApiKey
+     * Operation developerRevokeApiKey
      *
-     * @param  string $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerDeleteApiKey'] to see the possible values for this operation
+     * Revoke API Key
+     *
+     * @param  string $id The API key ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerRevokeApiKey'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function developerControllerDeleteApiKey($id, string $contentType = self::contentTypes['developerControllerDeleteApiKey'][0])
+    public function developerRevokeApiKey($id, string $contentType = self::contentTypes['developerRevokeApiKey'][0])
     {
-        $this->developerControllerDeleteApiKeyWithHttpInfo($id, $contentType);
+        $this->developerRevokeApiKeyWithHttpInfo($id, $contentType);
     }
 
     /**
-     * Operation developerControllerDeleteApiKeyWithHttpInfo
+     * Operation developerRevokeApiKeyWithHttpInfo
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerDeleteApiKey'] to see the possible values for this operation
+     * Revoke API Key
+     *
+     * @param  string $id The API key ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerRevokeApiKey'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function developerControllerDeleteApiKeyWithHttpInfo($id, string $contentType = self::contentTypes['developerControllerDeleteApiKey'][0])
+    public function developerRevokeApiKeyWithHttpInfo($id, string $contentType = self::contentTypes['developerRevokeApiKey'][0])
     {
-        $request = $this->developerControllerDeleteApiKeyRequest($id, $contentType);
+        $request = $this->developerRevokeApiKeyRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -586,17 +2526,19 @@ class DeveloperApi
     }
 
     /**
-     * Operation developerControllerDeleteApiKeyAsync
+     * Operation developerRevokeApiKeyAsync
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerDeleteApiKey'] to see the possible values for this operation
+     * Revoke API Key
+     *
+     * @param  string $id The API key ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerRevokeApiKey'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function developerControllerDeleteApiKeyAsync($id, string $contentType = self::contentTypes['developerControllerDeleteApiKey'][0])
+    public function developerRevokeApiKeyAsync($id, string $contentType = self::contentTypes['developerRevokeApiKey'][0])
     {
-        return $this->developerControllerDeleteApiKeyAsyncWithHttpInfo($id, $contentType)
+        return $this->developerRevokeApiKeyAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -605,18 +2547,20 @@ class DeveloperApi
     }
 
     /**
-     * Operation developerControllerDeleteApiKeyAsyncWithHttpInfo
+     * Operation developerRevokeApiKeyAsyncWithHttpInfo
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerDeleteApiKey'] to see the possible values for this operation
+     * Revoke API Key
+     *
+     * @param  string $id The API key ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerRevokeApiKey'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function developerControllerDeleteApiKeyAsyncWithHttpInfo($id, string $contentType = self::contentTypes['developerControllerDeleteApiKey'][0])
+    public function developerRevokeApiKeyAsyncWithHttpInfo($id, string $contentType = self::contentTypes['developerRevokeApiKey'][0])
     {
         $returnType = '';
-        $request = $this->developerControllerDeleteApiKeyRequest($id, $contentType);
+        $request = $this->developerRevokeApiKeyRequest($id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -642,21 +2586,21 @@ class DeveloperApi
     }
 
     /**
-     * Create request for operation 'developerControllerDeleteApiKey'
+     * Create request for operation 'developerRevokeApiKey'
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerDeleteApiKey'] to see the possible values for this operation
+     * @param  string $id The API key ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerRevokeApiKey'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function developerControllerDeleteApiKeyRequest($id, string $contentType = self::contentTypes['developerControllerDeleteApiKey'][0])
+    public function developerRevokeApiKeyRequest($id, string $contentType = self::contentTypes['developerRevokeApiKey'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling developerControllerDeleteApiKey'
+                'Missing the required parameter $id when calling developerRevokeApiKey'
             );
         }
 
@@ -734,33 +2678,40 @@ class DeveloperApi
     }
 
     /**
-     * Operation developerControllerDeleteWebhookEndpoint
+     * Operation developerUpdateWebhook
      *
-     * @param  string $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerDeleteWebhookEndpoint'] to see the possible values for this operation
+     * Update Webhook Endpoint
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  \Solifyn\Model\UpdateWebhookEndpointDto $update_webhook_endpoint_dto update_webhook_endpoint_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerUpdateWebhook'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \Solifyn\Model\WebhookEndpointResponseDto
      */
-    public function developerControllerDeleteWebhookEndpoint($id, string $contentType = self::contentTypes['developerControllerDeleteWebhookEndpoint'][0])
+    public function developerUpdateWebhook($id, $update_webhook_endpoint_dto, string $contentType = self::contentTypes['developerUpdateWebhook'][0])
     {
-        $this->developerControllerDeleteWebhookEndpointWithHttpInfo($id, $contentType);
+        list($response) = $this->developerUpdateWebhookWithHttpInfo($id, $update_webhook_endpoint_dto, $contentType);
+        return $response;
     }
 
     /**
-     * Operation developerControllerDeleteWebhookEndpointWithHttpInfo
+     * Operation developerUpdateWebhookWithHttpInfo
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerDeleteWebhookEndpoint'] to see the possible values for this operation
+     * Update Webhook Endpoint
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  \Solifyn\Model\UpdateWebhookEndpointDto $update_webhook_endpoint_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerUpdateWebhook'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Solifyn\Model\WebhookEndpointResponseDto, HTTP status code, HTTP response headers (array of strings)
      */
-    public function developerControllerDeleteWebhookEndpointWithHttpInfo($id, string $contentType = self::contentTypes['developerControllerDeleteWebhookEndpoint'][0])
+    public function developerUpdateWebhookWithHttpInfo($id, $update_webhook_endpoint_dto, string $contentType = self::contentTypes['developerUpdateWebhook'][0])
     {
-        $request = $this->developerControllerDeleteWebhookEndpointRequest($id, $contentType);
+        $request = $this->developerUpdateWebhookRequest($id, $update_webhook_endpoint_dto, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -785,27 +2736,107 @@ class DeveloperApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    if ('\Solifyn\Model\WebhookEndpointResponseDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Solifyn\Model\WebhookEndpointResponseDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\WebhookEndpointResponseDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Solifyn\Model\WebhookEndpointResponseDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Solifyn\Model\WebhookEndpointResponseDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation developerControllerDeleteWebhookEndpointAsync
+     * Operation developerUpdateWebhookAsync
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerDeleteWebhookEndpoint'] to see the possible values for this operation
+     * Update Webhook Endpoint
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  \Solifyn\Model\UpdateWebhookEndpointDto $update_webhook_endpoint_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerUpdateWebhook'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function developerControllerDeleteWebhookEndpointAsync($id, string $contentType = self::contentTypes['developerControllerDeleteWebhookEndpoint'][0])
+    public function developerUpdateWebhookAsync($id, $update_webhook_endpoint_dto, string $contentType = self::contentTypes['developerUpdateWebhook'][0])
     {
-        return $this->developerControllerDeleteWebhookEndpointAsyncWithHttpInfo($id, $contentType)
+        return $this->developerUpdateWebhookAsyncWithHttpInfo($id, $update_webhook_endpoint_dto, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -814,24 +2845,40 @@ class DeveloperApi
     }
 
     /**
-     * Operation developerControllerDeleteWebhookEndpointAsyncWithHttpInfo
+     * Operation developerUpdateWebhookAsyncWithHttpInfo
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerDeleteWebhookEndpoint'] to see the possible values for this operation
+     * Update Webhook Endpoint
+     *
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  \Solifyn\Model\UpdateWebhookEndpointDto $update_webhook_endpoint_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerUpdateWebhook'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function developerControllerDeleteWebhookEndpointAsyncWithHttpInfo($id, string $contentType = self::contentTypes['developerControllerDeleteWebhookEndpoint'][0])
+    public function developerUpdateWebhookAsyncWithHttpInfo($id, $update_webhook_endpoint_dto, string $contentType = self::contentTypes['developerUpdateWebhook'][0])
     {
-        $returnType = '';
-        $request = $this->developerControllerDeleteWebhookEndpointRequest($id, $contentType);
+        $returnType = '\Solifyn\Model\WebhookEndpointResponseDto';
+        $request = $this->developerUpdateWebhookRequest($id, $update_webhook_endpoint_dto, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -851,21 +2898,29 @@ class DeveloperApi
     }
 
     /**
-     * Create request for operation 'developerControllerDeleteWebhookEndpoint'
+     * Create request for operation 'developerUpdateWebhook'
      *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerDeleteWebhookEndpoint'] to see the possible values for this operation
+     * @param  string $id The webhook endpoint ID (required)
+     * @param  \Solifyn\Model\UpdateWebhookEndpointDto $update_webhook_endpoint_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerUpdateWebhook'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function developerControllerDeleteWebhookEndpointRequest($id, string $contentType = self::contentTypes['developerControllerDeleteWebhookEndpoint'][0])
+    public function developerUpdateWebhookRequest($id, $update_webhook_endpoint_dto, string $contentType = self::contentTypes['developerUpdateWebhook'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling developerControllerDeleteWebhookEndpoint'
+                'Missing the required parameter $id when calling developerUpdateWebhook'
+            );
+        }
+
+        // verify the required parameter 'update_webhook_endpoint_dto' is set
+        if ($update_webhook_endpoint_dto === null || (is_array($update_webhook_endpoint_dto) && count($update_webhook_endpoint_dto) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $update_webhook_endpoint_dto when calling developerUpdateWebhook'
             );
         }
 
@@ -890,998 +2945,20 @@ class DeveloperApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            [],
+            ['application/json', ],
             $contentType,
             $multipart
         );
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+        if (isset($update_webhook_endpoint_dto)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_webhook_endpoint_dto));
             } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
+                $httpBody = $update_webhook_endpoint_dto;
             }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'DELETE',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation developerControllerGetApiKeys
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetApiKeys'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function developerControllerGetApiKeys(string $contentType = self::contentTypes['developerControllerGetApiKeys'][0])
-    {
-        $this->developerControllerGetApiKeysWithHttpInfo($contentType);
-    }
-
-    /**
-     * Operation developerControllerGetApiKeysWithHttpInfo
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetApiKeys'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function developerControllerGetApiKeysWithHttpInfo(string $contentType = self::contentTypes['developerControllerGetApiKeys'][0])
-    {
-        $request = $this->developerControllerGetApiKeysRequest($contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation developerControllerGetApiKeysAsync
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetApiKeys'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function developerControllerGetApiKeysAsync(string $contentType = self::contentTypes['developerControllerGetApiKeys'][0])
-    {
-        return $this->developerControllerGetApiKeysAsyncWithHttpInfo($contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation developerControllerGetApiKeysAsyncWithHttpInfo
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetApiKeys'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function developerControllerGetApiKeysAsyncWithHttpInfo(string $contentType = self::contentTypes['developerControllerGetApiKeys'][0])
-    {
-        $returnType = '';
-        $request = $this->developerControllerGetApiKeysRequest($contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'developerControllerGetApiKeys'
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetApiKeys'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function developerControllerGetApiKeysRequest(string $contentType = self::contentTypes['developerControllerGetApiKeys'][0])
-    {
-
-
-        $resourcePath = '/v1/developer/api-keys';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            [],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation developerControllerGetAppPortalUrl
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetAppPortalUrl'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function developerControllerGetAppPortalUrl(string $contentType = self::contentTypes['developerControllerGetAppPortalUrl'][0])
-    {
-        $this->developerControllerGetAppPortalUrlWithHttpInfo($contentType);
-    }
-
-    /**
-     * Operation developerControllerGetAppPortalUrlWithHttpInfo
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetAppPortalUrl'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function developerControllerGetAppPortalUrlWithHttpInfo(string $contentType = self::contentTypes['developerControllerGetAppPortalUrl'][0])
-    {
-        $request = $this->developerControllerGetAppPortalUrlRequest($contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation developerControllerGetAppPortalUrlAsync
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetAppPortalUrl'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function developerControllerGetAppPortalUrlAsync(string $contentType = self::contentTypes['developerControllerGetAppPortalUrl'][0])
-    {
-        return $this->developerControllerGetAppPortalUrlAsyncWithHttpInfo($contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation developerControllerGetAppPortalUrlAsyncWithHttpInfo
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetAppPortalUrl'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function developerControllerGetAppPortalUrlAsyncWithHttpInfo(string $contentType = self::contentTypes['developerControllerGetAppPortalUrl'][0])
-    {
-        $returnType = '';
-        $request = $this->developerControllerGetAppPortalUrlRequest($contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'developerControllerGetAppPortalUrl'
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetAppPortalUrl'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function developerControllerGetAppPortalUrlRequest(string $contentType = self::contentTypes['developerControllerGetAppPortalUrl'][0])
-    {
-
-
-        $resourcePath = '/v1/developer/webhooks/app-portal';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            [],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation developerControllerGetWebhookDeliveries
-     *
-     * @param  string $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetWebhookDeliveries'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function developerControllerGetWebhookDeliveries($id, string $contentType = self::contentTypes['developerControllerGetWebhookDeliveries'][0])
-    {
-        $this->developerControllerGetWebhookDeliveriesWithHttpInfo($id, $contentType);
-    }
-
-    /**
-     * Operation developerControllerGetWebhookDeliveriesWithHttpInfo
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetWebhookDeliveries'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function developerControllerGetWebhookDeliveriesWithHttpInfo($id, string $contentType = self::contentTypes['developerControllerGetWebhookDeliveries'][0])
-    {
-        $request = $this->developerControllerGetWebhookDeliveriesRequest($id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation developerControllerGetWebhookDeliveriesAsync
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetWebhookDeliveries'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function developerControllerGetWebhookDeliveriesAsync($id, string $contentType = self::contentTypes['developerControllerGetWebhookDeliveries'][0])
-    {
-        return $this->developerControllerGetWebhookDeliveriesAsyncWithHttpInfo($id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation developerControllerGetWebhookDeliveriesAsyncWithHttpInfo
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetWebhookDeliveries'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function developerControllerGetWebhookDeliveriesAsyncWithHttpInfo($id, string $contentType = self::contentTypes['developerControllerGetWebhookDeliveries'][0])
-    {
-        $returnType = '';
-        $request = $this->developerControllerGetWebhookDeliveriesRequest($id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'developerControllerGetWebhookDeliveries'
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetWebhookDeliveries'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function developerControllerGetWebhookDeliveriesRequest($id, string $contentType = self::contentTypes['developerControllerGetWebhookDeliveries'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling developerControllerGetWebhookDeliveries'
-            );
-        }
-
-
-        $resourcePath = '/v1/developer/webhooks/{id}/deliveries';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            [],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation developerControllerGetWebhookEndpoints
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetWebhookEndpoints'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function developerControllerGetWebhookEndpoints(string $contentType = self::contentTypes['developerControllerGetWebhookEndpoints'][0])
-    {
-        $this->developerControllerGetWebhookEndpointsWithHttpInfo($contentType);
-    }
-
-    /**
-     * Operation developerControllerGetWebhookEndpointsWithHttpInfo
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetWebhookEndpoints'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function developerControllerGetWebhookEndpointsWithHttpInfo(string $contentType = self::contentTypes['developerControllerGetWebhookEndpoints'][0])
-    {
-        $request = $this->developerControllerGetWebhookEndpointsRequest($contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation developerControllerGetWebhookEndpointsAsync
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetWebhookEndpoints'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function developerControllerGetWebhookEndpointsAsync(string $contentType = self::contentTypes['developerControllerGetWebhookEndpoints'][0])
-    {
-        return $this->developerControllerGetWebhookEndpointsAsyncWithHttpInfo($contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation developerControllerGetWebhookEndpointsAsyncWithHttpInfo
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetWebhookEndpoints'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function developerControllerGetWebhookEndpointsAsyncWithHttpInfo(string $contentType = self::contentTypes['developerControllerGetWebhookEndpoints'][0])
-    {
-        $returnType = '';
-        $request = $this->developerControllerGetWebhookEndpointsRequest($contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'developerControllerGetWebhookEndpoints'
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerGetWebhookEndpoints'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function developerControllerGetWebhookEndpointsRequest(string $contentType = self::contentTypes['developerControllerGetWebhookEndpoints'][0])
-    {
-
-
-        $resourcePath = '/v1/developer/webhooks';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            [],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation developerControllerUpdateWebhookEndpoint
-     *
-     * @param  string $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerUpdateWebhookEndpoint'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function developerControllerUpdateWebhookEndpoint($id, string $contentType = self::contentTypes['developerControllerUpdateWebhookEndpoint'][0])
-    {
-        $this->developerControllerUpdateWebhookEndpointWithHttpInfo($id, $contentType);
-    }
-
-    /**
-     * Operation developerControllerUpdateWebhookEndpointWithHttpInfo
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerUpdateWebhookEndpoint'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function developerControllerUpdateWebhookEndpointWithHttpInfo($id, string $contentType = self::contentTypes['developerControllerUpdateWebhookEndpoint'][0])
-    {
-        $request = $this->developerControllerUpdateWebhookEndpointRequest($id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation developerControllerUpdateWebhookEndpointAsync
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerUpdateWebhookEndpoint'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function developerControllerUpdateWebhookEndpointAsync($id, string $contentType = self::contentTypes['developerControllerUpdateWebhookEndpoint'][0])
-    {
-        return $this->developerControllerUpdateWebhookEndpointAsyncWithHttpInfo($id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation developerControllerUpdateWebhookEndpointAsyncWithHttpInfo
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerUpdateWebhookEndpoint'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function developerControllerUpdateWebhookEndpointAsyncWithHttpInfo($id, string $contentType = self::contentTypes['developerControllerUpdateWebhookEndpoint'][0])
-    {
-        $returnType = '';
-        $request = $this->developerControllerUpdateWebhookEndpointRequest($id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'developerControllerUpdateWebhookEndpoint'
-     *
-     * @param  string $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['developerControllerUpdateWebhookEndpoint'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function developerControllerUpdateWebhookEndpointRequest($id, string $contentType = self::contentTypes['developerControllerUpdateWebhookEndpoint'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling developerControllerUpdateWebhookEndpoint'
-            );
-        }
-
-
-        $resourcePath = '/v1/developer/webhooks/{id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            [],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {

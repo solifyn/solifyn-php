@@ -78,6 +78,7 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'custom_fields' => '\Solifyn\Model\ProductCreateCustomFieldsInner[]',
         'stock' => 'int',
         'is_listed' => 'bool',
+        'is_free' => 'bool',
         'addons' => '\Solifyn\Model\ProductCreateAddonsInner[]'
     ];
 
@@ -110,6 +111,7 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'custom_fields' => null,
         'stock' => null,
         'is_listed' => null,
+        'is_free' => null,
         'addons' => null
     ];
 
@@ -140,6 +142,7 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'custom_fields' => false,
         'stock' => false,
         'is_listed' => false,
+        'is_free' => false,
         'addons' => false
     ];
 
@@ -250,6 +253,7 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'custom_fields' => 'customFields',
         'stock' => 'stock',
         'is_listed' => 'isListed',
+        'is_free' => 'isFree',
         'addons' => 'addons'
     ];
 
@@ -280,6 +284,7 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'custom_fields' => 'setCustomFields',
         'stock' => 'setStock',
         'is_listed' => 'setIsListed',
+        'is_free' => 'setIsFree',
         'addons' => 'setAddons'
     ];
 
@@ -310,6 +315,7 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'custom_fields' => 'getCustomFields',
         'stock' => 'getStock',
         'is_listed' => 'getIsListed',
+        'is_free' => 'getIsFree',
         'addons' => 'getAddons'
     ];
 
@@ -585,6 +591,7 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('custom_fields', $data ?? [], null);
         $this->setIfExists('stock', $data ?? [], null);
         $this->setIfExists('is_listed', $data ?? [], true);
+        $this->setIfExists('is_free', $data ?? [], false);
         $this->setIfExists('addons', $data ?? [], null);
     }
 
@@ -1231,6 +1238,33 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable is_listed cannot be null');
         }
         $this->container['is_listed'] = $is_listed;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_free
+     *
+     * @return bool|null
+     */
+    public function getIsFree()
+    {
+        return $this->container['is_free'];
+    }
+
+    /**
+     * Sets is_free
+     *
+     * @param bool|null $is_free Whether the product is free of charge.
+     *
+     * @return self
+     */
+    public function setIsFree($is_free)
+    {
+        if (is_null($is_free)) {
+            throw new \InvalidArgumentException('non-nullable is_free cannot be null');
+        }
+        $this->container['is_free'] = $is_free;
 
         return $this;
     }

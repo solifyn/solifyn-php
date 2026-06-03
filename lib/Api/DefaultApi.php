@@ -163,16 +163,16 @@ class DefaultApi
      *
      * Dispute Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeCreatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function disputeCreatedPost($unknown_base_type = null, string $contentType = self::contentTypes['disputeCreatedPost'][0])
+    public function disputeCreatedPost($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeCreatedPost'][0])
     {
-        $this->disputeCreatedPostWithHttpInfo($unknown_base_type, $contentType);
+        $this->disputeCreatedPostWithHttpInfo($webhook_dispute_payload, $contentType);
     }
 
     /**
@@ -180,16 +180,16 @@ class DefaultApi
      *
      * Dispute Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeCreatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function disputeCreatedPostWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['disputeCreatedPost'][0])
+    public function disputeCreatedPostWithHttpInfo($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeCreatedPost'][0])
     {
-        $request = $this->disputeCreatedPostRequest($unknown_base_type, $contentType);
+        $request = $this->disputeCreatedPostRequest($webhook_dispute_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -228,15 +228,15 @@ class DefaultApi
      *
      * Dispute Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function disputeCreatedPostAsync($unknown_base_type = null, string $contentType = self::contentTypes['disputeCreatedPost'][0])
+    public function disputeCreatedPostAsync($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeCreatedPost'][0])
     {
-        return $this->disputeCreatedPostAsyncWithHttpInfo($unknown_base_type, $contentType)
+        return $this->disputeCreatedPostAsyncWithHttpInfo($webhook_dispute_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -249,16 +249,16 @@ class DefaultApi
      *
      * Dispute Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function disputeCreatedPostAsyncWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['disputeCreatedPost'][0])
+    public function disputeCreatedPostAsyncWithHttpInfo($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeCreatedPost'][0])
     {
         $returnType = '';
-        $request = $this->disputeCreatedPostRequest($unknown_base_type, $contentType);
+        $request = $this->disputeCreatedPostRequest($webhook_dispute_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -286,13 +286,13 @@ class DefaultApi
     /**
      * Create request for operation 'disputeCreatedPost'
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function disputeCreatedPostRequest($unknown_base_type = null, string $contentType = self::contentTypes['disputeCreatedPost'][0])
+    public function disputeCreatedPostRequest($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeCreatedPost'][0])
     {
 
 
@@ -315,12 +315,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($unknown_base_type)) {
+        if (isset($webhook_dispute_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($unknown_base_type));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_dispute_payload));
             } else {
-                $httpBody = $unknown_base_type;
+                $httpBody = $webhook_dispute_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -377,16 +377,16 @@ class DefaultApi
      *
      * Dispute Lost
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeLostPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function disputeLostPost($unknown_base_type = null, string $contentType = self::contentTypes['disputeLostPost'][0])
+    public function disputeLostPost($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeLostPost'][0])
     {
-        $this->disputeLostPostWithHttpInfo($unknown_base_type, $contentType);
+        $this->disputeLostPostWithHttpInfo($webhook_dispute_payload, $contentType);
     }
 
     /**
@@ -394,16 +394,16 @@ class DefaultApi
      *
      * Dispute Lost
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeLostPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function disputeLostPostWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['disputeLostPost'][0])
+    public function disputeLostPostWithHttpInfo($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeLostPost'][0])
     {
-        $request = $this->disputeLostPostRequest($unknown_base_type, $contentType);
+        $request = $this->disputeLostPostRequest($webhook_dispute_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -442,15 +442,15 @@ class DefaultApi
      *
      * Dispute Lost
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeLostPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function disputeLostPostAsync($unknown_base_type = null, string $contentType = self::contentTypes['disputeLostPost'][0])
+    public function disputeLostPostAsync($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeLostPost'][0])
     {
-        return $this->disputeLostPostAsyncWithHttpInfo($unknown_base_type, $contentType)
+        return $this->disputeLostPostAsyncWithHttpInfo($webhook_dispute_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -463,16 +463,16 @@ class DefaultApi
      *
      * Dispute Lost
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeLostPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function disputeLostPostAsyncWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['disputeLostPost'][0])
+    public function disputeLostPostAsyncWithHttpInfo($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeLostPost'][0])
     {
         $returnType = '';
-        $request = $this->disputeLostPostRequest($unknown_base_type, $contentType);
+        $request = $this->disputeLostPostRequest($webhook_dispute_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -500,13 +500,13 @@ class DefaultApi
     /**
      * Create request for operation 'disputeLostPost'
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeLostPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function disputeLostPostRequest($unknown_base_type = null, string $contentType = self::contentTypes['disputeLostPost'][0])
+    public function disputeLostPostRequest($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeLostPost'][0])
     {
 
 
@@ -529,12 +529,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($unknown_base_type)) {
+        if (isset($webhook_dispute_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($unknown_base_type));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_dispute_payload));
             } else {
-                $httpBody = $unknown_base_type;
+                $httpBody = $webhook_dispute_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -591,16 +591,16 @@ class DefaultApi
      *
      * Dispute Won
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeWonPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function disputeWonPost($unknown_base_type = null, string $contentType = self::contentTypes['disputeWonPost'][0])
+    public function disputeWonPost($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeWonPost'][0])
     {
-        $this->disputeWonPostWithHttpInfo($unknown_base_type, $contentType);
+        $this->disputeWonPostWithHttpInfo($webhook_dispute_payload, $contentType);
     }
 
     /**
@@ -608,16 +608,16 @@ class DefaultApi
      *
      * Dispute Won
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeWonPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function disputeWonPostWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['disputeWonPost'][0])
+    public function disputeWonPostWithHttpInfo($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeWonPost'][0])
     {
-        $request = $this->disputeWonPostRequest($unknown_base_type, $contentType);
+        $request = $this->disputeWonPostRequest($webhook_dispute_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -656,15 +656,15 @@ class DefaultApi
      *
      * Dispute Won
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeWonPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function disputeWonPostAsync($unknown_base_type = null, string $contentType = self::contentTypes['disputeWonPost'][0])
+    public function disputeWonPostAsync($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeWonPost'][0])
     {
-        return $this->disputeWonPostAsyncWithHttpInfo($unknown_base_type, $contentType)
+        return $this->disputeWonPostAsyncWithHttpInfo($webhook_dispute_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -677,16 +677,16 @@ class DefaultApi
      *
      * Dispute Won
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeWonPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function disputeWonPostAsyncWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['disputeWonPost'][0])
+    public function disputeWonPostAsyncWithHttpInfo($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeWonPost'][0])
     {
         $returnType = '';
-        $request = $this->disputeWonPostRequest($unknown_base_type, $contentType);
+        $request = $this->disputeWonPostRequest($webhook_dispute_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -714,13 +714,13 @@ class DefaultApi
     /**
      * Create request for operation 'disputeWonPost'
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookDisputePayload $webhook_dispute_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disputeWonPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function disputeWonPostRequest($unknown_base_type = null, string $contentType = self::contentTypes['disputeWonPost'][0])
+    public function disputeWonPostRequest($webhook_dispute_payload = null, string $contentType = self::contentTypes['disputeWonPost'][0])
     {
 
 
@@ -743,12 +743,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($unknown_base_type)) {
+        if (isset($webhook_dispute_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($unknown_base_type));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_dispute_payload));
             } else {
-                $httpBody = $unknown_base_type;
+                $httpBody = $webhook_dispute_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -805,16 +805,16 @@ class DefaultApi
      *
      * License Created
      *
-     * @param  \Solifyn\Model\License $license license (optional)
+     * @param  \Solifyn\Model\WebhookLicensePayload $webhook_license_payload webhook_license_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['licenseCreatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function licenseCreatedPost($license = null, string $contentType = self::contentTypes['licenseCreatedPost'][0])
+    public function licenseCreatedPost($webhook_license_payload = null, string $contentType = self::contentTypes['licenseCreatedPost'][0])
     {
-        $this->licenseCreatedPostWithHttpInfo($license, $contentType);
+        $this->licenseCreatedPostWithHttpInfo($webhook_license_payload, $contentType);
     }
 
     /**
@@ -822,16 +822,16 @@ class DefaultApi
      *
      * License Created
      *
-     * @param  \Solifyn\Model\License $license (optional)
+     * @param  \Solifyn\Model\WebhookLicensePayload $webhook_license_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['licenseCreatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function licenseCreatedPostWithHttpInfo($license = null, string $contentType = self::contentTypes['licenseCreatedPost'][0])
+    public function licenseCreatedPostWithHttpInfo($webhook_license_payload = null, string $contentType = self::contentTypes['licenseCreatedPost'][0])
     {
-        $request = $this->licenseCreatedPostRequest($license, $contentType);
+        $request = $this->licenseCreatedPostRequest($webhook_license_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -870,15 +870,15 @@ class DefaultApi
      *
      * License Created
      *
-     * @param  \Solifyn\Model\License $license (optional)
+     * @param  \Solifyn\Model\WebhookLicensePayload $webhook_license_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['licenseCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function licenseCreatedPostAsync($license = null, string $contentType = self::contentTypes['licenseCreatedPost'][0])
+    public function licenseCreatedPostAsync($webhook_license_payload = null, string $contentType = self::contentTypes['licenseCreatedPost'][0])
     {
-        return $this->licenseCreatedPostAsyncWithHttpInfo($license, $contentType)
+        return $this->licenseCreatedPostAsyncWithHttpInfo($webhook_license_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -891,16 +891,16 @@ class DefaultApi
      *
      * License Created
      *
-     * @param  \Solifyn\Model\License $license (optional)
+     * @param  \Solifyn\Model\WebhookLicensePayload $webhook_license_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['licenseCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function licenseCreatedPostAsyncWithHttpInfo($license = null, string $contentType = self::contentTypes['licenseCreatedPost'][0])
+    public function licenseCreatedPostAsyncWithHttpInfo($webhook_license_payload = null, string $contentType = self::contentTypes['licenseCreatedPost'][0])
     {
         $returnType = '';
-        $request = $this->licenseCreatedPostRequest($license, $contentType);
+        $request = $this->licenseCreatedPostRequest($webhook_license_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -928,13 +928,13 @@ class DefaultApi
     /**
      * Create request for operation 'licenseCreatedPost'
      *
-     * @param  \Solifyn\Model\License $license (optional)
+     * @param  \Solifyn\Model\WebhookLicensePayload $webhook_license_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['licenseCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function licenseCreatedPostRequest($license = null, string $contentType = self::contentTypes['licenseCreatedPost'][0])
+    public function licenseCreatedPostRequest($webhook_license_payload = null, string $contentType = self::contentTypes['licenseCreatedPost'][0])
     {
 
 
@@ -957,12 +957,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($license)) {
+        if (isset($webhook_license_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($license));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_license_payload));
             } else {
-                $httpBody = $license;
+                $httpBody = $webhook_license_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1019,16 +1019,16 @@ class DefaultApi
      *
      * License Revoked
      *
-     * @param  \Solifyn\Model\License $license license (optional)
+     * @param  \Solifyn\Model\WebhookLicensePayload $webhook_license_payload webhook_license_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['licenseRevokedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function licenseRevokedPost($license = null, string $contentType = self::contentTypes['licenseRevokedPost'][0])
+    public function licenseRevokedPost($webhook_license_payload = null, string $contentType = self::contentTypes['licenseRevokedPost'][0])
     {
-        $this->licenseRevokedPostWithHttpInfo($license, $contentType);
+        $this->licenseRevokedPostWithHttpInfo($webhook_license_payload, $contentType);
     }
 
     /**
@@ -1036,16 +1036,16 @@ class DefaultApi
      *
      * License Revoked
      *
-     * @param  \Solifyn\Model\License $license (optional)
+     * @param  \Solifyn\Model\WebhookLicensePayload $webhook_license_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['licenseRevokedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function licenseRevokedPostWithHttpInfo($license = null, string $contentType = self::contentTypes['licenseRevokedPost'][0])
+    public function licenseRevokedPostWithHttpInfo($webhook_license_payload = null, string $contentType = self::contentTypes['licenseRevokedPost'][0])
     {
-        $request = $this->licenseRevokedPostRequest($license, $contentType);
+        $request = $this->licenseRevokedPostRequest($webhook_license_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1084,15 +1084,15 @@ class DefaultApi
      *
      * License Revoked
      *
-     * @param  \Solifyn\Model\License $license (optional)
+     * @param  \Solifyn\Model\WebhookLicensePayload $webhook_license_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['licenseRevokedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function licenseRevokedPostAsync($license = null, string $contentType = self::contentTypes['licenseRevokedPost'][0])
+    public function licenseRevokedPostAsync($webhook_license_payload = null, string $contentType = self::contentTypes['licenseRevokedPost'][0])
     {
-        return $this->licenseRevokedPostAsyncWithHttpInfo($license, $contentType)
+        return $this->licenseRevokedPostAsyncWithHttpInfo($webhook_license_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1105,16 +1105,16 @@ class DefaultApi
      *
      * License Revoked
      *
-     * @param  \Solifyn\Model\License $license (optional)
+     * @param  \Solifyn\Model\WebhookLicensePayload $webhook_license_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['licenseRevokedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function licenseRevokedPostAsyncWithHttpInfo($license = null, string $contentType = self::contentTypes['licenseRevokedPost'][0])
+    public function licenseRevokedPostAsyncWithHttpInfo($webhook_license_payload = null, string $contentType = self::contentTypes['licenseRevokedPost'][0])
     {
         $returnType = '';
-        $request = $this->licenseRevokedPostRequest($license, $contentType);
+        $request = $this->licenseRevokedPostRequest($webhook_license_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1142,13 +1142,13 @@ class DefaultApi
     /**
      * Create request for operation 'licenseRevokedPost'
      *
-     * @param  \Solifyn\Model\License $license (optional)
+     * @param  \Solifyn\Model\WebhookLicensePayload $webhook_license_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['licenseRevokedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function licenseRevokedPostRequest($license = null, string $contentType = self::contentTypes['licenseRevokedPost'][0])
+    public function licenseRevokedPostRequest($webhook_license_payload = null, string $contentType = self::contentTypes['licenseRevokedPost'][0])
     {
 
 
@@ -1171,12 +1171,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($license)) {
+        if (isset($webhook_license_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($license));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_license_payload));
             } else {
-                $httpBody = $license;
+                $httpBody = $webhook_license_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1233,16 +1233,16 @@ class DefaultApi
      *
      * Payment Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookPaymentPayload $webhook_payment_payload webhook_payment_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentCreatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function paymentCreatedPost($unknown_base_type = null, string $contentType = self::contentTypes['paymentCreatedPost'][0])
+    public function paymentCreatedPost($webhook_payment_payload = null, string $contentType = self::contentTypes['paymentCreatedPost'][0])
     {
-        $this->paymentCreatedPostWithHttpInfo($unknown_base_type, $contentType);
+        $this->paymentCreatedPostWithHttpInfo($webhook_payment_payload, $contentType);
     }
 
     /**
@@ -1250,16 +1250,16 @@ class DefaultApi
      *
      * Payment Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookPaymentPayload $webhook_payment_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentCreatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function paymentCreatedPostWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['paymentCreatedPost'][0])
+    public function paymentCreatedPostWithHttpInfo($webhook_payment_payload = null, string $contentType = self::contentTypes['paymentCreatedPost'][0])
     {
-        $request = $this->paymentCreatedPostRequest($unknown_base_type, $contentType);
+        $request = $this->paymentCreatedPostRequest($webhook_payment_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1298,15 +1298,15 @@ class DefaultApi
      *
      * Payment Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookPaymentPayload $webhook_payment_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function paymentCreatedPostAsync($unknown_base_type = null, string $contentType = self::contentTypes['paymentCreatedPost'][0])
+    public function paymentCreatedPostAsync($webhook_payment_payload = null, string $contentType = self::contentTypes['paymentCreatedPost'][0])
     {
-        return $this->paymentCreatedPostAsyncWithHttpInfo($unknown_base_type, $contentType)
+        return $this->paymentCreatedPostAsyncWithHttpInfo($webhook_payment_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1319,16 +1319,16 @@ class DefaultApi
      *
      * Payment Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookPaymentPayload $webhook_payment_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function paymentCreatedPostAsyncWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['paymentCreatedPost'][0])
+    public function paymentCreatedPostAsyncWithHttpInfo($webhook_payment_payload = null, string $contentType = self::contentTypes['paymentCreatedPost'][0])
     {
         $returnType = '';
-        $request = $this->paymentCreatedPostRequest($unknown_base_type, $contentType);
+        $request = $this->paymentCreatedPostRequest($webhook_payment_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1356,13 +1356,13 @@ class DefaultApi
     /**
      * Create request for operation 'paymentCreatedPost'
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookPaymentPayload $webhook_payment_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function paymentCreatedPostRequest($unknown_base_type = null, string $contentType = self::contentTypes['paymentCreatedPost'][0])
+    public function paymentCreatedPostRequest($webhook_payment_payload = null, string $contentType = self::contentTypes['paymentCreatedPost'][0])
     {
 
 
@@ -1385,12 +1385,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($unknown_base_type)) {
+        if (isset($webhook_payment_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($unknown_base_type));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_payment_payload));
             } else {
-                $httpBody = $unknown_base_type;
+                $httpBody = $webhook_payment_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1875,16 +1875,16 @@ class DefaultApi
      *
      * Refund Failed
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookRefundPayload $webhook_refund_payload webhook_refund_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundFailedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function refundFailedPost($unknown_base_type = null, string $contentType = self::contentTypes['refundFailedPost'][0])
+    public function refundFailedPost($webhook_refund_payload = null, string $contentType = self::contentTypes['refundFailedPost'][0])
     {
-        $this->refundFailedPostWithHttpInfo($unknown_base_type, $contentType);
+        $this->refundFailedPostWithHttpInfo($webhook_refund_payload, $contentType);
     }
 
     /**
@@ -1892,16 +1892,16 @@ class DefaultApi
      *
      * Refund Failed
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookRefundPayload $webhook_refund_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundFailedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function refundFailedPostWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['refundFailedPost'][0])
+    public function refundFailedPostWithHttpInfo($webhook_refund_payload = null, string $contentType = self::contentTypes['refundFailedPost'][0])
     {
-        $request = $this->refundFailedPostRequest($unknown_base_type, $contentType);
+        $request = $this->refundFailedPostRequest($webhook_refund_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1940,15 +1940,15 @@ class DefaultApi
      *
      * Refund Failed
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookRefundPayload $webhook_refund_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundFailedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function refundFailedPostAsync($unknown_base_type = null, string $contentType = self::contentTypes['refundFailedPost'][0])
+    public function refundFailedPostAsync($webhook_refund_payload = null, string $contentType = self::contentTypes['refundFailedPost'][0])
     {
-        return $this->refundFailedPostAsyncWithHttpInfo($unknown_base_type, $contentType)
+        return $this->refundFailedPostAsyncWithHttpInfo($webhook_refund_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1961,16 +1961,16 @@ class DefaultApi
      *
      * Refund Failed
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookRefundPayload $webhook_refund_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundFailedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function refundFailedPostAsyncWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['refundFailedPost'][0])
+    public function refundFailedPostAsyncWithHttpInfo($webhook_refund_payload = null, string $contentType = self::contentTypes['refundFailedPost'][0])
     {
         $returnType = '';
-        $request = $this->refundFailedPostRequest($unknown_base_type, $contentType);
+        $request = $this->refundFailedPostRequest($webhook_refund_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1998,13 +1998,13 @@ class DefaultApi
     /**
      * Create request for operation 'refundFailedPost'
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookRefundPayload $webhook_refund_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundFailedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function refundFailedPostRequest($unknown_base_type = null, string $contentType = self::contentTypes['refundFailedPost'][0])
+    public function refundFailedPostRequest($webhook_refund_payload = null, string $contentType = self::contentTypes['refundFailedPost'][0])
     {
 
 
@@ -2027,12 +2027,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($unknown_base_type)) {
+        if (isset($webhook_refund_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($unknown_base_type));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_refund_payload));
             } else {
-                $httpBody = $unknown_base_type;
+                $httpBody = $webhook_refund_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2089,16 +2089,16 @@ class DefaultApi
      *
      * Refund Succeeded
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookRefundPayload $webhook_refund_payload webhook_refund_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundSucceededPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function refundSucceededPost($unknown_base_type = null, string $contentType = self::contentTypes['refundSucceededPost'][0])
+    public function refundSucceededPost($webhook_refund_payload = null, string $contentType = self::contentTypes['refundSucceededPost'][0])
     {
-        $this->refundSucceededPostWithHttpInfo($unknown_base_type, $contentType);
+        $this->refundSucceededPostWithHttpInfo($webhook_refund_payload, $contentType);
     }
 
     /**
@@ -2106,16 +2106,16 @@ class DefaultApi
      *
      * Refund Succeeded
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookRefundPayload $webhook_refund_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundSucceededPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function refundSucceededPostWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['refundSucceededPost'][0])
+    public function refundSucceededPostWithHttpInfo($webhook_refund_payload = null, string $contentType = self::contentTypes['refundSucceededPost'][0])
     {
-        $request = $this->refundSucceededPostRequest($unknown_base_type, $contentType);
+        $request = $this->refundSucceededPostRequest($webhook_refund_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2154,15 +2154,15 @@ class DefaultApi
      *
      * Refund Succeeded
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookRefundPayload $webhook_refund_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundSucceededPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function refundSucceededPostAsync($unknown_base_type = null, string $contentType = self::contentTypes['refundSucceededPost'][0])
+    public function refundSucceededPostAsync($webhook_refund_payload = null, string $contentType = self::contentTypes['refundSucceededPost'][0])
     {
-        return $this->refundSucceededPostAsyncWithHttpInfo($unknown_base_type, $contentType)
+        return $this->refundSucceededPostAsyncWithHttpInfo($webhook_refund_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2175,16 +2175,16 @@ class DefaultApi
      *
      * Refund Succeeded
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookRefundPayload $webhook_refund_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundSucceededPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function refundSucceededPostAsyncWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['refundSucceededPost'][0])
+    public function refundSucceededPostAsyncWithHttpInfo($webhook_refund_payload = null, string $contentType = self::contentTypes['refundSucceededPost'][0])
     {
         $returnType = '';
-        $request = $this->refundSucceededPostRequest($unknown_base_type, $contentType);
+        $request = $this->refundSucceededPostRequest($webhook_refund_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2212,13 +2212,13 @@ class DefaultApi
     /**
      * Create request for operation 'refundSucceededPost'
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookRefundPayload $webhook_refund_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundSucceededPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function refundSucceededPostRequest($unknown_base_type = null, string $contentType = self::contentTypes['refundSucceededPost'][0])
+    public function refundSucceededPostRequest($webhook_refund_payload = null, string $contentType = self::contentTypes['refundSucceededPost'][0])
     {
 
 
@@ -2241,12 +2241,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($unknown_base_type)) {
+        if (isset($webhook_refund_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($unknown_base_type));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_refund_payload));
             } else {
-                $httpBody = $unknown_base_type;
+                $httpBody = $webhook_refund_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2303,16 +2303,16 @@ class DefaultApi
      *
      * Subscription Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionCreatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function subscriptionCreatedPost($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionCreatedPost'][0])
+    public function subscriptionCreatedPost($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionCreatedPost'][0])
     {
-        $this->subscriptionCreatedPostWithHttpInfo($unknown_base_type, $contentType);
+        $this->subscriptionCreatedPostWithHttpInfo($webhook_subscription_payload, $contentType);
     }
 
     /**
@@ -2320,16 +2320,16 @@ class DefaultApi
      *
      * Subscription Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionCreatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function subscriptionCreatedPostWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionCreatedPost'][0])
+    public function subscriptionCreatedPostWithHttpInfo($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionCreatedPost'][0])
     {
-        $request = $this->subscriptionCreatedPostRequest($unknown_base_type, $contentType);
+        $request = $this->subscriptionCreatedPostRequest($webhook_subscription_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2368,15 +2368,15 @@ class DefaultApi
      *
      * Subscription Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function subscriptionCreatedPostAsync($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionCreatedPost'][0])
+    public function subscriptionCreatedPostAsync($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionCreatedPost'][0])
     {
-        return $this->subscriptionCreatedPostAsyncWithHttpInfo($unknown_base_type, $contentType)
+        return $this->subscriptionCreatedPostAsyncWithHttpInfo($webhook_subscription_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2389,16 +2389,16 @@ class DefaultApi
      *
      * Subscription Created
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function subscriptionCreatedPostAsyncWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionCreatedPost'][0])
+    public function subscriptionCreatedPostAsyncWithHttpInfo($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionCreatedPost'][0])
     {
         $returnType = '';
-        $request = $this->subscriptionCreatedPostRequest($unknown_base_type, $contentType);
+        $request = $this->subscriptionCreatedPostRequest($webhook_subscription_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2426,13 +2426,13 @@ class DefaultApi
     /**
      * Create request for operation 'subscriptionCreatedPost'
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionCreatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function subscriptionCreatedPostRequest($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionCreatedPost'][0])
+    public function subscriptionCreatedPostRequest($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionCreatedPost'][0])
     {
 
 
@@ -2455,12 +2455,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($unknown_base_type)) {
+        if (isset($webhook_subscription_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($unknown_base_type));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_subscription_payload));
             } else {
-                $httpBody = $unknown_base_type;
+                $httpBody = $webhook_subscription_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2517,16 +2517,16 @@ class DefaultApi
      *
      * Subscription Deactivated
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionDeactivatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function subscriptionDeactivatedPost($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionDeactivatedPost'][0])
+    public function subscriptionDeactivatedPost($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionDeactivatedPost'][0])
     {
-        $this->subscriptionDeactivatedPostWithHttpInfo($unknown_base_type, $contentType);
+        $this->subscriptionDeactivatedPostWithHttpInfo($webhook_subscription_payload, $contentType);
     }
 
     /**
@@ -2534,16 +2534,16 @@ class DefaultApi
      *
      * Subscription Deactivated
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionDeactivatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function subscriptionDeactivatedPostWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionDeactivatedPost'][0])
+    public function subscriptionDeactivatedPostWithHttpInfo($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionDeactivatedPost'][0])
     {
-        $request = $this->subscriptionDeactivatedPostRequest($unknown_base_type, $contentType);
+        $request = $this->subscriptionDeactivatedPostRequest($webhook_subscription_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2582,15 +2582,15 @@ class DefaultApi
      *
      * Subscription Deactivated
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionDeactivatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function subscriptionDeactivatedPostAsync($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionDeactivatedPost'][0])
+    public function subscriptionDeactivatedPostAsync($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionDeactivatedPost'][0])
     {
-        return $this->subscriptionDeactivatedPostAsyncWithHttpInfo($unknown_base_type, $contentType)
+        return $this->subscriptionDeactivatedPostAsyncWithHttpInfo($webhook_subscription_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2603,16 +2603,16 @@ class DefaultApi
      *
      * Subscription Deactivated
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionDeactivatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function subscriptionDeactivatedPostAsyncWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionDeactivatedPost'][0])
+    public function subscriptionDeactivatedPostAsyncWithHttpInfo($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionDeactivatedPost'][0])
     {
         $returnType = '';
-        $request = $this->subscriptionDeactivatedPostRequest($unknown_base_type, $contentType);
+        $request = $this->subscriptionDeactivatedPostRequest($webhook_subscription_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2640,13 +2640,13 @@ class DefaultApi
     /**
      * Create request for operation 'subscriptionDeactivatedPost'
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionDeactivatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function subscriptionDeactivatedPostRequest($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionDeactivatedPost'][0])
+    public function subscriptionDeactivatedPostRequest($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionDeactivatedPost'][0])
     {
 
 
@@ -2669,12 +2669,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($unknown_base_type)) {
+        if (isset($webhook_subscription_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($unknown_base_type));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_subscription_payload));
             } else {
-                $httpBody = $unknown_base_type;
+                $httpBody = $webhook_subscription_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2731,16 +2731,16 @@ class DefaultApi
      *
      * Subscription Updated
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionUpdatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function subscriptionUpdatedPost($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionUpdatedPost'][0])
+    public function subscriptionUpdatedPost($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionUpdatedPost'][0])
     {
-        $this->subscriptionUpdatedPostWithHttpInfo($unknown_base_type, $contentType);
+        $this->subscriptionUpdatedPostWithHttpInfo($webhook_subscription_payload, $contentType);
     }
 
     /**
@@ -2748,16 +2748,16 @@ class DefaultApi
      *
      * Subscription Updated
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionUpdatedPost'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function subscriptionUpdatedPostWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionUpdatedPost'][0])
+    public function subscriptionUpdatedPostWithHttpInfo($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionUpdatedPost'][0])
     {
-        $request = $this->subscriptionUpdatedPostRequest($unknown_base_type, $contentType);
+        $request = $this->subscriptionUpdatedPostRequest($webhook_subscription_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2796,15 +2796,15 @@ class DefaultApi
      *
      * Subscription Updated
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionUpdatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function subscriptionUpdatedPostAsync($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionUpdatedPost'][0])
+    public function subscriptionUpdatedPostAsync($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionUpdatedPost'][0])
     {
-        return $this->subscriptionUpdatedPostAsyncWithHttpInfo($unknown_base_type, $contentType)
+        return $this->subscriptionUpdatedPostAsyncWithHttpInfo($webhook_subscription_payload, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2817,16 +2817,16 @@ class DefaultApi
      *
      * Subscription Updated
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionUpdatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function subscriptionUpdatedPostAsyncWithHttpInfo($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionUpdatedPost'][0])
+    public function subscriptionUpdatedPostAsyncWithHttpInfo($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionUpdatedPost'][0])
     {
         $returnType = '';
-        $request = $this->subscriptionUpdatedPostRequest($unknown_base_type, $contentType);
+        $request = $this->subscriptionUpdatedPostRequest($webhook_subscription_payload, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2854,13 +2854,13 @@ class DefaultApi
     /**
      * Create request for operation 'subscriptionUpdatedPost'
      *
-     * @param  \Solifyn\Model\UNKNOWN_BASE_TYPE $unknown_base_type (optional)
+     * @param  \Solifyn\Model\WebhookSubscriptionPayload $webhook_subscription_payload (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['subscriptionUpdatedPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function subscriptionUpdatedPostRequest($unknown_base_type = null, string $contentType = self::contentTypes['subscriptionUpdatedPost'][0])
+    public function subscriptionUpdatedPostRequest($webhook_subscription_payload = null, string $contentType = self::contentTypes['subscriptionUpdatedPost'][0])
     {
 
 
@@ -2883,12 +2883,12 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (isset($unknown_base_type)) {
+        if (isset($webhook_subscription_payload)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($unknown_base_type));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_subscription_payload));
             } else {
-                $httpBody = $unknown_base_type;
+                $httpBody = $webhook_subscription_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

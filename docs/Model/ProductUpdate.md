@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **custom_fields** | [**\Solifyn\Model\ProductCreateCustomFieldsInner[]**](ProductCreateCustomFieldsInner.md) | Form field configurations to gather during checkout. | [optional]
 **stock** | **int** | Initial stock quantity limit. | [optional]
 **is_listed** | **bool** | Whether the product is publicly visible. | [optional] [default to true]
+**is_free** | **bool** | Whether the product is free of charge. | [optional] [default to false]
 **addons** | [**\Solifyn\Model\ProductCreateAddonsInner[]**](ProductCreateAddonsInner.md) | Product addons configurations. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

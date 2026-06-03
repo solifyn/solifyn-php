@@ -4,24 +4,25 @@ All URIs are relative to http://localhost:8000, except if the operation defines 
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**developerControllerCreateApiKey()**](DeveloperApi.md#developerControllerCreateApiKey) | **POST** /v1/developer/api-keys |  |
-| [**developerControllerCreateWebhookEndpoint()**](DeveloperApi.md#developerControllerCreateWebhookEndpoint) | **POST** /v1/developer/webhooks |  |
-| [**developerControllerDeleteApiKey()**](DeveloperApi.md#developerControllerDeleteApiKey) | **DELETE** /v1/developer/api-keys/{id} |  |
-| [**developerControllerDeleteWebhookEndpoint()**](DeveloperApi.md#developerControllerDeleteWebhookEndpoint) | **DELETE** /v1/developer/webhooks/{id} |  |
-| [**developerControllerGetApiKeys()**](DeveloperApi.md#developerControllerGetApiKeys) | **GET** /v1/developer/api-keys |  |
-| [**developerControllerGetAppPortalUrl()**](DeveloperApi.md#developerControllerGetAppPortalUrl) | **GET** /v1/developer/webhooks/app-portal |  |
-| [**developerControllerGetWebhookDeliveries()**](DeveloperApi.md#developerControllerGetWebhookDeliveries) | **GET** /v1/developer/webhooks/{id}/deliveries |  |
-| [**developerControllerGetWebhookEndpoints()**](DeveloperApi.md#developerControllerGetWebhookEndpoints) | **GET** /v1/developer/webhooks |  |
-| [**developerControllerUpdateWebhookEndpoint()**](DeveloperApi.md#developerControllerUpdateWebhookEndpoint) | **PATCH** /v1/developer/webhooks/{id} |  |
+| [**developerCreateApiKey()**](DeveloperApi.md#developerCreateApiKey) | **POST** /v1/developer/api-keys | Create Developer API Key |
+| [**developerCreateWebhook()**](DeveloperApi.md#developerCreateWebhook) | **POST** /v1/developer/webhooks | Create Webhook Endpoint |
+| [**developerDeleteWebhook()**](DeveloperApi.md#developerDeleteWebhook) | **DELETE** /v1/developer/webhooks/{id} | Delete Webhook Endpoint |
+| [**developerGetAppPortal()**](DeveloperApi.md#developerGetAppPortal) | **GET** /v1/developer/webhooks/app-portal | Retrieve Hosted Webhooks Portal URL |
+| [**developerGetWebhook()**](DeveloperApi.md#developerGetWebhook) | **GET** /v1/developer/webhooks/{id} | Retrieve Webhook Endpoint Details |
+| [**developerListApiKeys()**](DeveloperApi.md#developerListApiKeys) | **GET** /v1/developer/api-keys | List Developer API Keys |
+| [**developerListWebhookDeliveries()**](DeveloperApi.md#developerListWebhookDeliveries) | **GET** /v1/developer/webhooks/{id}/deliveries | Retrieve Webhook Delivery Logs |
+| [**developerListWebhooks()**](DeveloperApi.md#developerListWebhooks) | **GET** /v1/developer/webhooks | List Webhook Endpoints |
+| [**developerRevokeApiKey()**](DeveloperApi.md#developerRevokeApiKey) | **DELETE** /v1/developer/api-keys/{id} | Revoke API Key |
+| [**developerUpdateWebhook()**](DeveloperApi.md#developerUpdateWebhook) | **PATCH** /v1/developer/webhooks/{id} | Update Webhook Endpoint |
 
 
-## `developerControllerCreateApiKey()`
+## `developerCreateApiKey()`
 
 ```php
-developerControllerCreateApiKey()
+developerCreateApiKey($create_api_key_dto): \Solifyn\Model\ApiKeyResponseDto
 ```
 
-
+Create Developer API Key
 
 ### Example
 
@@ -36,112 +37,13 @@ $apiInstance = new Solifyn\Api\DeveloperApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
+$create_api_key_dto = new \Solifyn\Model\CreateApiKeyDto(); // \Solifyn\Model\CreateApiKeyDto
 
 try {
-    $apiInstance->developerControllerCreateApiKey();
+    $result = $apiInstance->developerCreateApiKey($create_api_key_dto);
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DeveloperApi->developerControllerCreateApiKey: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `developerControllerCreateWebhookEndpoint()`
-
-```php
-developerControllerCreateWebhookEndpoint()
-```
-
-
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-
-$apiInstance = new Solifyn\Api\DeveloperApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
-);
-
-try {
-    $apiInstance->developerControllerCreateWebhookEndpoint();
-} catch (Exception $e) {
-    echo 'Exception when calling DeveloperApi->developerControllerCreateWebhookEndpoint: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `developerControllerDeleteApiKey()`
-
-```php
-developerControllerDeleteApiKey($id)
-```
-
-
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-
-$apiInstance = new Solifyn\Api\DeveloperApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
-);
-$id = 'id_example'; // string
-
-try {
-    $apiInstance->developerControllerDeleteApiKey($id);
-} catch (Exception $e) {
-    echo 'Exception when calling DeveloperApi->developerControllerDeleteApiKey: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DeveloperApi->developerCreateApiKey: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -149,11 +51,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**|  | |
+| **create_api_key_dto** | [**\Solifyn\Model\CreateApiKeyDto**](../Model/CreateApiKeyDto.md)|  | |
 
 ### Return type
 
-void (empty response body)
+[**\Solifyn\Model\ApiKeyResponseDto**](../Model/ApiKeyResponseDto.md)
 
 ### Authorization
 
@@ -161,20 +63,20 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `developerControllerDeleteWebhookEndpoint()`
+## `developerCreateWebhook()`
 
 ```php
-developerControllerDeleteWebhookEndpoint($id)
+developerCreateWebhook($create_webhook_endpoint_dto): \Solifyn\Model\WebhookEndpointResponseDto
 ```
 
-
+Create Webhook Endpoint
 
 ### Example
 
@@ -189,12 +91,13 @@ $apiInstance = new Solifyn\Api\DeveloperApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = 'id_example'; // string
+$create_webhook_endpoint_dto = new \Solifyn\Model\CreateWebhookEndpointDto(); // \Solifyn\Model\CreateWebhookEndpointDto
 
 try {
-    $apiInstance->developerControllerDeleteWebhookEndpoint($id);
+    $result = $apiInstance->developerCreateWebhook($create_webhook_endpoint_dto);
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DeveloperApi->developerControllerDeleteWebhookEndpoint: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DeveloperApi->developerCreateWebhook: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -202,7 +105,60 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**|  | |
+| **create_webhook_endpoint_dto** | [**\Solifyn\Model\CreateWebhookEndpointDto**](../Model/CreateWebhookEndpointDto.md)|  | |
+
+### Return type
+
+[**\Solifyn\Model\WebhookEndpointResponseDto**](../Model/WebhookEndpointResponseDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `developerDeleteWebhook()`
+
+```php
+developerDeleteWebhook($id)
+```
+
+Delete Webhook Endpoint
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Solifyn\Api\DeveloperApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$id = 'id_example'; // string | The webhook endpoint ID
+
+try {
+    $apiInstance->developerDeleteWebhook($id);
+} catch (Exception $e) {
+    echo 'Exception when calling DeveloperApi->developerDeleteWebhook: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| The webhook endpoint ID | |
 
 ### Return type
 
@@ -221,13 +177,13 @@ No authorization required
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `developerControllerGetApiKeys()`
+## `developerGetAppPortal()`
 
 ```php
-developerControllerGetApiKeys()
+developerGetAppPortal(): \Solifyn\Model\AppPortalUrlResponseDto
 ```
 
-
+Retrieve Hosted Webhooks Portal URL
 
 ### Example
 
@@ -244,9 +200,10 @@ $apiInstance = new Solifyn\Api\DeveloperApi(
 );
 
 try {
-    $apiInstance->developerControllerGetApiKeys();
+    $result = $apiInstance->developerGetAppPortal();
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DeveloperApi->developerControllerGetApiKeys: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DeveloperApi->developerGetAppPortal: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -256,7 +213,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**\Solifyn\Model\AppPortalUrlResponseDto**](../Model/AppPortalUrlResponseDto.md)
 
 ### Authorization
 
@@ -265,19 +222,73 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `developerControllerGetAppPortalUrl()`
+## `developerGetWebhook()`
 
 ```php
-developerControllerGetAppPortalUrl()
+developerGetWebhook($id): \Solifyn\Model\WebhookEndpointResponseDto
 ```
 
+Retrieve Webhook Endpoint Details
 
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Solifyn\Api\DeveloperApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$id = 'id_example'; // string | The webhook endpoint ID
+
+try {
+    $result = $apiInstance->developerGetWebhook($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DeveloperApi->developerGetWebhook: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| The webhook endpoint ID | |
+
+### Return type
+
+[**\Solifyn\Model\WebhookEndpointResponseDto**](../Model/WebhookEndpointResponseDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `developerListApiKeys()`
+
+```php
+developerListApiKeys(): \Solifyn\Model\ApiKeyResponseDto[]
+```
+
+List Developer API Keys
 
 ### Example
 
@@ -294,9 +305,10 @@ $apiInstance = new Solifyn\Api\DeveloperApi(
 );
 
 try {
-    $apiInstance->developerControllerGetAppPortalUrl();
+    $result = $apiInstance->developerListApiKeys();
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DeveloperApi->developerControllerGetAppPortalUrl: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DeveloperApi->developerListApiKeys: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -306,7 +318,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**\Solifyn\Model\ApiKeyResponseDto[]**](../Model/ApiKeyResponseDto.md)
 
 ### Authorization
 
@@ -315,19 +327,19 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `developerControllerGetWebhookDeliveries()`
+## `developerListWebhookDeliveries()`
 
 ```php
-developerControllerGetWebhookDeliveries($id)
+developerListWebhookDeliveries($id): \Solifyn\Model\WebhookDeliveryResponseDto[]
 ```
 
-
+Retrieve Webhook Delivery Logs
 
 ### Example
 
@@ -342,12 +354,13 @@ $apiInstance = new Solifyn\Api\DeveloperApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = 'id_example'; // string
+$id = 'id_example'; // string | The webhook endpoint ID
 
 try {
-    $apiInstance->developerControllerGetWebhookDeliveries($id);
+    $result = $apiInstance->developerListWebhookDeliveries($id);
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DeveloperApi->developerControllerGetWebhookDeliveries: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DeveloperApi->developerListWebhookDeliveries: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -355,11 +368,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**|  | |
+| **id** | **string**| The webhook endpoint ID | |
 
 ### Return type
 
-void (empty response body)
+[**\Solifyn\Model\WebhookDeliveryResponseDto[]**](../Model/WebhookDeliveryResponseDto.md)
 
 ### Authorization
 
@@ -368,19 +381,19 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `developerControllerGetWebhookEndpoints()`
+## `developerListWebhooks()`
 
 ```php
-developerControllerGetWebhookEndpoints()
+developerListWebhooks(): \Solifyn\Model\WebhookEndpointResponseDto[]
 ```
 
-
+List Webhook Endpoints
 
 ### Example
 
@@ -397,9 +410,10 @@ $apiInstance = new Solifyn\Api\DeveloperApi(
 );
 
 try {
-    $apiInstance->developerControllerGetWebhookEndpoints();
+    $result = $apiInstance->developerListWebhooks();
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DeveloperApi->developerControllerGetWebhookEndpoints: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DeveloperApi->developerListWebhooks: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -409,6 +423,59 @@ This endpoint does not need any parameter.
 
 ### Return type
 
+[**\Solifyn\Model\WebhookEndpointResponseDto[]**](../Model/WebhookEndpointResponseDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `developerRevokeApiKey()`
+
+```php
+developerRevokeApiKey($id)
+```
+
+Revoke API Key
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Solifyn\Api\DeveloperApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$id = 'id_example'; // string | The API key ID
+
+try {
+    $apiInstance->developerRevokeApiKey($id);
+} catch (Exception $e) {
+    echo 'Exception when calling DeveloperApi->developerRevokeApiKey: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| The API key ID | |
+
+### Return type
+
 void (empty response body)
 
 ### Authorization
@@ -424,13 +491,13 @@ No authorization required
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `developerControllerUpdateWebhookEndpoint()`
+## `developerUpdateWebhook()`
 
 ```php
-developerControllerUpdateWebhookEndpoint($id)
+developerUpdateWebhook($id, $update_webhook_endpoint_dto): \Solifyn\Model\WebhookEndpointResponseDto
 ```
 
-
+Update Webhook Endpoint
 
 ### Example
 
@@ -445,12 +512,14 @@ $apiInstance = new Solifyn\Api\DeveloperApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = 'id_example'; // string
+$id = 'id_example'; // string | The webhook endpoint ID
+$update_webhook_endpoint_dto = new \Solifyn\Model\UpdateWebhookEndpointDto(); // \Solifyn\Model\UpdateWebhookEndpointDto
 
 try {
-    $apiInstance->developerControllerUpdateWebhookEndpoint($id);
+    $result = $apiInstance->developerUpdateWebhook($id, $update_webhook_endpoint_dto);
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DeveloperApi->developerControllerUpdateWebhookEndpoint: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DeveloperApi->developerUpdateWebhook: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -458,11 +527,12 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**|  | |
+| **id** | **string**| The webhook endpoint ID | |
+| **update_webhook_endpoint_dto** | [**\Solifyn\Model\UpdateWebhookEndpointDto**](../Model/UpdateWebhookEndpointDto.md)|  | |
 
 ### Return type
 
-void (empty response body)
+[**\Solifyn\Model\WebhookEndpointResponseDto**](../Model/WebhookEndpointResponseDto.md)
 
 ### Authorization
 
@@ -470,8 +540,8 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
