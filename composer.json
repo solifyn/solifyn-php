@@ -1,4 +1,5 @@
 {
+    "name": "solifyn/solifyn",
     "description": "Welcome to the Solifyn API Reference. Leverage our secure endpoints to manage products and issue, validate, and manage software license keys programmatically.",
     "keywords": [
         "openapitools",
