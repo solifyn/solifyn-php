@@ -1,24 +1,24 @@
-# Solifyn\LicenseKeysClientApi
+# Solifyn\EntitlementGrantsApi
 
 All URIs are relative to https://api.solifyn.com, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**licensesActivate()**](LicenseKeysClientApi.md#licensesActivate) | **POST** /v1/licenses/activate | Activate License Key |
-| [**licensesDeactivate()**](LicenseKeysClientApi.md#licensesDeactivate) | **POST** /v1/licenses/deactivate/{instanceId} | Deactivate Instance |
-| [**licensesInstances()**](LicenseKeysClientApi.md#licensesInstances) | **GET** /v1/licenses/instances/{licenseId} | Get Active Instances |
-| [**licensesVerify()**](LicenseKeysClientApi.md#licensesVerify) | **POST** /v1/licenses/verify | Validate License Key |
+| [**entitlementGrantsGet()**](EntitlementGrantsApi.md#entitlementGrantsGet) | **GET** /v1/entitlement-grants/{id} | Retrieve Entitlement Grant |
+| [**entitlementGrantsList()**](EntitlementGrantsApi.md#entitlementGrantsList) | **GET** /v1/entitlement-grants | List Entitlement Grants |
+| [**entitlementGrantsRetry()**](EntitlementGrantsApi.md#entitlementGrantsRetry) | **POST** /v1/entitlement-grants/{id}/retry | Retry Entitlement Grant Delivery |
+| [**entitlementGrantsRevoke()**](EntitlementGrantsApi.md#entitlementGrantsRevoke) | **POST** /v1/entitlement-grants/{id}/revoke | Manually Revoke Entitlement Grant |
 
 
-## `licensesActivate()`
+## `entitlementGrantsGet()`
 
 ```php
-licensesActivate($licenses_activate_request): \Solifyn\Model\Instance
+entitlementGrantsGet($id): \Solifyn\Model\EntitlementGrantResponseDto
 ```
 
-Activate License Key
+Retrieve Entitlement Grant
 
-Register and activate a device or instance for a specific license key.
+Retrieve details of a specific entitlement grant.
 
 ### Example
 
@@ -31,19 +31,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Solifyn\Api\LicenseKeysClientApi(
+$apiInstance = new Solifyn\Api\EntitlementGrantsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$licenses_activate_request = new \Solifyn\Model\LicensesActivateRequest(); // \Solifyn\Model\LicensesActivateRequest
+$id = 'id_example'; // string | The unique grant ID
 
 try {
-    $result = $apiInstance->licensesActivate($licenses_activate_request);
+    $result = $apiInstance->entitlementGrantsGet($id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling LicenseKeysClientApi->licensesActivate: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling EntitlementGrantsApi->entitlementGrantsGet: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -51,133 +51,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **licenses_activate_request** | [**\Solifyn\Model\LicensesActivateRequest**](../Model/LicensesActivateRequest.md)|  | |
+| **id** | **string**| The unique grant ID | |
 
 ### Return type
 
-[**\Solifyn\Model\Instance**](../Model/Instance.md)
-
-### Authorization
-
-[ApiKeyAuth](../../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `licensesDeactivate()`
-
-```php
-licensesDeactivate($instance_id, $licenses_deactivate_request): \Solifyn\Model\LicensesDeactivate200Response
-```
-
-Deactivate Instance
-
-Deactivate or unregister an active device instance from a license key.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure Bearer (API Key) authorization: ApiKeyAuth
-$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
-
-
-$apiInstance = new Solifyn\Api\LicenseKeysClientApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$instance_id = 'instance_id_example'; // string | The unique device instance ID.
-$licenses_deactivate_request = new \Solifyn\Model\LicensesDeactivateRequest(); // \Solifyn\Model\LicensesDeactivateRequest
-
-try {
-    $result = $apiInstance->licensesDeactivate($instance_id, $licenses_deactivate_request);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling LicenseKeysClientApi->licensesDeactivate: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **instance_id** | **string**| The unique device instance ID. | |
-| **licenses_deactivate_request** | [**\Solifyn\Model\LicensesDeactivateRequest**](../Model/LicensesDeactivateRequest.md)|  | |
-
-### Return type
-
-[**\Solifyn\Model\LicensesDeactivate200Response**](../Model/LicensesDeactivate200Response.md)
-
-### Authorization
-
-[ApiKeyAuth](../../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `licensesInstances()`
-
-```php
-licensesInstances($license_id): \Solifyn\Model\Instance[]
-```
-
-Get Active Instances
-
-List all active devices or server instances linked to a specific license key.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure Bearer (API Key) authorization: ApiKeyAuth
-$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
-
-
-$apiInstance = new Solifyn\Api\LicenseKeysClientApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$license_id = 'license_id_example'; // string | The unique license key ID.
-
-try {
-    $result = $apiInstance->licensesInstances($license_id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling LicenseKeysClientApi->licensesInstances: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **license_id** | **string**| The unique license key ID. | |
-
-### Return type
-
-[**\Solifyn\Model\Instance[]**](../Model/Instance.md)
+[**\Solifyn\Model\EntitlementGrantResponseDto**](../Model/EntitlementGrantResponseDto.md)
 
 ### Authorization
 
@@ -192,15 +70,15 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `licensesVerify()`
+## `entitlementGrantsList()`
 
 ```php
-licensesVerify($licenses_verify_request): \Solifyn\Model\LicenseValidationResponse
+entitlementGrantsList($status): \Solifyn\Model\EntitlementGrantResponseDto[]
 ```
 
-Validate License Key
+List Entitlement Grants
 
-Verify if a software license key is valid, active, and has not exceeded its limits.
+Retrieve all GitHub repository entitlement grants for the active business.
 
 ### Example
 
@@ -213,19 +91,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new Solifyn\Api\LicenseKeysClientApi(
+$apiInstance = new Solifyn\Api\EntitlementGrantsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$licenses_verify_request = new \Solifyn\Model\LicensesVerifyRequest(); // \Solifyn\Model\LicensesVerifyRequest
+$status = 'status_example'; // string | Filter by status (PENDING, DELIVERED, FAILED, REVOKED)
 
 try {
-    $result = $apiInstance->licensesVerify($licenses_verify_request);
+    $result = $apiInstance->entitlementGrantsList($status);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling LicenseKeysClientApi->licensesVerify: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling EntitlementGrantsApi->entitlementGrantsList: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -233,11 +111,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **licenses_verify_request** | [**\Solifyn\Model\LicensesVerifyRequest**](../Model/LicensesVerifyRequest.md)|  | |
+| **status** | **string**| Filter by status (PENDING, DELIVERED, FAILED, REVOKED) | [optional] |
 
 ### Return type
 
-[**\Solifyn\Model\LicenseValidationResponse**](../Model/LicenseValidationResponse.md)
+[**\Solifyn\Model\EntitlementGrantResponseDto[]**](../Model/EntitlementGrantResponseDto.md)
 
 ### Authorization
 
@@ -245,7 +123,127 @@ try {
 
 ### HTTP request headers
 
-- **Content-Type**: `application/json`
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `entitlementGrantsRetry()`
+
+```php
+entitlementGrantsRetry($id): \Solifyn\Model\EntitlementGrantResponseDto
+```
+
+Retry Entitlement Grant Delivery
+
+Attempts to re-invite the collaborator if GitHub username is already connected, or resets the OAuth URL redirect.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Solifyn\Api\EntitlementGrantsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | The unique grant ID
+
+try {
+    $result = $apiInstance->entitlementGrantsRetry($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling EntitlementGrantsApi->entitlementGrantsRetry: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| The unique grant ID | |
+
+### Return type
+
+[**\Solifyn\Model\EntitlementGrantResponseDto**](../Model/EntitlementGrantResponseDto.md)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `entitlementGrantsRevoke()`
+
+```php
+entitlementGrantsRevoke($id): \Solifyn\Model\EntitlementGrantResponseDto
+```
+
+Manually Revoke Entitlement Grant
+
+Manually remove the customer collaborator access from the repository and revoke the grant.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Solifyn\Api\EntitlementGrantsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | The unique grant ID
+
+try {
+    $result = $apiInstance->entitlementGrantsRevoke($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling EntitlementGrantsApi->entitlementGrantsRevoke: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| The unique grant ID | |
+
+### Return type
+
+[**\Solifyn\Model\EntitlementGrantResponseDto**](../Model/EntitlementGrantResponseDto.md)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

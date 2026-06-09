@@ -13,6 +13,8 @@ docs/Api/DeveloperApi.md
 docs/Api/DigitalFileApi.md
 docs/Api/DiscountsApi.md
 docs/Api/DisputesApi.md
+docs/Api/EntitlementGrantsApi.md
+docs/Api/GitHubIntegrationApi.md
 docs/Api/LicenseApi.md
 docs/Api/LicenseKeysApi.md
 docs/Api/LicenseKeysClientApi.md
@@ -74,6 +76,8 @@ docs/Model/DisputeEvidenceUpdate.md
 docs/Model/DisputeFileUpload.md
 docs/Model/DisputeList.md
 docs/Model/DisputeListMetaDto.md
+docs/Model/EntitlementGrantResponseDto.md
+docs/Model/GithubReposResponseDto.md
 docs/Model/Instance.md
 docs/Model/Invoice.md
 docs/Model/License.md
@@ -141,6 +145,7 @@ docs/Model/SubscriptionSeatAdjustment.md
 docs/Model/SubscriptionUserDto.md
 docs/Model/SubscriptionsAction201Response.md
 docs/Model/SupportedCurrenciesResponseDto.md
+docs/Model/SyncLoginDto.md
 docs/Model/UpdateCheckoutLinkDto.md
 docs/Model/UpdateCollectionDto.md
 docs/Model/UpdateCollectionProductDto.md
@@ -167,6 +172,8 @@ lib/Api/DeveloperApi.php
 lib/Api/DigitalFileApi.php
 lib/Api/DiscountsApi.php
 lib/Api/DisputesApi.php
+lib/Api/EntitlementGrantsApi.php
+lib/Api/GitHubIntegrationApi.php
 lib/Api/LicenseApi.php
 lib/Api/LicenseKeysApi.php
 lib/Api/LicenseKeysClientApi.php
@@ -231,6 +238,8 @@ lib/Model/DisputeEvidenceUpdate.php
 lib/Model/DisputeFileUpload.php
 lib/Model/DisputeList.php
 lib/Model/DisputeListMetaDto.php
+lib/Model/EntitlementGrantResponseDto.php
+lib/Model/GithubReposResponseDto.php
 lib/Model/Instance.php
 lib/Model/Invoice.php
 lib/Model/License.php
@@ -299,6 +308,7 @@ lib/Model/SubscriptionSeatAdjustment.php
 lib/Model/SubscriptionUserDto.php
 lib/Model/SubscriptionsAction201Response.php
 lib/Model/SupportedCurrenciesResponseDto.php
+lib/Model/SyncLoginDto.php
 lib/Model/UpdateCheckoutLinkDto.php
 lib/Model/UpdateCollectionDto.php
 lib/Model/UpdateCollectionProductDto.php

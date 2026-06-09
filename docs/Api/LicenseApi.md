@@ -1,6 +1,6 @@
 # Solifyn\LicenseApi
 
-All URIs are relative to http://localhost:8000, except if the operation defines another base path.
+All URIs are relative to https://api.solifyn.com, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |

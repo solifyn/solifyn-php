@@ -1,6 +1,6 @@
 # Solifyn\WebhookEndpointApi
 
-All URIs are relative to http://localhost:8000, except if the operation defines another base path.
+All URIs are relative to https://api.solifyn.com, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
@@ -30,11 +30,15 @@ Create Operational Webhook Endpoint
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Solifyn\Api\WebhookEndpointApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $operational_webhook_endpoint_in_dto = new \Solifyn\Model\OperationalWebhookEndpointInDto(); // \Solifyn\Model\OperationalWebhookEndpointInDto
 
@@ -58,7 +62,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -84,11 +88,15 @@ Delete Operational Webhook Endpoint
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Solifyn\Api\WebhookEndpointApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $id = 'id_example'; // string | The endpoint ID or UID
 
@@ -111,7 +119,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -137,11 +145,15 @@ Get Operational Webhook Endpoint
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Solifyn\Api\WebhookEndpointApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $id = 'id_example'; // string | The endpoint ID or UID
 
@@ -165,7 +177,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -191,11 +203,15 @@ Get Operational Webhook Endpoint Headers
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Solifyn\Api\WebhookEndpointApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $id = 'id_example'; // string | The endpoint ID or UID
 
@@ -219,7 +235,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -245,11 +261,15 @@ Get Operational Webhook Endpoint Secret
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Solifyn\Api\WebhookEndpointApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $id = 'id_example'; // string | The endpoint ID or UID
 
@@ -273,7 +293,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -299,11 +319,15 @@ List Operational Webhook Endpoints
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Solifyn\Api\WebhookEndpointApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 
 try {
@@ -324,7 +348,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -350,11 +374,15 @@ Rotate Operational Webhook Endpoint Secret
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Solifyn\Api\WebhookEndpointApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $id = 'id_example'; // string | The endpoint ID or UID
 $operational_webhook_endpoint_secret_in_dto = new \Solifyn\Model\OperationalWebhookEndpointSecretInDto(); // \Solifyn\Model\OperationalWebhookEndpointSecretInDto
@@ -379,7 +407,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -405,11 +433,15 @@ Update Operational Webhook Endpoint
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Solifyn\Api\WebhookEndpointApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $id = 'id_example'; // string | The endpoint ID or UID
 $operational_webhook_endpoint_update_dto = new \Solifyn\Model\OperationalWebhookEndpointUpdateDto(); // \Solifyn\Model\OperationalWebhookEndpointUpdateDto
@@ -435,7 +467,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -461,11 +493,15 @@ Set Operational Webhook Endpoint Headers
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Solifyn\Api\WebhookEndpointApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $id = 'id_example'; // string | The endpoint ID or UID
 $operational_webhook_endpoint_headers_in_dto = new \Solifyn\Model\OperationalWebhookEndpointHeadersInDto(); // \Solifyn\Model\OperationalWebhookEndpointHeadersInDto
@@ -490,7 +526,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 

@@ -70,6 +70,9 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'discount' => 'float',
         'has_license_key' => 'bool',
         'has_digital_delivery' => 'bool',
+        'has_github_access' => 'bool',
+        'github_repo' => 'string',
+        'github_permission' => 'string',
         'is_tax_inclusive' => 'bool',
         'billing_period' => 'int',
         'trial_period_days' => 'int',
@@ -113,6 +116,9 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'discount' => null,
         'has_license_key' => null,
         'has_digital_delivery' => null,
+        'has_github_access' => null,
+        'github_repo' => null,
+        'github_permission' => null,
         'is_tax_inclusive' => null,
         'billing_period' => null,
         'trial_period_days' => null,
@@ -154,6 +160,9 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'discount' => false,
         'has_license_key' => false,
         'has_digital_delivery' => false,
+        'has_github_access' => false,
+        'github_repo' => false,
+        'github_permission' => false,
         'is_tax_inclusive' => false,
         'billing_period' => false,
         'trial_period_days' => false,
@@ -275,6 +284,9 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'discount' => 'discount',
         'has_license_key' => 'hasLicenseKey',
         'has_digital_delivery' => 'hasDigitalDelivery',
+        'has_github_access' => 'hasGithubAccess',
+        'github_repo' => 'githubRepo',
+        'github_permission' => 'githubPermission',
         'is_tax_inclusive' => 'isTaxInclusive',
         'billing_period' => 'billingPeriod',
         'trial_period_days' => 'trialPeriodDays',
@@ -316,6 +328,9 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'discount' => 'setDiscount',
         'has_license_key' => 'setHasLicenseKey',
         'has_digital_delivery' => 'setHasDigitalDelivery',
+        'has_github_access' => 'setHasGithubAccess',
+        'github_repo' => 'setGithubRepo',
+        'github_permission' => 'setGithubPermission',
         'is_tax_inclusive' => 'setIsTaxInclusive',
         'billing_period' => 'setBillingPeriod',
         'trial_period_days' => 'setTrialPeriodDays',
@@ -357,6 +372,9 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'discount' => 'getDiscount',
         'has_license_key' => 'getHasLicenseKey',
         'has_digital_delivery' => 'getHasDigitalDelivery',
+        'has_github_access' => 'getHasGithubAccess',
+        'github_repo' => 'getGithubRepo',
+        'github_permission' => 'getGithubPermission',
         'is_tax_inclusive' => 'getIsTaxInclusive',
         'billing_period' => 'getBillingPeriod',
         'trial_period_days' => 'getTrialPeriodDays',
@@ -428,6 +446,11 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public const PRICING_TYPE_USAGE_BASED = 'usage_based';
     public const PRICING_TYPE_ONE_TIME = 'one_time';
     public const PRICING_TYPE_RENEWAL = 'renewal';
+    public const GITHUB_PERMISSION_PULL = 'pull';
+    public const GITHUB_PERMISSION_TRIAGE = 'triage';
+    public const GITHUB_PERMISSION_PUSH = 'push';
+    public const GITHUB_PERMISSION_MAINTAIN = 'maintain';
+    public const GITHUB_PERMISSION_ADMIN = 'admin';
 
     /**
      * Gets allowable values of the enum
@@ -459,6 +482,22 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getGithubPermissionAllowableValues()
+    {
+        return [
+            self::GITHUB_PERMISSION_PULL,
+            self::GITHUB_PERMISSION_TRIAGE,
+            self::GITHUB_PERMISSION_PUSH,
+            self::GITHUB_PERMISSION_MAINTAIN,
+            self::GITHUB_PERMISSION_ADMIN,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -485,6 +524,9 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('discount', $data ?? [], null);
         $this->setIfExists('has_license_key', $data ?? [], null);
         $this->setIfExists('has_digital_delivery', $data ?? [], null);
+        $this->setIfExists('has_github_access', $data ?? [], null);
+        $this->setIfExists('github_repo', $data ?? [], null);
+        $this->setIfExists('github_permission', $data ?? [], null);
         $this->setIfExists('is_tax_inclusive', $data ?? [], null);
         $this->setIfExists('billing_period', $data ?? [], null);
         $this->setIfExists('trial_period_days', $data ?? [], null);
@@ -586,6 +628,24 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['has_digital_delivery'] === null) {
             $invalidProperties[] = "'has_digital_delivery' can't be null";
         }
+        if ($this->container['has_github_access'] === null) {
+            $invalidProperties[] = "'has_github_access' can't be null";
+        }
+        if ($this->container['github_repo'] === null) {
+            $invalidProperties[] = "'github_repo' can't be null";
+        }
+        if ($this->container['github_permission'] === null) {
+            $invalidProperties[] = "'github_permission' can't be null";
+        }
+        $allowedValues = $this->getGithubPermissionAllowableValues();
+        if (!is_null($this->container['github_permission']) && !in_array($this->container['github_permission'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'github_permission', must be one of '%s'",
+                $this->container['github_permission'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['is_tax_inclusive'] === null) {
             $invalidProperties[] = "'is_tax_inclusive' can't be null";
         }
@@ -1004,6 +1064,97 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable has_digital_delivery cannot be null');
         }
         $this->container['has_digital_delivery'] = $has_digital_delivery;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_github_access
+     *
+     * @return bool
+     */
+    public function getHasGithubAccess()
+    {
+        return $this->container['has_github_access'];
+    }
+
+    /**
+     * Sets has_github_access
+     *
+     * @param bool $has_github_access Whether the product includes GitHub repository access.
+     *
+     * @return self
+     */
+    public function setHasGithubAccess($has_github_access)
+    {
+        if (is_null($has_github_access)) {
+            throw new \InvalidArgumentException('non-nullable has_github_access cannot be null');
+        }
+        $this->container['has_github_access'] = $has_github_access;
+
+        return $this;
+    }
+
+    /**
+     * Gets github_repo
+     *
+     * @return string
+     */
+    public function getGithubRepo()
+    {
+        return $this->container['github_repo'];
+    }
+
+    /**
+     * Sets github_repo
+     *
+     * @param string $github_repo GitHub repository to grant access to (format: owner/repo).
+     *
+     * @return self
+     */
+    public function setGithubRepo($github_repo)
+    {
+        if (is_null($github_repo)) {
+            throw new \InvalidArgumentException('non-nullable github_repo cannot be null');
+        }
+        $this->container['github_repo'] = $github_repo;
+
+        return $this;
+    }
+
+    /**
+     * Gets github_permission
+     *
+     * @return string
+     */
+    public function getGithubPermission()
+    {
+        return $this->container['github_permission'];
+    }
+
+    /**
+     * Sets github_permission
+     *
+     * @param string $github_permission GitHub collaborator permission level.
+     *
+     * @return self
+     */
+    public function setGithubPermission($github_permission)
+    {
+        if (is_null($github_permission)) {
+            throw new \InvalidArgumentException('non-nullable github_permission cannot be null');
+        }
+        $allowedValues = $this->getGithubPermissionAllowableValues();
+        if (!in_array($github_permission, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'github_permission', must be one of '%s'",
+                    $github_permission,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['github_permission'] = $github_permission;
 
         return $this;
     }

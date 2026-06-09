@@ -93,7 +93,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'http://localhost:8000';
+    protected $host = 'https://api.solifyn.com';
 
     /**
      * User agent of the HTTP request, set to "OpenAPI-Generator/{version}/PHP" by default
@@ -472,11 +472,11 @@ class Configuration
     {
         return [
             [
-                "url" => "http://localhost:8000",
+                "url" => "https://api.solifyn.com",
                 "description" => "Live environment",
             ],
             [
-                "url" => "http://localhost:8001",
+                "url" => "https://sandbox-api.solifyn.com",
                 "description" => "Test environment",
             ]
         ];

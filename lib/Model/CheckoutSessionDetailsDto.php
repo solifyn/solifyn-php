@@ -67,7 +67,8 @@ class CheckoutSessionDetailsDto implements ModelInterface, ArrayAccess, \JsonSer
         'session_id' => 'string',
         'payment_id' => 'string',
         'checkout_url' => 'string',
-        'product' => '\Solifyn\Model\Product'
+        'product' => '\Solifyn\Model\Product',
+        'entitlement_grants' => 'object[]'
     ];
 
     /**
@@ -88,7 +89,8 @@ class CheckoutSessionDetailsDto implements ModelInterface, ArrayAccess, \JsonSer
         'session_id' => null,
         'payment_id' => null,
         'checkout_url' => null,
-        'product' => null
+        'product' => null,
+        'entitlement_grants' => null
     ];
 
     /**
@@ -107,7 +109,8 @@ class CheckoutSessionDetailsDto implements ModelInterface, ArrayAccess, \JsonSer
         'session_id' => false,
         'payment_id' => false,
         'checkout_url' => false,
-        'product' => false
+        'product' => false,
+        'entitlement_grants' => false
     ];
 
     /**
@@ -206,7 +209,8 @@ class CheckoutSessionDetailsDto implements ModelInterface, ArrayAccess, \JsonSer
         'session_id' => 'session_id',
         'payment_id' => 'paymentId',
         'checkout_url' => 'checkoutUrl',
-        'product' => 'product'
+        'product' => 'product',
+        'entitlement_grants' => 'entitlementGrants'
     ];
 
     /**
@@ -225,7 +229,8 @@ class CheckoutSessionDetailsDto implements ModelInterface, ArrayAccess, \JsonSer
         'session_id' => 'setSessionId',
         'payment_id' => 'setPaymentId',
         'checkout_url' => 'setCheckoutUrl',
-        'product' => 'setProduct'
+        'product' => 'setProduct',
+        'entitlement_grants' => 'setEntitlementGrants'
     ];
 
     /**
@@ -244,7 +249,8 @@ class CheckoutSessionDetailsDto implements ModelInterface, ArrayAccess, \JsonSer
         'session_id' => 'getSessionId',
         'payment_id' => 'getPaymentId',
         'checkout_url' => 'getCheckoutUrl',
-        'product' => 'getProduct'
+        'product' => 'getProduct',
+        'entitlement_grants' => 'getEntitlementGrants'
     ];
 
     /**
@@ -315,6 +321,7 @@ class CheckoutSessionDetailsDto implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('payment_id', $data ?? [], null);
         $this->setIfExists('checkout_url', $data ?? [], null);
         $this->setIfExists('product', $data ?? [], null);
+        $this->setIfExists('entitlement_grants', $data ?? [], null);
     }
 
     /**
@@ -667,6 +674,33 @@ class CheckoutSessionDetailsDto implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable product cannot be null');
         }
         $this->container['product'] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Gets entitlement_grants
+     *
+     * @return object[]|null
+     */
+    public function getEntitlementGrants()
+    {
+        return $this->container['entitlement_grants'];
+    }
+
+    /**
+     * Sets entitlement_grants
+     *
+     * @param object[]|null $entitlement_grants List of entitlement grants (e.g. GitHub repo invites) associated with this checkout.
+     *
+     * @return self
+     */
+    public function setEntitlementGrants($entitlement_grants)
+    {
+        if (is_null($entitlement_grants)) {
+            throw new \InvalidArgumentException('non-nullable entitlement_grants cannot be null');
+        }
+        $this->container['entitlement_grants'] = $entitlement_grants;
 
         return $this;
     }
