@@ -85,7 +85,7 @@ class ResolvedAddon implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'product_id' => false,
         'name' => false,
-        'image_url' => true,
+        'image_url' => false,
         'quantity' => false
     ];
 
@@ -396,14 +396,7 @@ class ResolvedAddon implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setImageUrl($image_url)
     {
         if (is_null($image_url)) {
-            array_push($this->openAPINullablesSetToNull, 'image_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('image_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
         }
         $this->container['image_url'] = $image_url;
 

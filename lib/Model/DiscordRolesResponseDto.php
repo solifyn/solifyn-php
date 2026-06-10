@@ -1,6 +1,6 @@
 <?php
 /**
- * CustomerResponseDto
+ * DiscordRolesResponseDto
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Solifyn\ObjectSerializer;
 
 /**
- * CustomerResponseDto Class Doc Comment
+ * DiscordRolesResponseDto Class Doc Comment
  *
  * @category Class
  * @package  Solifyn
@@ -40,7 +40,7 @@ use \Solifyn\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class DiscordRolesResponseDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CustomerResponseDto';
+    protected static $openAPIModelName = 'DiscordRolesResponseDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,16 +58,9 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'member_id' => 'string',
-        'email' => 'string',
         'name' => 'string',
-        'username' => 'string',
-        'phone' => 'string',
-        'phone_number' => 'string',
-        'metadata' => 'object',
-        'created_at' => '\DateTime',
-        'updated_at' => '\DateTime',
-        'business_id' => 'string'
+        'position' => 'float',
+        'color' => 'float'
     ];
 
     /**
@@ -79,16 +72,9 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'member_id' => null,
-        'email' => null,
         'name' => null,
-        'username' => null,
-        'phone' => null,
-        'phone_number' => null,
-        'metadata' => null,
-        'created_at' => 'date-time',
-        'updated_at' => 'date-time',
-        'business_id' => null
+        'position' => null,
+        'color' => null
     ];
 
     /**
@@ -98,16 +84,9 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'member_id' => false,
-        'email' => false,
         'name' => false,
-        'username' => false,
-        'phone' => false,
-        'phone_number' => false,
-        'metadata' => false,
-        'created_at' => false,
-        'updated_at' => false,
-        'business_id' => false
+        'position' => false,
+        'color' => false
     ];
 
     /**
@@ -197,16 +176,9 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'member_id' => 'memberId',
-        'email' => 'email',
         'name' => 'name',
-        'username' => 'username',
-        'phone' => 'phone',
-        'phone_number' => 'phone_number',
-        'metadata' => 'metadata',
-        'created_at' => 'createdAt',
-        'updated_at' => 'updatedAt',
-        'business_id' => 'businessId'
+        'position' => 'position',
+        'color' => 'color'
     ];
 
     /**
@@ -216,16 +188,9 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $setters = [
         'id' => 'setId',
-        'member_id' => 'setMemberId',
-        'email' => 'setEmail',
         'name' => 'setName',
-        'username' => 'setUsername',
-        'phone' => 'setPhone',
-        'phone_number' => 'setPhoneNumber',
-        'metadata' => 'setMetadata',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt',
-        'business_id' => 'setBusinessId'
+        'position' => 'setPosition',
+        'color' => 'setColor'
     ];
 
     /**
@@ -235,16 +200,9 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $getters = [
         'id' => 'getId',
-        'member_id' => 'getMemberId',
-        'email' => 'getEmail',
         'name' => 'getName',
-        'username' => 'getUsername',
-        'phone' => 'getPhone',
-        'phone_number' => 'getPhoneNumber',
-        'metadata' => 'getMetadata',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt',
-        'business_id' => 'getBusinessId'
+        'position' => 'getPosition',
+        'color' => 'getColor'
     ];
 
     /**
@@ -305,16 +263,9 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('member_id', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('username', $data ?? [], null);
-        $this->setIfExists('phone', $data ?? [], null);
-        $this->setIfExists('phone_number', $data ?? [], null);
-        $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
-        $this->setIfExists('business_id', $data ?? [], null);
+        $this->setIfExists('position', $data ?? [], null);
+        $this->setIfExists('color', $data ?? [], null);
     }
 
     /**
@@ -347,17 +298,14 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['created_at'] === null) {
-            $invalidProperties[] = "'created_at' can't be null";
+        if ($this->container['position'] === null) {
+            $invalidProperties[] = "'position' can't be null";
         }
-        if ($this->container['updated_at'] === null) {
-            $invalidProperties[] = "'updated_at' can't be null";
-        }
-        if ($this->container['business_id'] === null) {
-            $invalidProperties[] = "'business_id' can't be null";
+        if ($this->container['color'] === null) {
+            $invalidProperties[] = "'color' can't be null";
         }
         return $invalidProperties;
     }
@@ -387,7 +335,7 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets id
      *
-     * @param string $id The customer ID
+     * @param string $id The Discord Role ID
      *
      * @return self
      */
@@ -402,63 +350,9 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     }
 
     /**
-     * Gets member_id
-     *
-     * @return string|null
-     */
-    public function getMemberId()
-    {
-        return $this->container['member_id'];
-    }
-
-    /**
-     * Sets member_id
-     *
-     * @param string|null $member_id The Membership ID associated with this customer
-     *
-     * @return self
-     */
-    public function setMemberId($member_id)
-    {
-        if (is_null($member_id)) {
-            throw new \InvalidArgumentException('non-nullable member_id cannot be null');
-        }
-        $this->container['member_id'] = $member_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->container['email'];
-    }
-
-    /**
-     * Sets email
-     *
-     * @param string $email The email address of the customer
-     *
-     * @return self
-     */
-    public function setEmail($email)
-    {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
-        }
-        $this->container['email'] = $email;
-
-        return $this;
-    }
-
-    /**
      * Gets name
      *
-     * @return string|null
+     * @return string
      */
     public function getName()
     {
@@ -468,7 +362,7 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets name
      *
-     * @param string|null $name The name of the customer
+     * @param string $name The Discord Role Name
      *
      * @return self
      */
@@ -483,190 +377,55 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     }
 
     /**
-     * Gets username
+     * Gets position
      *
-     * @return string|null
+     * @return float
      */
-    public function getUsername()
+    public function getPosition()
     {
-        return $this->container['username'];
+        return $this->container['position'];
     }
 
     /**
-     * Sets username
+     * Sets position
      *
-     * @param string|null $username The username of the customer
+     * @param float $position The position of the role in the server hierarchy
      *
      * @return self
      */
-    public function setUsername($username)
+    public function setPosition($position)
     {
-        if (is_null($username)) {
-            throw new \InvalidArgumentException('non-nullable username cannot be null');
+        if (is_null($position)) {
+            throw new \InvalidArgumentException('non-nullable position cannot be null');
         }
-        $this->container['username'] = $username;
+        $this->container['position'] = $position;
 
         return $this;
     }
 
     /**
-     * Gets phone
+     * Gets color
      *
-     * @return string|null
+     * @return float
      */
-    public function getPhone()
+    public function getColor()
     {
-        return $this->container['phone'];
+        return $this->container['color'];
     }
 
     /**
-     * Sets phone
+     * Sets color
      *
-     * @param string|null $phone The phone number of the customer
+     * @param float $color The color of the role (hex integer code)
      *
      * @return self
      */
-    public function setPhone($phone)
+    public function setColor($color)
     {
-        if (is_null($phone)) {
-            throw new \InvalidArgumentException('non-nullable phone cannot be null');
+        if (is_null($color)) {
+            throw new \InvalidArgumentException('non-nullable color cannot be null');
         }
-        $this->container['phone'] = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Gets phone_number
-     *
-     * @return string|null
-     */
-    public function getPhoneNumber()
-    {
-        return $this->container['phone_number'];
-    }
-
-    /**
-     * Sets phone_number
-     *
-     * @param string|null $phone_number The phone number of the customer
-     *
-     * @return self
-     */
-    public function setPhoneNumber($phone_number)
-    {
-        if (is_null($phone_number)) {
-            throw new \InvalidArgumentException('non-nullable phone_number cannot be null');
-        }
-        $this->container['phone_number'] = $phone_number;
-
-        return $this;
-    }
-
-    /**
-     * Gets metadata
-     *
-     * @return object|null
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param object|null $metadata Additional metadata associated with the customer
-     *
-     * @return self
-     */
-    public function setMetadata($metadata)
-    {
-        if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
-        }
-        $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime $created_at Timestamp when the customer was created
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime $updated_at Timestamp when the customer was last updated
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets business_id
-     *
-     * @return string
-     */
-    public function getBusinessId()
-    {
-        return $this->container['business_id'];
-    }
-
-    /**
-     * Sets business_id
-     *
-     * @param string $business_id The business ID associated with the customer
-     *
-     * @return self
-     */
-    public function setBusinessId($business_id)
-    {
-        if (is_null($business_id)) {
-            throw new \InvalidArgumentException('non-nullable business_id cannot be null');
-        }
-        $this->container['business_id'] = $business_id;
+        $this->container['color'] = $color;
 
         return $this;
     }

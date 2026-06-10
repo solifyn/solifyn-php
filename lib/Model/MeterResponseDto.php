@@ -103,12 +103,12 @@ class MeterResponseDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
         'business_id' => false,
         'name' => false,
-        'description' => true,
+        'description' => false,
         'event_name' => false,
         'aggregation_type' => false,
-        'aggregation_key' => true,
-        'unit' => true,
-        'filters' => true,
+        'aggregation_key' => false,
+        'unit' => false,
+        'filters' => false,
         'archived' => false,
         'created_at' => false,
         'updated_at' => false
@@ -520,14 +520,7 @@ class MeterResponseDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDescription($description)
     {
         if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
         $this->container['description'] = $description;
 
@@ -618,14 +611,7 @@ class MeterResponseDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setAggregationKey($aggregation_key)
     {
         if (is_null($aggregation_key)) {
-            array_push($this->openAPINullablesSetToNull, 'aggregation_key');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('aggregation_key', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable aggregation_key cannot be null');
         }
         $this->container['aggregation_key'] = $aggregation_key;
 
@@ -652,14 +638,7 @@ class MeterResponseDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setUnit($unit)
     {
         if (is_null($unit)) {
-            array_push($this->openAPINullablesSetToNull, 'unit');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('unit', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable unit cannot be null');
         }
         $this->container['unit'] = $unit;
 
@@ -686,14 +665,7 @@ class MeterResponseDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setFilters($filters)
     {
         if (is_null($filters)) {
-            array_push($this->openAPINullablesSetToNull, 'filters');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('filters', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable filters cannot be null');
         }
         $this->container['filters'] = $filters;
 

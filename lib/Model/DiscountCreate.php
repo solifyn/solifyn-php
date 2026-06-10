@@ -99,9 +99,9 @@ class DiscountCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => false,
         'type' => false,
         'amount' => false,
-        'usage_limit' => true,
-        'expires_at' => true,
-        'subscription_cycles' => true,
+        'usage_limit' => false,
+        'expires_at' => false,
+        'subscription_cycles' => false,
         'restricted_to' => false,
         'preserve_on_plan_change' => false,
         'metadata' => false
@@ -523,14 +523,7 @@ class DiscountCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setUsageLimit($usage_limit)
     {
         if (is_null($usage_limit)) {
-            array_push($this->openAPINullablesSetToNull, 'usage_limit');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('usage_limit', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable usage_limit cannot be null');
         }
         $this->container['usage_limit'] = $usage_limit;
 
@@ -557,14 +550,7 @@ class DiscountCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setExpiresAt($expires_at)
     {
         if (is_null($expires_at)) {
-            array_push($this->openAPINullablesSetToNull, 'expires_at');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('expires_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable expires_at cannot be null');
         }
         $this->container['expires_at'] = $expires_at;
 
@@ -591,14 +577,7 @@ class DiscountCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setSubscriptionCycles($subscription_cycles)
     {
         if (is_null($subscription_cycles)) {
-            array_push($this->openAPINullablesSetToNull, 'subscription_cycles');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('subscription_cycles', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable subscription_cycles cannot be null');
         }
         $this->container['subscription_cycles'] = $subscription_cycles;
 

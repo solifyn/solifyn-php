@@ -151,24 +151,24 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
         'manage_url' => false,
         'member' => false,
         'user' => false,
-        'renewal_period_start' => true,
-        'renewal_period_end' => true,
+        'renewal_period_start' => false,
+        'renewal_period_end' => false,
         'cancel_at_period_end' => false,
-        'cancel_option' => true,
-        'cancellation_reason' => true,
-        'canceled_at' => true,
+        'cancel_option' => false,
+        'cancellation_reason' => false,
+        'canceled_at' => false,
         'currency' => false,
         'company' => false,
         'plan' => false,
-        'promo_code' => true,
+        'promo_code' => false,
         'product' => false,
-        'license_key' => true,
+        'license_key' => false,
         'metadata' => false,
         'payment_collection_paused' => false,
         'checkout_configuration_id' => false,
-        'price' => true,
-        'type' => true,
-        'customer_id' => true,
+        'price' => false,
+        'type' => false,
+        'customer_id' => false,
         'success' => false,
         'subscription_id' => false,
         'addon_product_id' => false,
@@ -849,14 +849,7 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
     public function setRenewalPeriodStart($renewal_period_start)
     {
         if (is_null($renewal_period_start)) {
-            array_push($this->openAPINullablesSetToNull, 'renewal_period_start');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('renewal_period_start', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable renewal_period_start cannot be null');
         }
         $this->container['renewal_period_start'] = $renewal_period_start;
 
@@ -883,14 +876,7 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
     public function setRenewalPeriodEnd($renewal_period_end)
     {
         if (is_null($renewal_period_end)) {
-            array_push($this->openAPINullablesSetToNull, 'renewal_period_end');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('renewal_period_end', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable renewal_period_end cannot be null');
         }
         $this->container['renewal_period_end'] = $renewal_period_end;
 
@@ -944,14 +930,7 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
     public function setCancelOption($cancel_option)
     {
         if (is_null($cancel_option)) {
-            array_push($this->openAPINullablesSetToNull, 'cancel_option');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('cancel_option', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable cancel_option cannot be null');
         }
         $this->container['cancel_option'] = $cancel_option;
 
@@ -978,14 +957,7 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
     public function setCancellationReason($cancellation_reason)
     {
         if (is_null($cancellation_reason)) {
-            array_push($this->openAPINullablesSetToNull, 'cancellation_reason');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('cancellation_reason', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable cancellation_reason cannot be null');
         }
         $this->container['cancellation_reason'] = $cancellation_reason;
 
@@ -1012,14 +984,7 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
     public function setCanceledAt($canceled_at)
     {
         if (is_null($canceled_at)) {
-            array_push($this->openAPINullablesSetToNull, 'canceled_at');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('canceled_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable canceled_at cannot be null');
         }
         $this->container['canceled_at'] = $canceled_at;
 
@@ -1127,14 +1092,7 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
     public function setPromoCode($promo_code)
     {
         if (is_null($promo_code)) {
-            array_push($this->openAPINullablesSetToNull, 'promo_code');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('promo_code', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable promo_code cannot be null');
         }
         $this->container['promo_code'] = $promo_code;
 
@@ -1188,14 +1146,7 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
     public function setLicenseKey($license_key)
     {
         if (is_null($license_key)) {
-            array_push($this->openAPINullablesSetToNull, 'license_key');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('license_key', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
         }
         $this->container['license_key'] = $license_key;
 
@@ -1303,14 +1254,7 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
     public function setPrice($price)
     {
         if (is_null($price)) {
-            array_push($this->openAPINullablesSetToNull, 'price');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('price', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable price cannot be null');
         }
         $this->container['price'] = $price;
 
@@ -1337,14 +1281,7 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
     public function setType($type)
     {
         if (is_null($type)) {
-            array_push($this->openAPINullablesSetToNull, 'type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
         $this->container['type'] = $type;
 
@@ -1371,14 +1308,7 @@ class SubscriptionsAction201Response implements ModelInterface, ArrayAccess, \Js
     public function setCustomerId($customer_id)
     {
         if (is_null($customer_id)) {
-            array_push($this->openAPINullablesSetToNull, 'customer_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('customer_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
         }
         $this->container['customer_id'] = $customer_id;
 

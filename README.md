@@ -112,6 +112,8 @@ Class | Method | HTTP request | Description
 *DigitalFileApi* | [**digitalFileControllerCreate**](docs/Api/DigitalFileApi.md#digitalfilecontrollercreate) | **POST** /v1/digital-files | 
 *DigitalFileApi* | [**digitalFileControllerFindAll**](docs/Api/DigitalFileApi.md#digitalfilecontrollerfindall) | **GET** /v1/digital-files | 
 *DigitalFileApi* | [**digitalFileControllerRemove**](docs/Api/DigitalFileApi.md#digitalfilecontrollerremove) | **DELETE** /v1/digital-files/{id} | 
+*DiscordIntegrationApi* | [**discordGetInstallUrl**](docs/Api/DiscordIntegrationApi.md#discordgetinstallurl) | **GET** /v1/discord/install | Get Discord Bot Installation URL
+*DiscordIntegrationApi* | [**discordListRoles**](docs/Api/DiscordIntegrationApi.md#discordlistroles) | **GET** /v1/discord/roles | List Guild Discord Roles
 *DiscountsApi* | [**discountsCreate**](docs/Api/DiscountsApi.md#discountscreate) | **POST** /v1/discounts | Create Discount
 *DiscountsApi* | [**discountsDelete**](docs/Api/DiscountsApi.md#discountsdelete) | **DELETE** /v1/discounts/{id} | Delete Discount
 *DiscountsApi* | [**discountsGet**](docs/Api/DiscountsApi.md#discountsget) | **GET** /v1/discounts/{id} | Retrieve Discount
@@ -240,6 +242,7 @@ Class | Method | HTTP request | Description
 - [CustomerResponseDto](docs/Model/CustomerResponseDto.md)
 - [CustomerSharedInviteResponseDto](docs/Model/CustomerSharedInviteResponseDto.md)
 - [DashboardStatsDto](docs/Model/DashboardStatsDto.md)
+- [DiscordRolesResponseDto](docs/Model/DiscordRolesResponseDto.md)
 - [Discount](docs/Model/Discount.md)
 - [DiscountCreate](docs/Model/DiscountCreate.md)
 - [DiscountUpdate](docs/Model/DiscountUpdate.md)

@@ -112,15 +112,15 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'key' => false,
         'status' => false,
         'business_id' => false,
-        'product_id' => true,
-        'payment_id' => true,
-        'customer_id' => true,
-        'activation_limit' => true,
-        'activation_message' => true,
+        'product_id' => false,
+        'payment_id' => false,
+        'customer_id' => false,
+        'activation_limit' => false,
+        'activation_message' => false,
         'instances_count' => false,
-        'expiry_hours' => true,
-        'expires_at' => true,
-        'filters' => true,
+        'expiry_hours' => false,
+        'expires_at' => false,
+        'filters' => false,
         'archived' => false,
         'created_at' => false,
         'updated_at' => false
@@ -607,14 +607,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setProductId($product_id)
     {
         if (is_null($product_id)) {
-            array_push($this->openAPINullablesSetToNull, 'product_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('product_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable product_id cannot be null');
         }
         $this->container['product_id'] = $product_id;
 
@@ -641,14 +634,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPaymentId($payment_id)
     {
         if (is_null($payment_id)) {
-            array_push($this->openAPINullablesSetToNull, 'payment_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payment_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable payment_id cannot be null');
         }
         $this->container['payment_id'] = $payment_id;
 
@@ -675,14 +661,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCustomerId($customer_id)
     {
         if (is_null($customer_id)) {
-            array_push($this->openAPINullablesSetToNull, 'customer_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('customer_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
         }
         $this->container['customer_id'] = $customer_id;
 
@@ -709,14 +688,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setActivationLimit($activation_limit)
     {
         if (is_null($activation_limit)) {
-            array_push($this->openAPINullablesSetToNull, 'activation_limit');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('activation_limit', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable activation_limit cannot be null');
         }
         $this->container['activation_limit'] = $activation_limit;
 
@@ -743,14 +715,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setActivationMessage($activation_message)
     {
         if (is_null($activation_message)) {
-            array_push($this->openAPINullablesSetToNull, 'activation_message');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('activation_message', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable activation_message cannot be null');
         }
         $this->container['activation_message'] = $activation_message;
 
@@ -804,14 +769,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setExpiryHours($expiry_hours)
     {
         if (is_null($expiry_hours)) {
-            array_push($this->openAPINullablesSetToNull, 'expiry_hours');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('expiry_hours', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable expiry_hours cannot be null');
         }
         $this->container['expiry_hours'] = $expiry_hours;
 
@@ -838,14 +796,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setExpiresAt($expires_at)
     {
         if (is_null($expires_at)) {
-            array_push($this->openAPINullablesSetToNull, 'expires_at');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('expires_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable expires_at cannot be null');
         }
         $this->container['expires_at'] = $expires_at;
 
@@ -872,14 +823,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setFilters($filters)
     {
         if (is_null($filters)) {
-            array_push($this->openAPINullablesSetToNull, 'filters');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('filters', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable filters cannot be null');
         }
         $this->container['filters'] = $filters;
 

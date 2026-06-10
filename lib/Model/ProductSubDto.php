@@ -83,7 +83,7 @@ class ProductSubDto implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'id' => false,
         'name' => false,
-        'digital_link' => true
+        'digital_link' => false
     ];
 
     /**
@@ -386,14 +386,7 @@ class ProductSubDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDigitalLink($digital_link)
     {
         if (is_null($digital_link)) {
-            array_push($this->openAPINullablesSetToNull, 'digital_link');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('digital_link', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable digital_link cannot be null');
         }
         $this->container['digital_link'] = $digital_link;
 

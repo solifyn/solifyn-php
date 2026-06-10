@@ -110,19 +110,19 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'title' => true,
-        'product_id' => true,
-        'collection_id' => true,
-        'customer_name' => true,
-        'customer_email' => true,
-        'address_line1' => true,
-        'city' => true,
-        'state' => true,
-        'postal_code' => true,
-        'country' => true,
+        'title' => false,
+        'product_id' => false,
+        'collection_id' => false,
+        'customer_name' => false,
+        'customer_email' => false,
+        'address_line1' => false,
+        'city' => false,
+        'state' => false,
+        'postal_code' => false,
+        'country' => false,
         'quantity' => false,
-        'redirect_url' => true,
-        'cancel_url' => true,
+        'redirect_url' => false,
+        'cancel_url' => false,
         'show_discounts' => false,
         'created_at' => false,
         'updated_at' => false
@@ -463,14 +463,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setTitle($title)
     {
         if (is_null($title)) {
-            array_push($this->openAPINullablesSetToNull, 'title');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('title', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
         $this->container['title'] = $title;
 
@@ -497,14 +490,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setProductId($product_id)
     {
         if (is_null($product_id)) {
-            array_push($this->openAPINullablesSetToNull, 'product_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('product_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable product_id cannot be null');
         }
         $this->container['product_id'] = $product_id;
 
@@ -531,14 +517,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setCollectionId($collection_id)
     {
         if (is_null($collection_id)) {
-            array_push($this->openAPINullablesSetToNull, 'collection_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('collection_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable collection_id cannot be null');
         }
         $this->container['collection_id'] = $collection_id;
 
@@ -565,14 +544,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setCustomerName($customer_name)
     {
         if (is_null($customer_name)) {
-            array_push($this->openAPINullablesSetToNull, 'customer_name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('customer_name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable customer_name cannot be null');
         }
         $this->container['customer_name'] = $customer_name;
 
@@ -599,14 +571,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setCustomerEmail($customer_email)
     {
         if (is_null($customer_email)) {
-            array_push($this->openAPINullablesSetToNull, 'customer_email');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('customer_email', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable customer_email cannot be null');
         }
         $this->container['customer_email'] = $customer_email;
 
@@ -633,14 +598,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setAddressLine1($address_line1)
     {
         if (is_null($address_line1)) {
-            array_push($this->openAPINullablesSetToNull, 'address_line1');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('address_line1', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable address_line1 cannot be null');
         }
         $this->container['address_line1'] = $address_line1;
 
@@ -667,14 +625,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setCity($city)
     {
         if (is_null($city)) {
-            array_push($this->openAPINullablesSetToNull, 'city');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('city', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable city cannot be null');
         }
         $this->container['city'] = $city;
 
@@ -701,14 +652,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setState($state)
     {
         if (is_null($state)) {
-            array_push($this->openAPINullablesSetToNull, 'state');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('state', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
         }
         $this->container['state'] = $state;
 
@@ -735,14 +679,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setPostalCode($postal_code)
     {
         if (is_null($postal_code)) {
-            array_push($this->openAPINullablesSetToNull, 'postal_code');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('postal_code', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable postal_code cannot be null');
         }
         $this->container['postal_code'] = $postal_code;
 
@@ -769,14 +706,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setCountry($country)
     {
         if (is_null($country)) {
-            array_push($this->openAPINullablesSetToNull, 'country');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('country', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable country cannot be null');
         }
         $this->container['country'] = $country;
 
@@ -830,14 +760,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setRedirectUrl($redirect_url)
     {
         if (is_null($redirect_url)) {
-            array_push($this->openAPINullablesSetToNull, 'redirect_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('redirect_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable redirect_url cannot be null');
         }
         $this->container['redirect_url'] = $redirect_url;
 
@@ -864,14 +787,7 @@ class CheckoutLinkResponseDto implements ModelInterface, ArrayAccess, \JsonSeria
     public function setCancelUrl($cancel_url)
     {
         if (is_null($cancel_url)) {
-            array_push($this->openAPINullablesSetToNull, 'cancel_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('cancel_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable cancel_url cannot be null');
         }
         $this->container['cancel_url'] = $cancel_url;
 

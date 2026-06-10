@@ -109,7 +109,7 @@ class CheckoutSessionDetailsDto implements ModelInterface, ArrayAccess, \JsonSer
         'session_id' => false,
         'payment_id' => false,
         'checkout_url' => false,
-        'product' => true,
+        'product' => false,
         'entitlement_grants' => false
     ];
 
@@ -671,14 +671,7 @@ class CheckoutSessionDetailsDto implements ModelInterface, ArrayAccess, \JsonSer
     public function setProduct($product)
     {
         if (is_null($product)) {
-            array_push($this->openAPINullablesSetToNull, 'product');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('product', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable product cannot be null');
         }
         $this->container['product'] = $product;
 

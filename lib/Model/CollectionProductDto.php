@@ -72,6 +72,9 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'has_github_access' => 'bool',
         'github_repo' => 'string',
         'github_permission' => 'string',
+        'has_discord_access' => 'bool',
+        'discord_guild_id' => 'string',
+        'discord_role_id' => 'string',
         'is_tax_inclusive' => 'bool',
         'billing_period' => 'int',
         'trial_period_days' => 'int',
@@ -119,6 +122,9 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'has_github_access' => null,
         'github_repo' => null,
         'github_permission' => null,
+        'has_discord_access' => null,
+        'discord_guild_id' => null,
+        'discord_role_id' => null,
         'is_tax_inclusive' => null,
         'billing_period' => null,
         'trial_period_days' => null,
@@ -153,37 +159,40 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'name' => false,
         'price' => false,
         'currency' => false,
-        'description' => true,
+        'description' => false,
         'status' => false,
-        'image_url' => true,
+        'image_url' => false,
         'tax_category' => false,
         'pricing_type' => false,
-        'discount' => true,
+        'discount' => false,
         'has_license_key' => false,
         'has_digital_delivery' => false,
         'has_github_access' => false,
-        'github_repo' => true,
-        'github_permission' => true,
+        'github_repo' => false,
+        'github_permission' => false,
+        'has_discord_access' => false,
+        'discord_guild_id' => false,
+        'discord_role_id' => false,
         'is_tax_inclusive' => false,
-        'billing_period' => true,
-        'trial_period_days' => true,
-        'expiration_days' => true,
-        'statement_descriptor' => true,
+        'billing_period' => false,
+        'trial_period_days' => false,
+        'expiration_days' => false,
+        'statement_descriptor' => false,
         'pay_what_you_want' => false,
-        'metadata' => true,
-        'custom_fields' => true,
-        'stock' => true,
+        'metadata' => false,
+        'custom_fields' => false,
+        'stock' => false,
         'activation_limit' => false,
         'is_listed' => false,
         'is_free' => false,
         'created_at' => false,
         'updated_at' => false,
         'is_permanently_deleted' => false,
-        'brand_id' => true,
-        'digital_link' => true,
-        'instructions' => true,
-        'activation_message' => true,
-        'expiry_hours' => true,
+        'brand_id' => false,
+        'digital_link' => false,
+        'instructions' => false,
+        'activation_message' => false,
+        'expiry_hours' => false,
         'business_id' => false,
         'quantity' => false
     ];
@@ -289,6 +298,9 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'has_github_access' => 'hasGithubAccess',
         'github_repo' => 'githubRepo',
         'github_permission' => 'githubPermission',
+        'has_discord_access' => 'hasDiscordAccess',
+        'discord_guild_id' => 'discordGuildId',
+        'discord_role_id' => 'discordRoleId',
         'is_tax_inclusive' => 'isTaxInclusive',
         'billing_period' => 'billingPeriod',
         'trial_period_days' => 'trialPeriodDays',
@@ -334,6 +346,9 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'has_github_access' => 'setHasGithubAccess',
         'github_repo' => 'setGithubRepo',
         'github_permission' => 'setGithubPermission',
+        'has_discord_access' => 'setHasDiscordAccess',
+        'discord_guild_id' => 'setDiscordGuildId',
+        'discord_role_id' => 'setDiscordRoleId',
         'is_tax_inclusive' => 'setIsTaxInclusive',
         'billing_period' => 'setBillingPeriod',
         'trial_period_days' => 'setTrialPeriodDays',
@@ -379,6 +394,9 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'has_github_access' => 'getHasGithubAccess',
         'github_repo' => 'getGithubRepo',
         'github_permission' => 'getGithubPermission',
+        'has_discord_access' => 'getHasDiscordAccess',
+        'discord_guild_id' => 'getDiscordGuildId',
+        'discord_role_id' => 'getDiscordRoleId',
         'is_tax_inclusive' => 'getIsTaxInclusive',
         'billing_period' => 'getBillingPeriod',
         'trial_period_days' => 'getTrialPeriodDays',
@@ -532,6 +550,9 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('has_github_access', $data ?? [], null);
         $this->setIfExists('github_repo', $data ?? [], null);
         $this->setIfExists('github_permission', $data ?? [], null);
+        $this->setIfExists('has_discord_access', $data ?? [], null);
+        $this->setIfExists('discord_guild_id', $data ?? [], null);
+        $this->setIfExists('discord_role_id', $data ?? [], null);
         $this->setIfExists('is_tax_inclusive', $data ?? [], null);
         $this->setIfExists('billing_period', $data ?? [], null);
         $this->setIfExists('trial_period_days', $data ?? [], null);
@@ -652,6 +673,15 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
             );
         }
 
+        if ($this->container['has_discord_access'] === null) {
+            $invalidProperties[] = "'has_discord_access' can't be null";
+        }
+        if ($this->container['discord_guild_id'] === null) {
+            $invalidProperties[] = "'discord_guild_id' can't be null";
+        }
+        if ($this->container['discord_role_id'] === null) {
+            $invalidProperties[] = "'discord_role_id' can't be null";
+        }
         if ($this->container['is_tax_inclusive'] === null) {
             $invalidProperties[] = "'is_tax_inclusive' can't be null";
         }
@@ -861,14 +891,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setDescription($description)
     {
         if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
         $this->container['description'] = $description;
 
@@ -922,14 +945,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setImageUrl($image_url)
     {
         if (is_null($image_url)) {
-            array_push($this->openAPINullablesSetToNull, 'image_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('image_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
         }
         $this->container['image_url'] = $image_url;
 
@@ -1030,14 +1046,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setDiscount($discount)
     {
         if (is_null($discount)) {
-            array_push($this->openAPINullablesSetToNull, 'discount');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('discount', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable discount cannot be null');
         }
         $this->container['discount'] = $discount;
 
@@ -1145,14 +1154,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setGithubRepo($github_repo)
     {
         if (is_null($github_repo)) {
-            array_push($this->openAPINullablesSetToNull, 'github_repo');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('github_repo', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable github_repo cannot be null');
         }
         $this->container['github_repo'] = $github_repo;
 
@@ -1179,17 +1181,10 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setGithubPermission($github_permission)
     {
         if (is_null($github_permission)) {
-            array_push($this->openAPINullablesSetToNull, 'github_permission');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('github_permission', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable github_permission cannot be null');
         }
         $allowedValues = $this->getGithubPermissionAllowableValues();
-        if (!is_null($github_permission) && !in_array($github_permission, $allowedValues, true)) {
+        if (!in_array($github_permission, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'github_permission', must be one of '%s'",
@@ -1199,6 +1194,87 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
             );
         }
         $this->container['github_permission'] = $github_permission;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_discord_access
+     *
+     * @return bool
+     */
+    public function getHasDiscordAccess()
+    {
+        return $this->container['has_discord_access'];
+    }
+
+    /**
+     * Sets has_discord_access
+     *
+     * @param bool $has_discord_access Whether the product includes Discord role access.
+     *
+     * @return self
+     */
+    public function setHasDiscordAccess($has_discord_access)
+    {
+        if (is_null($has_discord_access)) {
+            throw new \InvalidArgumentException('non-nullable has_discord_access cannot be null');
+        }
+        $this->container['has_discord_access'] = $has_discord_access;
+
+        return $this;
+    }
+
+    /**
+     * Gets discord_guild_id
+     *
+     * @return string
+     */
+    public function getDiscordGuildId()
+    {
+        return $this->container['discord_guild_id'];
+    }
+
+    /**
+     * Sets discord_guild_id
+     *
+     * @param string $discord_guild_id Discord Guild (Server) ID to grant access to.
+     *
+     * @return self
+     */
+    public function setDiscordGuildId($discord_guild_id)
+    {
+        if (is_null($discord_guild_id)) {
+            throw new \InvalidArgumentException('non-nullable discord_guild_id cannot be null');
+        }
+        $this->container['discord_guild_id'] = $discord_guild_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets discord_role_id
+     *
+     * @return string
+     */
+    public function getDiscordRoleId()
+    {
+        return $this->container['discord_role_id'];
+    }
+
+    /**
+     * Sets discord_role_id
+     *
+     * @param string $discord_role_id Discord Role ID to assign to the user.
+     *
+     * @return self
+     */
+    public function setDiscordRoleId($discord_role_id)
+    {
+        if (is_null($discord_role_id)) {
+            throw new \InvalidArgumentException('non-nullable discord_role_id cannot be null');
+        }
+        $this->container['discord_role_id'] = $discord_role_id;
 
         return $this;
     }
@@ -1250,14 +1326,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setBillingPeriod($billing_period)
     {
         if (is_null($billing_period)) {
-            array_push($this->openAPINullablesSetToNull, 'billing_period');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('billing_period', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable billing_period cannot be null');
         }
         $this->container['billing_period'] = $billing_period;
 
@@ -1284,14 +1353,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setTrialPeriodDays($trial_period_days)
     {
         if (is_null($trial_period_days)) {
-            array_push($this->openAPINullablesSetToNull, 'trial_period_days');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('trial_period_days', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable trial_period_days cannot be null');
         }
         $this->container['trial_period_days'] = $trial_period_days;
 
@@ -1318,14 +1380,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setExpirationDays($expiration_days)
     {
         if (is_null($expiration_days)) {
-            array_push($this->openAPINullablesSetToNull, 'expiration_days');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('expiration_days', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable expiration_days cannot be null');
         }
         $this->container['expiration_days'] = $expiration_days;
 
@@ -1352,14 +1407,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setStatementDescriptor($statement_descriptor)
     {
         if (is_null($statement_descriptor)) {
-            array_push($this->openAPINullablesSetToNull, 'statement_descriptor');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('statement_descriptor', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable statement_descriptor cannot be null');
         }
         $this->container['statement_descriptor'] = $statement_descriptor;
 
@@ -1413,14 +1461,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setMetadata($metadata)
     {
         if (is_null($metadata)) {
-            array_push($this->openAPINullablesSetToNull, 'metadata');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('metadata', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
         }
         $this->container['metadata'] = $metadata;
 
@@ -1447,14 +1488,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setCustomFields($custom_fields)
     {
         if (is_null($custom_fields)) {
-            array_push($this->openAPINullablesSetToNull, 'custom_fields');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('custom_fields', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable custom_fields cannot be null');
         }
         $this->container['custom_fields'] = $custom_fields;
 
@@ -1481,14 +1515,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setStock($stock)
     {
         if (is_null($stock)) {
-            array_push($this->openAPINullablesSetToNull, 'stock');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('stock', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable stock cannot be null');
         }
         $this->container['stock'] = $stock;
 
@@ -1677,14 +1704,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setBrandId($brand_id)
     {
         if (is_null($brand_id)) {
-            array_push($this->openAPINullablesSetToNull, 'brand_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('brand_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable brand_id cannot be null');
         }
         $this->container['brand_id'] = $brand_id;
 
@@ -1711,14 +1731,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setDigitalLink($digital_link)
     {
         if (is_null($digital_link)) {
-            array_push($this->openAPINullablesSetToNull, 'digital_link');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('digital_link', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable digital_link cannot be null');
         }
         $this->container['digital_link'] = $digital_link;
 
@@ -1745,14 +1758,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setInstructions($instructions)
     {
         if (is_null($instructions)) {
-            array_push($this->openAPINullablesSetToNull, 'instructions');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('instructions', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable instructions cannot be null');
         }
         $this->container['instructions'] = $instructions;
 
@@ -1779,14 +1785,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setActivationMessage($activation_message)
     {
         if (is_null($activation_message)) {
-            array_push($this->openAPINullablesSetToNull, 'activation_message');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('activation_message', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable activation_message cannot be null');
         }
         $this->container['activation_message'] = $activation_message;
 
@@ -1813,14 +1812,7 @@ class CollectionProductDto implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setExpiryHours($expiry_hours)
     {
         if (is_null($expiry_hours)) {
-            array_push($this->openAPINullablesSetToNull, 'expiry_hours');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('expiry_hours', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable expiry_hours cannot be null');
         }
         $this->container['expiry_hours'] = $expiry_hours;
 

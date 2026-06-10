@@ -66,6 +66,10 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
         'github_repo' => 'string',
         'github_permission' => 'string',
         'github_username' => 'string',
+        'discord_guild_id' => 'string',
+        'discord_role_id' => 'string',
+        'discord_username' => 'string',
+        'discord_user_id' => 'string',
         'status' => 'string',
         'oauth_url' => 'string',
         'error_details' => 'string',
@@ -91,6 +95,10 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
         'github_repo' => null,
         'github_permission' => null,
         'github_username' => null,
+        'discord_guild_id' => null,
+        'discord_role_id' => null,
+        'discord_username' => null,
+        'discord_user_id' => null,
         'status' => null,
         'oauth_url' => null,
         'error_details' => null,
@@ -114,6 +122,10 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
         'github_repo' => false,
         'github_permission' => false,
         'github_username' => false,
+        'discord_guild_id' => false,
+        'discord_role_id' => false,
+        'discord_username' => false,
+        'discord_user_id' => false,
         'status' => false,
         'oauth_url' => false,
         'error_details' => false,
@@ -217,6 +229,10 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
         'github_repo' => 'githubRepo',
         'github_permission' => 'githubPermission',
         'github_username' => 'githubUsername',
+        'discord_guild_id' => 'discordGuildId',
+        'discord_role_id' => 'discordRoleId',
+        'discord_username' => 'discordUsername',
+        'discord_user_id' => 'discordUserId',
         'status' => 'status',
         'oauth_url' => 'oauthUrl',
         'error_details' => 'errorDetails',
@@ -240,6 +256,10 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
         'github_repo' => 'setGithubRepo',
         'github_permission' => 'setGithubPermission',
         'github_username' => 'setGithubUsername',
+        'discord_guild_id' => 'setDiscordGuildId',
+        'discord_role_id' => 'setDiscordRoleId',
+        'discord_username' => 'setDiscordUsername',
+        'discord_user_id' => 'setDiscordUserId',
         'status' => 'setStatus',
         'oauth_url' => 'setOauthUrl',
         'error_details' => 'setErrorDetails',
@@ -263,6 +283,10 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
         'github_repo' => 'getGithubRepo',
         'github_permission' => 'getGithubPermission',
         'github_username' => 'getGithubUsername',
+        'discord_guild_id' => 'getDiscordGuildId',
+        'discord_role_id' => 'getDiscordRoleId',
+        'discord_username' => 'getDiscordUsername',
+        'discord_user_id' => 'getDiscordUserId',
         'status' => 'getStatus',
         'oauth_url' => 'getOauthUrl',
         'error_details' => 'getErrorDetails',
@@ -337,6 +361,10 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('github_repo', $data ?? [], null);
         $this->setIfExists('github_permission', $data ?? [], null);
         $this->setIfExists('github_username', $data ?? [], null);
+        $this->setIfExists('discord_guild_id', $data ?? [], null);
+        $this->setIfExists('discord_role_id', $data ?? [], null);
+        $this->setIfExists('discord_username', $data ?? [], null);
+        $this->setIfExists('discord_user_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('oauth_url', $data ?? [], null);
         $this->setIfExists('error_details', $data ?? [], null);
@@ -650,6 +678,114 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable github_username cannot be null');
         }
         $this->container['github_username'] = $github_username;
+
+        return $this;
+    }
+
+    /**
+     * Gets discord_guild_id
+     *
+     * @return string|null
+     */
+    public function getDiscordGuildId()
+    {
+        return $this->container['discord_guild_id'];
+    }
+
+    /**
+     * Sets discord_guild_id
+     *
+     * @param string|null $discord_guild_id Target Discord Guild ID if type is DISCORD.
+     *
+     * @return self
+     */
+    public function setDiscordGuildId($discord_guild_id)
+    {
+        if (is_null($discord_guild_id)) {
+            throw new \InvalidArgumentException('non-nullable discord_guild_id cannot be null');
+        }
+        $this->container['discord_guild_id'] = $discord_guild_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets discord_role_id
+     *
+     * @return string|null
+     */
+    public function getDiscordRoleId()
+    {
+        return $this->container['discord_role_id'];
+    }
+
+    /**
+     * Sets discord_role_id
+     *
+     * @param string|null $discord_role_id Target Discord Role ID if type is DISCORD.
+     *
+     * @return self
+     */
+    public function setDiscordRoleId($discord_role_id)
+    {
+        if (is_null($discord_role_id)) {
+            throw new \InvalidArgumentException('non-nullable discord_role_id cannot be null');
+        }
+        $this->container['discord_role_id'] = $discord_role_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets discord_username
+     *
+     * @return string|null
+     */
+    public function getDiscordUsername()
+    {
+        return $this->container['discord_username'];
+    }
+
+    /**
+     * Sets discord_username
+     *
+     * @param string|null $discord_username The connected customer Discord username.
+     *
+     * @return self
+     */
+    public function setDiscordUsername($discord_username)
+    {
+        if (is_null($discord_username)) {
+            throw new \InvalidArgumentException('non-nullable discord_username cannot be null');
+        }
+        $this->container['discord_username'] = $discord_username;
+
+        return $this;
+    }
+
+    /**
+     * Gets discord_user_id
+     *
+     * @return string|null
+     */
+    public function getDiscordUserId()
+    {
+        return $this->container['discord_user_id'];
+    }
+
+    /**
+     * Sets discord_user_id
+     *
+     * @param string|null $discord_user_id The connected customer Discord user ID.
+     *
+     * @return self
+     */
+    public function setDiscordUserId($discord_user_id)
+    {
+        if (is_null($discord_user_id)) {
+            throw new \InvalidArgumentException('non-nullable discord_user_id cannot be null');
+        }
+        $this->container['discord_user_id'] = $discord_user_id;
 
         return $this;
     }

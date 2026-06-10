@@ -92,9 +92,9 @@ class LicenseSubDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
         'key' => false,
         'status' => false,
-        'activation_limit' => true,
-        'activation_message' => true,
-        'expires_at' => true,
+        'activation_limit' => false,
+        'activation_message' => false,
+        'expires_at' => false,
         'product' => false
     ];
 
@@ -450,14 +450,7 @@ class LicenseSubDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setActivationLimit($activation_limit)
     {
         if (is_null($activation_limit)) {
-            array_push($this->openAPINullablesSetToNull, 'activation_limit');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('activation_limit', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable activation_limit cannot be null');
         }
         $this->container['activation_limit'] = $activation_limit;
 
@@ -484,14 +477,7 @@ class LicenseSubDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setActivationMessage($activation_message)
     {
         if (is_null($activation_message)) {
-            array_push($this->openAPINullablesSetToNull, 'activation_message');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('activation_message', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable activation_message cannot be null');
         }
         $this->container['activation_message'] = $activation_message;
 
@@ -518,14 +504,7 @@ class LicenseSubDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setExpiresAt($expires_at)
     {
         if (is_null($expires_at)) {
-            array_push($this->openAPINullablesSetToNull, 'expires_at');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('expires_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable expires_at cannot be null');
         }
         $this->container['expires_at'] = $expires_at;
 

@@ -69,6 +69,9 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_github_access' => 'bool',
         'github_repo' => 'string',
         'github_permission' => 'string',
+        'has_discord_access' => 'bool',
+        'discord_guild_id' => 'string',
+        'discord_role_id' => 'string',
         'is_tax_inclusive' => 'bool',
         'activation_limit' => 'int',
         'brand_id' => 'string',
@@ -105,6 +108,9 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_github_access' => null,
         'github_repo' => null,
         'github_permission' => null,
+        'has_discord_access' => null,
+        'discord_guild_id' => null,
+        'discord_role_id' => null,
         'is_tax_inclusive' => null,
         'activation_limit' => null,
         'brand_id' => null,
@@ -139,9 +145,12 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_github_access' => false,
         'github_repo' => false,
         'github_permission' => false,
+        'has_discord_access' => false,
+        'discord_guild_id' => false,
+        'discord_role_id' => false,
         'is_tax_inclusive' => false,
-        'activation_limit' => true,
-        'brand_id' => true,
+        'activation_limit' => false,
+        'brand_id' => false,
         'billing_period' => false,
         'trial_period_days' => false,
         'expiration_days' => false,
@@ -253,6 +262,9 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_github_access' => 'hasGithubAccess',
         'github_repo' => 'githubRepo',
         'github_permission' => 'githubPermission',
+        'has_discord_access' => 'hasDiscordAccess',
+        'discord_guild_id' => 'discordGuildId',
+        'discord_role_id' => 'discordRoleId',
         'is_tax_inclusive' => 'isTaxInclusive',
         'activation_limit' => 'activationLimit',
         'brand_id' => 'brandId',
@@ -287,6 +299,9 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_github_access' => 'setHasGithubAccess',
         'github_repo' => 'setGithubRepo',
         'github_permission' => 'setGithubPermission',
+        'has_discord_access' => 'setHasDiscordAccess',
+        'discord_guild_id' => 'setDiscordGuildId',
+        'discord_role_id' => 'setDiscordRoleId',
         'is_tax_inclusive' => 'setIsTaxInclusive',
         'activation_limit' => 'setActivationLimit',
         'brand_id' => 'setBrandId',
@@ -321,6 +336,9 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_github_access' => 'getHasGithubAccess',
         'github_repo' => 'getGithubRepo',
         'github_permission' => 'getGithubPermission',
+        'has_discord_access' => 'getHasDiscordAccess',
+        'discord_guild_id' => 'getDiscordGuildId',
+        'discord_role_id' => 'getDiscordRoleId',
         'is_tax_inclusive' => 'getIsTaxInclusive',
         'activation_limit' => 'getActivationLimit',
         'brand_id' => 'getBrandId',
@@ -621,6 +639,9 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('has_github_access', $data ?? [], false);
         $this->setIfExists('github_repo', $data ?? [], null);
         $this->setIfExists('github_permission', $data ?? [], null);
+        $this->setIfExists('has_discord_access', $data ?? [], false);
+        $this->setIfExists('discord_guild_id', $data ?? [], null);
+        $this->setIfExists('discord_role_id', $data ?? [], null);
         $this->setIfExists('is_tax_inclusive', $data ?? [], false);
         $this->setIfExists('activation_limit', $data ?? [], null);
         $this->setIfExists('brand_id', $data ?? [], null);
@@ -1073,6 +1094,87 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets has_discord_access
+     *
+     * @return bool|null
+     */
+    public function getHasDiscordAccess()
+    {
+        return $this->container['has_discord_access'];
+    }
+
+    /**
+     * Sets has_discord_access
+     *
+     * @param bool|null $has_discord_access Whether the purchase includes Discord server role access.
+     *
+     * @return self
+     */
+    public function setHasDiscordAccess($has_discord_access)
+    {
+        if (is_null($has_discord_access)) {
+            throw new \InvalidArgumentException('non-nullable has_discord_access cannot be null');
+        }
+        $this->container['has_discord_access'] = $has_discord_access;
+
+        return $this;
+    }
+
+    /**
+     * Gets discord_guild_id
+     *
+     * @return string|null
+     */
+    public function getDiscordGuildId()
+    {
+        return $this->container['discord_guild_id'];
+    }
+
+    /**
+     * Sets discord_guild_id
+     *
+     * @param string|null $discord_guild_id Discord Guild (Server) ID to grant access to.
+     *
+     * @return self
+     */
+    public function setDiscordGuildId($discord_guild_id)
+    {
+        if (is_null($discord_guild_id)) {
+            throw new \InvalidArgumentException('non-nullable discord_guild_id cannot be null');
+        }
+        $this->container['discord_guild_id'] = $discord_guild_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets discord_role_id
+     *
+     * @return string|null
+     */
+    public function getDiscordRoleId()
+    {
+        return $this->container['discord_role_id'];
+    }
+
+    /**
+     * Sets discord_role_id
+     *
+     * @param string|null $discord_role_id Discord Role ID to assign to the user.
+     *
+     * @return self
+     */
+    public function setDiscordRoleId($discord_role_id)
+    {
+        if (is_null($discord_role_id)) {
+            throw new \InvalidArgumentException('non-nullable discord_role_id cannot be null');
+        }
+        $this->container['discord_role_id'] = $discord_role_id;
+
+        return $this;
+    }
+
+    /**
      * Gets is_tax_inclusive
      *
      * @return bool|null
@@ -1119,14 +1221,7 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setActivationLimit($activation_limit)
     {
         if (is_null($activation_limit)) {
-            array_push($this->openAPINullablesSetToNull, 'activation_limit');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('activation_limit', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable activation_limit cannot be null');
         }
         $this->container['activation_limit'] = $activation_limit;
 
@@ -1153,14 +1248,7 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setBrandId($brand_id)
     {
         if (is_null($brand_id)) {
-            array_push($this->openAPINullablesSetToNull, 'brand_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('brand_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable brand_id cannot be null');
         }
         $this->container['brand_id'] = $brand_id;
 

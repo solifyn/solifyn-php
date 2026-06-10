@@ -97,8 +97,8 @@ class CollectionResponseDto implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static array $openAPINullables = [
         'id' => false,
         'name' => false,
-        'description' => true,
-        'image_url' => true,
+        'description' => false,
+        'image_url' => false,
         'status' => false,
         'business_id' => false,
         'is_permanently_deleted' => false,
@@ -471,14 +471,7 @@ class CollectionResponseDto implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setDescription($description)
     {
         if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
         $this->container['description'] = $description;
 
@@ -505,14 +498,7 @@ class CollectionResponseDto implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setImageUrl($image_url)
     {
         if (is_null($image_url)) {
-            array_push($this->openAPINullablesSetToNull, 'image_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('image_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
         }
         $this->container['image_url'] = $image_url;
 
