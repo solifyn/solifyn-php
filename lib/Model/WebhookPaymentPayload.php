@@ -177,53 +177,53 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static array $openAPINullables = [
         'id' => false,
         'status' => false,
-        'substatus' => false,
-        'customer_id' => false,
-        'customer_email' => false,
-        'customer_name' => false,
-        'customer_username' => false,
-        'product_title' => false,
-        'product_route' => false,
-        'plan_id' => false,
-        'membership_id' => false,
-        'membership_status' => false,
-        'billing_reason' => false,
-        'amount' => false,
-        'subtotal' => false,
-        'usd_total' => false,
-        'fee_amount' => false,
-        'amount_after_fees' => false,
-        'tax_amount' => false,
-        'tax_behavior' => false,
-        'tax_refunded_amount' => false,
+        'substatus' => true,
+        'customer_id' => true,
+        'customer_email' => true,
+        'customer_name' => true,
+        'customer_username' => true,
+        'product_title' => true,
+        'product_route' => true,
+        'plan_id' => true,
+        'membership_id' => true,
+        'membership_status' => true,
+        'billing_reason' => true,
+        'amount' => true,
+        'subtotal' => true,
+        'usd_total' => true,
+        'fee_amount' => true,
+        'amount_after_fees' => true,
+        'tax_amount' => true,
+        'tax_behavior' => true,
+        'tax_refunded_amount' => true,
         'refunded_amount' => false,
-        'settlement_amount' => false,
-        'settlement_currency' => false,
-        'settlement_exchange_rate' => false,
+        'settlement_amount' => true,
+        'settlement_currency' => true,
+        'settlement_exchange_rate' => true,
         'currency' => false,
         'refundable' => false,
         'retryable' => false,
         'auto_refunded' => false,
-        'payment_method' => false,
-        'card_brand' => false,
-        'card_last4' => false,
-        'card_exp_month' => false,
-        'card_exp_year' => false,
-        'billing_address' => false,
-        'license_key' => false,
-        'files_snapshot' => false,
-        'checkout_id' => false,
-        'discount_code' => false,
-        'failure_message' => false,
-        'paid_at' => false,
-        'refunded_at' => false,
-        'dispute_alerted_at' => false,
-        'last_payment_attempt' => false,
-        'next_payment_attempt' => false,
+        'payment_method' => true,
+        'card_brand' => true,
+        'card_last4' => true,
+        'card_exp_month' => true,
+        'card_exp_year' => true,
+        'billing_address' => true,
+        'license_key' => true,
+        'files_snapshot' => true,
+        'checkout_id' => true,
+        'discount_code' => true,
+        'failure_message' => true,
+        'paid_at' => true,
+        'refunded_at' => true,
+        'dispute_alerted_at' => true,
+        'last_payment_attempt' => true,
+        'next_payment_attempt' => true,
         'created_at' => false,
         'updated_at' => false,
-        'payment_event_type' => false,
-        'last_event_type' => false,
+        'payment_event_type' => true,
+        'last_event_type' => true,
         'business_id' => false
     ];
 
@@ -706,7 +706,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setSubstatus($substatus)
     {
         if (is_null($substatus)) {
-            throw new \InvalidArgumentException('non-nullable substatus cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'substatus');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('substatus', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['substatus'] = $substatus;
 
@@ -733,7 +740,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCustomerId($customer_id)
     {
         if (is_null($customer_id)) {
-            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_id'] = $customer_id;
 
@@ -760,7 +774,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCustomerEmail($customer_email)
     {
         if (is_null($customer_email)) {
-            throw new \InvalidArgumentException('non-nullable customer_email cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_email');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_email', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_email'] = $customer_email;
 
@@ -787,7 +808,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCustomerName($customer_name)
     {
         if (is_null($customer_name)) {
-            throw new \InvalidArgumentException('non-nullable customer_name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_name'] = $customer_name;
 
@@ -814,7 +842,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCustomerUsername($customer_username)
     {
         if (is_null($customer_username)) {
-            throw new \InvalidArgumentException('non-nullable customer_username cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_username');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_username', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_username'] = $customer_username;
 
@@ -841,7 +876,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setProductTitle($product_title)
     {
         if (is_null($product_title)) {
-            throw new \InvalidArgumentException('non-nullable product_title cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'product_title');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('product_title', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['product_title'] = $product_title;
 
@@ -868,7 +910,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setProductRoute($product_route)
     {
         if (is_null($product_route)) {
-            throw new \InvalidArgumentException('non-nullable product_route cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'product_route');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('product_route', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['product_route'] = $product_route;
 
@@ -895,7 +944,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setPlanId($plan_id)
     {
         if (is_null($plan_id)) {
-            throw new \InvalidArgumentException('non-nullable plan_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'plan_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('plan_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['plan_id'] = $plan_id;
 
@@ -922,7 +978,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setMembershipId($membership_id)
     {
         if (is_null($membership_id)) {
-            throw new \InvalidArgumentException('non-nullable membership_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'membership_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('membership_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['membership_id'] = $membership_id;
 
@@ -949,7 +1012,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setMembershipStatus($membership_status)
     {
         if (is_null($membership_status)) {
-            throw new \InvalidArgumentException('non-nullable membership_status cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'membership_status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('membership_status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['membership_status'] = $membership_status;
 
@@ -976,7 +1046,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setBillingReason($billing_reason)
     {
         if (is_null($billing_reason)) {
-            throw new \InvalidArgumentException('non-nullable billing_reason cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'billing_reason');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('billing_reason', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['billing_reason'] = $billing_reason;
 
@@ -1003,7 +1080,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setAmount($amount)
     {
         if (is_null($amount)) {
-            throw new \InvalidArgumentException('non-nullable amount cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['amount'] = $amount;
 
@@ -1030,7 +1114,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setSubtotal($subtotal)
     {
         if (is_null($subtotal)) {
-            throw new \InvalidArgumentException('non-nullable subtotal cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'subtotal');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('subtotal', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['subtotal'] = $subtotal;
 
@@ -1057,7 +1148,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setUsdTotal($usd_total)
     {
         if (is_null($usd_total)) {
-            throw new \InvalidArgumentException('non-nullable usd_total cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'usd_total');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('usd_total', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['usd_total'] = $usd_total;
 
@@ -1084,7 +1182,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setFeeAmount($fee_amount)
     {
         if (is_null($fee_amount)) {
-            throw new \InvalidArgumentException('non-nullable fee_amount cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'fee_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fee_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['fee_amount'] = $fee_amount;
 
@@ -1111,7 +1216,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setAmountAfterFees($amount_after_fees)
     {
         if (is_null($amount_after_fees)) {
-            throw new \InvalidArgumentException('non-nullable amount_after_fees cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'amount_after_fees');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('amount_after_fees', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['amount_after_fees'] = $amount_after_fees;
 
@@ -1138,7 +1250,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setTaxAmount($tax_amount)
     {
         if (is_null($tax_amount)) {
-            throw new \InvalidArgumentException('non-nullable tax_amount cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'tax_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tax_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['tax_amount'] = $tax_amount;
 
@@ -1165,7 +1284,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setTaxBehavior($tax_behavior)
     {
         if (is_null($tax_behavior)) {
-            throw new \InvalidArgumentException('non-nullable tax_behavior cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'tax_behavior');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tax_behavior', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['tax_behavior'] = $tax_behavior;
 
@@ -1192,7 +1318,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setTaxRefundedAmount($tax_refunded_amount)
     {
         if (is_null($tax_refunded_amount)) {
-            throw new \InvalidArgumentException('non-nullable tax_refunded_amount cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'tax_refunded_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tax_refunded_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['tax_refunded_amount'] = $tax_refunded_amount;
 
@@ -1246,7 +1379,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setSettlementAmount($settlement_amount)
     {
         if (is_null($settlement_amount)) {
-            throw new \InvalidArgumentException('non-nullable settlement_amount cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'settlement_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('settlement_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['settlement_amount'] = $settlement_amount;
 
@@ -1273,7 +1413,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setSettlementCurrency($settlement_currency)
     {
         if (is_null($settlement_currency)) {
-            throw new \InvalidArgumentException('non-nullable settlement_currency cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'settlement_currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('settlement_currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['settlement_currency'] = $settlement_currency;
 
@@ -1300,7 +1447,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setSettlementExchangeRate($settlement_exchange_rate)
     {
         if (is_null($settlement_exchange_rate)) {
-            throw new \InvalidArgumentException('non-nullable settlement_exchange_rate cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'settlement_exchange_rate');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('settlement_exchange_rate', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['settlement_exchange_rate'] = $settlement_exchange_rate;
 
@@ -1435,7 +1589,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setPaymentMethod($payment_method)
     {
         if (is_null($payment_method)) {
-            throw new \InvalidArgumentException('non-nullable payment_method cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'payment_method');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payment_method', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['payment_method'] = $payment_method;
 
@@ -1462,7 +1623,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCardBrand($card_brand)
     {
         if (is_null($card_brand)) {
-            throw new \InvalidArgumentException('non-nullable card_brand cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'card_brand');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('card_brand', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['card_brand'] = $card_brand;
 
@@ -1489,7 +1657,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCardLast4($card_last4)
     {
         if (is_null($card_last4)) {
-            throw new \InvalidArgumentException('non-nullable card_last4 cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'card_last4');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('card_last4', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['card_last4'] = $card_last4;
 
@@ -1516,7 +1691,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCardExpMonth($card_exp_month)
     {
         if (is_null($card_exp_month)) {
-            throw new \InvalidArgumentException('non-nullable card_exp_month cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'card_exp_month');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('card_exp_month', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['card_exp_month'] = $card_exp_month;
 
@@ -1543,7 +1725,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCardExpYear($card_exp_year)
     {
         if (is_null($card_exp_year)) {
-            throw new \InvalidArgumentException('non-nullable card_exp_year cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'card_exp_year');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('card_exp_year', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['card_exp_year'] = $card_exp_year;
 
@@ -1570,7 +1759,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setBillingAddress($billing_address)
     {
         if (is_null($billing_address)) {
-            throw new \InvalidArgumentException('non-nullable billing_address cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'billing_address');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('billing_address', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['billing_address'] = $billing_address;
 
@@ -1597,7 +1793,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setLicenseKey($license_key)
     {
         if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'license_key');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('license_key', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['license_key'] = $license_key;
 
@@ -1624,7 +1827,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setFilesSnapshot($files_snapshot)
     {
         if (is_null($files_snapshot)) {
-            throw new \InvalidArgumentException('non-nullable files_snapshot cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'files_snapshot');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('files_snapshot', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['files_snapshot'] = $files_snapshot;
 
@@ -1651,7 +1861,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCheckoutId($checkout_id)
     {
         if (is_null($checkout_id)) {
-            throw new \InvalidArgumentException('non-nullable checkout_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'checkout_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('checkout_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['checkout_id'] = $checkout_id;
 
@@ -1678,7 +1895,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setDiscountCode($discount_code)
     {
         if (is_null($discount_code)) {
-            throw new \InvalidArgumentException('non-nullable discount_code cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'discount_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('discount_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['discount_code'] = $discount_code;
 
@@ -1705,7 +1929,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setFailureMessage($failure_message)
     {
         if (is_null($failure_message)) {
-            throw new \InvalidArgumentException('non-nullable failure_message cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'failure_message');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('failure_message', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['failure_message'] = $failure_message;
 
@@ -1732,7 +1963,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setPaidAt($paid_at)
     {
         if (is_null($paid_at)) {
-            throw new \InvalidArgumentException('non-nullable paid_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'paid_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('paid_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['paid_at'] = $paid_at;
 
@@ -1759,7 +1997,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setRefundedAt($refunded_at)
     {
         if (is_null($refunded_at)) {
-            throw new \InvalidArgumentException('non-nullable refunded_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'refunded_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('refunded_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['refunded_at'] = $refunded_at;
 
@@ -1786,7 +2031,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setDisputeAlertedAt($dispute_alerted_at)
     {
         if (is_null($dispute_alerted_at)) {
-            throw new \InvalidArgumentException('non-nullable dispute_alerted_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'dispute_alerted_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('dispute_alerted_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['dispute_alerted_at'] = $dispute_alerted_at;
 
@@ -1813,7 +2065,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setLastPaymentAttempt($last_payment_attempt)
     {
         if (is_null($last_payment_attempt)) {
-            throw new \InvalidArgumentException('non-nullable last_payment_attempt cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'last_payment_attempt');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_payment_attempt', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['last_payment_attempt'] = $last_payment_attempt;
 
@@ -1840,7 +2099,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setNextPaymentAttempt($next_payment_attempt)
     {
         if (is_null($next_payment_attempt)) {
-            throw new \InvalidArgumentException('non-nullable next_payment_attempt cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'next_payment_attempt');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('next_payment_attempt', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['next_payment_attempt'] = $next_payment_attempt;
 
@@ -1921,7 +2187,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setPaymentEventType($payment_event_type)
     {
         if (is_null($payment_event_type)) {
-            throw new \InvalidArgumentException('non-nullable payment_event_type cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'payment_event_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payment_event_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['payment_event_type'] = $payment_event_type;
 
@@ -1948,7 +2221,14 @@ class WebhookPaymentPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setLastEventType($last_event_type)
     {
         if (is_null($last_event_type)) {
-            throw new \InvalidArgumentException('non-nullable last_event_type cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'last_event_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_event_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['last_event_type'] = $last_event_type;
 

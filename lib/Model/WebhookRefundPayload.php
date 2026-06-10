@@ -102,10 +102,10 @@ class WebhookRefundPayload implements ModelInterface, ArrayAccess, \JsonSerializ
         'amount' => false,
         'currency' => false,
         'status' => false,
-        'reason' => false,
-        'reference_value' => false,
-        'provider' => false,
-        'provider_created_at' => false,
+        'reason' => true,
+        'reference_value' => true,
+        'provider' => true,
+        'provider_created_at' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -514,7 +514,14 @@ class WebhookRefundPayload implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setReason($reason)
     {
         if (is_null($reason)) {
-            throw new \InvalidArgumentException('non-nullable reason cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'reason');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('reason', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['reason'] = $reason;
 
@@ -541,7 +548,14 @@ class WebhookRefundPayload implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setReferenceValue($reference_value)
     {
         if (is_null($reference_value)) {
-            throw new \InvalidArgumentException('non-nullable reference_value cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'reference_value');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('reference_value', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['reference_value'] = $reference_value;
 
@@ -568,7 +582,14 @@ class WebhookRefundPayload implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setProvider($provider)
     {
         if (is_null($provider)) {
-            throw new \InvalidArgumentException('non-nullable provider cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'provider');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('provider', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['provider'] = $provider;
 
@@ -595,7 +616,14 @@ class WebhookRefundPayload implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setProviderCreatedAt($provider_created_at)
     {
         if (is_null($provider_created_at)) {
-            throw new \InvalidArgumentException('non-nullable provider_created_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'provider_created_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('provider_created_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['provider_created_at'] = $provider_created_at;
 

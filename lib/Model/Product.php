@@ -152,37 +152,37 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => false,
         'price' => false,
         'currency' => false,
-        'description' => false,
+        'description' => true,
         'status' => false,
-        'image_url' => false,
+        'image_url' => true,
         'tax_category' => false,
         'pricing_type' => false,
-        'discount' => false,
+        'discount' => true,
         'has_license_key' => false,
         'has_digital_delivery' => false,
         'has_github_access' => false,
-        'github_repo' => false,
-        'github_permission' => false,
+        'github_repo' => true,
+        'github_permission' => true,
         'is_tax_inclusive' => false,
-        'billing_period' => false,
-        'trial_period_days' => false,
-        'expiration_days' => false,
-        'statement_descriptor' => false,
+        'billing_period' => true,
+        'trial_period_days' => true,
+        'expiration_days' => true,
+        'statement_descriptor' => true,
         'pay_what_you_want' => false,
-        'metadata' => false,
-        'custom_fields' => false,
-        'stock' => false,
+        'metadata' => true,
+        'custom_fields' => true,
+        'stock' => true,
         'activation_limit' => false,
         'is_listed' => false,
         'is_free' => false,
         'created_at' => false,
         'updated_at' => false,
         'is_permanently_deleted' => false,
-        'brand_id' => false,
-        'digital_link' => false,
-        'instructions' => false,
-        'activation_message' => false,
-        'expiry_hours' => false,
+        'brand_id' => true,
+        'digital_link' => true,
+        'instructions' => true,
+        'activation_message' => true,
+        'expiry_hours' => true,
         'business_id' => false
     ];
 
@@ -852,7 +852,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDescription($description)
     {
         if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['description'] = $description;
 
@@ -906,7 +913,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setImageUrl($image_url)
     {
         if (is_null($image_url)) {
-            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'image_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('image_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['image_url'] = $image_url;
 
@@ -1007,7 +1021,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDiscount($discount)
     {
         if (is_null($discount)) {
-            throw new \InvalidArgumentException('non-nullable discount cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'discount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('discount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['discount'] = $discount;
 
@@ -1115,7 +1136,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setGithubRepo($github_repo)
     {
         if (is_null($github_repo)) {
-            throw new \InvalidArgumentException('non-nullable github_repo cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'github_repo');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('github_repo', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['github_repo'] = $github_repo;
 
@@ -1142,10 +1170,17 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setGithubPermission($github_permission)
     {
         if (is_null($github_permission)) {
-            throw new \InvalidArgumentException('non-nullable github_permission cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'github_permission');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('github_permission', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $allowedValues = $this->getGithubPermissionAllowableValues();
-        if (!in_array($github_permission, $allowedValues, true)) {
+        if (!is_null($github_permission) && !in_array($github_permission, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'github_permission', must be one of '%s'",
@@ -1206,7 +1241,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setBillingPeriod($billing_period)
     {
         if (is_null($billing_period)) {
-            throw new \InvalidArgumentException('non-nullable billing_period cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'billing_period');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('billing_period', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['billing_period'] = $billing_period;
 
@@ -1233,7 +1275,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setTrialPeriodDays($trial_period_days)
     {
         if (is_null($trial_period_days)) {
-            throw new \InvalidArgumentException('non-nullable trial_period_days cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'trial_period_days');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('trial_period_days', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['trial_period_days'] = $trial_period_days;
 
@@ -1260,7 +1309,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setExpirationDays($expiration_days)
     {
         if (is_null($expiration_days)) {
-            throw new \InvalidArgumentException('non-nullable expiration_days cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'expiration_days');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expiration_days', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['expiration_days'] = $expiration_days;
 
@@ -1287,7 +1343,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setStatementDescriptor($statement_descriptor)
     {
         if (is_null($statement_descriptor)) {
-            throw new \InvalidArgumentException('non-nullable statement_descriptor cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'statement_descriptor');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('statement_descriptor', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['statement_descriptor'] = $statement_descriptor;
 
@@ -1341,7 +1404,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setMetadata($metadata)
     {
         if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['metadata'] = $metadata;
 
@@ -1368,7 +1438,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCustomFields($custom_fields)
     {
         if (is_null($custom_fields)) {
-            throw new \InvalidArgumentException('non-nullable custom_fields cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'custom_fields');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('custom_fields', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['custom_fields'] = $custom_fields;
 
@@ -1395,7 +1472,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setStock($stock)
     {
         if (is_null($stock)) {
-            throw new \InvalidArgumentException('non-nullable stock cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'stock');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('stock', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['stock'] = $stock;
 
@@ -1584,7 +1668,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setBrandId($brand_id)
     {
         if (is_null($brand_id)) {
-            throw new \InvalidArgumentException('non-nullable brand_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'brand_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('brand_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['brand_id'] = $brand_id;
 
@@ -1611,7 +1702,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDigitalLink($digital_link)
     {
         if (is_null($digital_link)) {
-            throw new \InvalidArgumentException('non-nullable digital_link cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'digital_link');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('digital_link', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['digital_link'] = $digital_link;
 
@@ -1638,7 +1736,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setInstructions($instructions)
     {
         if (is_null($instructions)) {
-            throw new \InvalidArgumentException('non-nullable instructions cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'instructions');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('instructions', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['instructions'] = $instructions;
 
@@ -1665,7 +1770,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setActivationMessage($activation_message)
     {
         if (is_null($activation_message)) {
-            throw new \InvalidArgumentException('non-nullable activation_message cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'activation_message');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('activation_message', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['activation_message'] = $activation_message;
 
@@ -1692,7 +1804,14 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setExpiryHours($expiry_hours)
     {
         if (is_null($expiry_hours)) {
-            throw new \InvalidArgumentException('non-nullable expiry_hours cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'expiry_hours');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expiry_hours', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['expiry_hours'] = $expiry_hours;
 

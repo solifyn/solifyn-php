@@ -122,18 +122,18 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
         'amount' => false,
         'currency' => false,
         'status' => false,
-        'reason' => false,
+        'reason' => true,
         'editable' => false,
-        'needs_response_by' => false,
+        'needs_response_by' => true,
         'visa_rdr' => false,
-        'billing_address' => false,
-        'customer_name' => false,
-        'customer_email' => false,
-        'notes' => false,
-        'product_description' => false,
-        'service_date' => false,
-        'access_activity_log' => false,
-        'evidence' => false,
+        'billing_address' => true,
+        'customer_name' => true,
+        'customer_email' => true,
+        'notes' => true,
+        'product_description' => true,
+        'service_date' => true,
+        'access_activity_log' => true,
+        'evidence' => true,
         'payment_id' => false,
         'business_id' => false,
         'created_at' => false,
@@ -617,7 +617,14 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setReason($reason)
     {
         if (is_null($reason)) {
-            throw new \InvalidArgumentException('non-nullable reason cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'reason');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('reason', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['reason'] = $reason;
 
@@ -671,7 +678,14 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setNeedsResponseBy($needs_response_by)
     {
         if (is_null($needs_response_by)) {
-            throw new \InvalidArgumentException('non-nullable needs_response_by cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'needs_response_by');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('needs_response_by', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['needs_response_by'] = $needs_response_by;
 
@@ -725,7 +739,14 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setBillingAddress($billing_address)
     {
         if (is_null($billing_address)) {
-            throw new \InvalidArgumentException('non-nullable billing_address cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'billing_address');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('billing_address', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['billing_address'] = $billing_address;
 
@@ -752,7 +773,14 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCustomerName($customer_name)
     {
         if (is_null($customer_name)) {
-            throw new \InvalidArgumentException('non-nullable customer_name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_name'] = $customer_name;
 
@@ -779,7 +807,14 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCustomerEmail($customer_email)
     {
         if (is_null($customer_email)) {
-            throw new \InvalidArgumentException('non-nullable customer_email cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_email');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_email', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_email'] = $customer_email;
 
@@ -806,7 +841,14 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setNotes($notes)
     {
         if (is_null($notes)) {
-            throw new \InvalidArgumentException('non-nullable notes cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'notes');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('notes', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['notes'] = $notes;
 
@@ -833,7 +875,14 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setProductDescription($product_description)
     {
         if (is_null($product_description)) {
-            throw new \InvalidArgumentException('non-nullable product_description cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'product_description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('product_description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['product_description'] = $product_description;
 
@@ -860,7 +909,14 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setServiceDate($service_date)
     {
         if (is_null($service_date)) {
-            throw new \InvalidArgumentException('non-nullable service_date cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'service_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('service_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['service_date'] = $service_date;
 
@@ -887,7 +943,14 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setAccessActivityLog($access_activity_log)
     {
         if (is_null($access_activity_log)) {
-            throw new \InvalidArgumentException('non-nullable access_activity_log cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'access_activity_log');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('access_activity_log', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['access_activity_log'] = $access_activity_log;
 
@@ -914,7 +977,14 @@ class Dispute implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setEvidence($evidence)
     {
         if (is_null($evidence)) {
-            throw new \InvalidArgumentException('non-nullable evidence cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'evidence');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('evidence', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['evidence'] = $evidence;
 

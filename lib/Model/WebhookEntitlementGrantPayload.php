@@ -106,15 +106,15 @@ class WebhookEntitlementGrantPayload implements ModelInterface, ArrayAccess, \Js
         'id' => false,
         'business_id' => false,
         'customer_id' => false,
-        'payment_id' => false,
+        'payment_id' => true,
         'product_id' => false,
         'type' => false,
-        'github_repo' => false,
-        'github_permission' => false,
-        'github_username' => false,
+        'github_repo' => true,
+        'github_permission' => true,
+        'github_username' => true,
         'status' => false,
-        'oauth_url' => false,
-        'error_details' => false,
+        'oauth_url' => true,
+        'error_details' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -481,7 +481,14 @@ class WebhookEntitlementGrantPayload implements ModelInterface, ArrayAccess, \Js
     public function setPaymentId($payment_id)
     {
         if (is_null($payment_id)) {
-            throw new \InvalidArgumentException('non-nullable payment_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'payment_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payment_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['payment_id'] = $payment_id;
 
@@ -562,7 +569,14 @@ class WebhookEntitlementGrantPayload implements ModelInterface, ArrayAccess, \Js
     public function setGithubRepo($github_repo)
     {
         if (is_null($github_repo)) {
-            throw new \InvalidArgumentException('non-nullable github_repo cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'github_repo');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('github_repo', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['github_repo'] = $github_repo;
 
@@ -589,7 +603,14 @@ class WebhookEntitlementGrantPayload implements ModelInterface, ArrayAccess, \Js
     public function setGithubPermission($github_permission)
     {
         if (is_null($github_permission)) {
-            throw new \InvalidArgumentException('non-nullable github_permission cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'github_permission');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('github_permission', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['github_permission'] = $github_permission;
 
@@ -616,7 +637,14 @@ class WebhookEntitlementGrantPayload implements ModelInterface, ArrayAccess, \Js
     public function setGithubUsername($github_username)
     {
         if (is_null($github_username)) {
-            throw new \InvalidArgumentException('non-nullable github_username cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'github_username');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('github_username', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['github_username'] = $github_username;
 
@@ -670,7 +698,14 @@ class WebhookEntitlementGrantPayload implements ModelInterface, ArrayAccess, \Js
     public function setOauthUrl($oauth_url)
     {
         if (is_null($oauth_url)) {
-            throw new \InvalidArgumentException('non-nullable oauth_url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'oauth_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('oauth_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['oauth_url'] = $oauth_url;
 
@@ -697,7 +732,14 @@ class WebhookEntitlementGrantPayload implements ModelInterface, ArrayAccess, \Js
     public function setErrorDetails($error_details)
     {
         if (is_null($error_details)) {
-            throw new \InvalidArgumentException('non-nullable error_details cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'error_details');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('error_details', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['error_details'] = $error_details;
 

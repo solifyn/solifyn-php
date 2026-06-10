@@ -108,9 +108,9 @@ class Discount implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => false,
         'type' => false,
         'amount' => false,
-        'usage_limit' => false,
+        'usage_limit' => true,
         'times_used' => false,
-        'expires_at' => false,
+        'expires_at' => true,
         'status' => false,
         'business_id' => false,
         'created_at' => false,
@@ -650,7 +650,14 @@ class Discount implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setUsageLimit($usage_limit)
     {
         if (is_null($usage_limit)) {
-            throw new \InvalidArgumentException('non-nullable usage_limit cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'usage_limit');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('usage_limit', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['usage_limit'] = $usage_limit;
 
@@ -704,7 +711,14 @@ class Discount implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setExpiresAt($expires_at)
     {
         if (is_null($expires_at)) {
-            throw new \InvalidArgumentException('non-nullable expires_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'expires_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expires_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['expires_at'] = $expires_at;
 

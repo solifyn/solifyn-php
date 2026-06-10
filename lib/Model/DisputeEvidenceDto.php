@@ -83,10 +83,10 @@ class DisputeEvidenceDto implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'cancellation_policy' => false,
-        'customer_communication' => false,
-        'refund_policy' => false,
-        'uncategorized' => false
+        'cancellation_policy' => true,
+        'customer_communication' => true,
+        'refund_policy' => true,
+        'uncategorized' => true
     ];
 
     /**
@@ -330,7 +330,14 @@ class DisputeEvidenceDto implements ModelInterface, ArrayAccess, \JsonSerializab
     public function setCancellationPolicy($cancellation_policy)
     {
         if (is_null($cancellation_policy)) {
-            throw new \InvalidArgumentException('non-nullable cancellation_policy cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'cancellation_policy');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cancellation_policy', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['cancellation_policy'] = $cancellation_policy;
 
@@ -357,7 +364,14 @@ class DisputeEvidenceDto implements ModelInterface, ArrayAccess, \JsonSerializab
     public function setCustomerCommunication($customer_communication)
     {
         if (is_null($customer_communication)) {
-            throw new \InvalidArgumentException('non-nullable customer_communication cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_communication');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_communication', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_communication'] = $customer_communication;
 
@@ -384,7 +398,14 @@ class DisputeEvidenceDto implements ModelInterface, ArrayAccess, \JsonSerializab
     public function setRefundPolicy($refund_policy)
     {
         if (is_null($refund_policy)) {
-            throw new \InvalidArgumentException('non-nullable refund_policy cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'refund_policy');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('refund_policy', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['refund_policy'] = $refund_policy;
 
@@ -411,7 +432,14 @@ class DisputeEvidenceDto implements ModelInterface, ArrayAccess, \JsonSerializab
     public function setUncategorized($uncategorized)
     {
         if (is_null($uncategorized)) {
-            throw new \InvalidArgumentException('non-nullable uncategorized cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'uncategorized');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('uncategorized', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['uncategorized'] = $uncategorized;
 

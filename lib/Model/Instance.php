@@ -92,11 +92,11 @@ class Instance implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'id' => false,
         'license_id' => false,
-        'instance_id' => false,
-        'instance_name' => false,
-        'ip_address' => false,
+        'instance_id' => true,
+        'instance_name' => true,
+        'ip_address' => true,
         'activated_at' => false,
-        'last_seen_at' => false
+        'last_seen_at' => true
     ];
 
     /**
@@ -427,7 +427,14 @@ class Instance implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setInstanceId($instance_id)
     {
         if (is_null($instance_id)) {
-            throw new \InvalidArgumentException('non-nullable instance_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'instance_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('instance_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['instance_id'] = $instance_id;
 
@@ -454,7 +461,14 @@ class Instance implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setInstanceName($instance_name)
     {
         if (is_null($instance_name)) {
-            throw new \InvalidArgumentException('non-nullable instance_name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'instance_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('instance_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['instance_name'] = $instance_name;
 
@@ -481,7 +495,14 @@ class Instance implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setIpAddress($ip_address)
     {
         if (is_null($ip_address)) {
-            throw new \InvalidArgumentException('non-nullable ip_address cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'ip_address');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ip_address', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['ip_address'] = $ip_address;
 
@@ -535,7 +556,14 @@ class Instance implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setLastSeenAt($last_seen_at)
     {
         if (is_null($last_seen_at)) {
-            throw new \InvalidArgumentException('non-nullable last_seen_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'last_seen_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_seen_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['last_seen_at'] = $last_seen_at;
 

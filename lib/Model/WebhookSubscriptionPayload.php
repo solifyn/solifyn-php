@@ -106,17 +106,17 @@ class WebhookSubscriptionPayload implements ModelInterface, ArrayAccess, \JsonSe
         'id' => false,
         'status' => false,
         'cancel_at_period_end' => false,
-        'renewal_period_start' => false,
-        'renewal_period_end' => false,
+        'renewal_period_start' => true,
+        'renewal_period_end' => true,
         'currency' => false,
         'amount' => false,
-        'customer_id' => false,
-        'customer_email' => false,
-        'customer_name' => false,
-        'product_id' => false,
-        'product_title' => false,
-        'created_at' => false,
-        'updated_at' => false
+        'customer_id' => true,
+        'customer_email' => true,
+        'customer_name' => true,
+        'product_id' => true,
+        'product_title' => true,
+        'created_at' => true,
+        'updated_at' => true
     ];
 
     /**
@@ -481,7 +481,14 @@ class WebhookSubscriptionPayload implements ModelInterface, ArrayAccess, \JsonSe
     public function setRenewalPeriodStart($renewal_period_start)
     {
         if (is_null($renewal_period_start)) {
-            throw new \InvalidArgumentException('non-nullable renewal_period_start cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'renewal_period_start');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('renewal_period_start', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['renewal_period_start'] = $renewal_period_start;
 
@@ -508,7 +515,14 @@ class WebhookSubscriptionPayload implements ModelInterface, ArrayAccess, \JsonSe
     public function setRenewalPeriodEnd($renewal_period_end)
     {
         if (is_null($renewal_period_end)) {
-            throw new \InvalidArgumentException('non-nullable renewal_period_end cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'renewal_period_end');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('renewal_period_end', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['renewal_period_end'] = $renewal_period_end;
 
@@ -589,7 +603,14 @@ class WebhookSubscriptionPayload implements ModelInterface, ArrayAccess, \JsonSe
     public function setCustomerId($customer_id)
     {
         if (is_null($customer_id)) {
-            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_id'] = $customer_id;
 
@@ -616,7 +637,14 @@ class WebhookSubscriptionPayload implements ModelInterface, ArrayAccess, \JsonSe
     public function setCustomerEmail($customer_email)
     {
         if (is_null($customer_email)) {
-            throw new \InvalidArgumentException('non-nullable customer_email cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_email');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_email', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_email'] = $customer_email;
 
@@ -643,7 +671,14 @@ class WebhookSubscriptionPayload implements ModelInterface, ArrayAccess, \JsonSe
     public function setCustomerName($customer_name)
     {
         if (is_null($customer_name)) {
-            throw new \InvalidArgumentException('non-nullable customer_name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_name'] = $customer_name;
 
@@ -670,7 +705,14 @@ class WebhookSubscriptionPayload implements ModelInterface, ArrayAccess, \JsonSe
     public function setProductId($product_id)
     {
         if (is_null($product_id)) {
-            throw new \InvalidArgumentException('non-nullable product_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'product_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('product_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['product_id'] = $product_id;
 
@@ -697,7 +739,14 @@ class WebhookSubscriptionPayload implements ModelInterface, ArrayAccess, \JsonSe
     public function setProductTitle($product_title)
     {
         if (is_null($product_title)) {
-            throw new \InvalidArgumentException('non-nullable product_title cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'product_title');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('product_title', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['product_title'] = $product_title;
 
@@ -724,7 +773,14 @@ class WebhookSubscriptionPayload implements ModelInterface, ArrayAccess, \JsonSe
     public function setCreatedAt($created_at)
     {
         if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'created_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('created_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['created_at'] = $created_at;
 
@@ -751,7 +807,14 @@ class WebhookSubscriptionPayload implements ModelInterface, ArrayAccess, \JsonSe
     public function setUpdatedAt($updated_at)
     {
         if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'updated_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('updated_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['updated_at'] = $updated_at;
 

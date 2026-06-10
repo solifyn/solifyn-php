@@ -106,12 +106,12 @@ class WebhookDisputePayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'amount' => false,
         'currency' => false,
         'status' => false,
-        'reason' => false,
+        'reason' => true,
         'editable' => false,
-        'needs_response_by' => false,
-        'customer_name' => false,
-        'customer_email' => false,
-        'notes' => false,
+        'needs_response_by' => true,
+        'customer_name' => true,
+        'customer_email' => true,
+        'notes' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -528,7 +528,14 @@ class WebhookDisputePayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setReason($reason)
     {
         if (is_null($reason)) {
-            throw new \InvalidArgumentException('non-nullable reason cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'reason');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('reason', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['reason'] = $reason;
 
@@ -582,7 +589,14 @@ class WebhookDisputePayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setNeedsResponseBy($needs_response_by)
     {
         if (is_null($needs_response_by)) {
-            throw new \InvalidArgumentException('non-nullable needs_response_by cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'needs_response_by');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('needs_response_by', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['needs_response_by'] = $needs_response_by;
 
@@ -609,7 +623,14 @@ class WebhookDisputePayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCustomerName($customer_name)
     {
         if (is_null($customer_name)) {
-            throw new \InvalidArgumentException('non-nullable customer_name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_name'] = $customer_name;
 
@@ -636,7 +657,14 @@ class WebhookDisputePayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setCustomerEmail($customer_email)
     {
         if (is_null($customer_email)) {
-            throw new \InvalidArgumentException('non-nullable customer_email cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'customer_email');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_email', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['customer_email'] = $customer_email;
 
@@ -663,7 +691,14 @@ class WebhookDisputePayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setNotes($notes)
     {
         if (is_null($notes)) {
-            throw new \InvalidArgumentException('non-nullable notes cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'notes');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('notes', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['notes'] = $notes;
 

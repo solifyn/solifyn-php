@@ -101,14 +101,14 @@ class Brand implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'id' => false,
         'name' => false,
-        'website_url' => false,
-        'support_email' => false,
-        'description' => false,
-        'logo_url' => false,
+        'website_url' => true,
+        'support_email' => true,
+        'description' => true,
+        'logo_url' => true,
         'is_primary' => false,
-        'statement_descriptor' => false,
+        'statement_descriptor' => true,
         'merchant_id' => false,
-        'business_id' => false,
+        'business_id' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -458,7 +458,14 @@ class Brand implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setWebsiteUrl($website_url)
     {
         if (is_null($website_url)) {
-            throw new \InvalidArgumentException('non-nullable website_url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'website_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('website_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['website_url'] = $website_url;
 
@@ -485,7 +492,14 @@ class Brand implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setSupportEmail($support_email)
     {
         if (is_null($support_email)) {
-            throw new \InvalidArgumentException('non-nullable support_email cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'support_email');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('support_email', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['support_email'] = $support_email;
 
@@ -512,7 +526,14 @@ class Brand implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDescription($description)
     {
         if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['description'] = $description;
 
@@ -539,7 +560,14 @@ class Brand implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setLogoUrl($logo_url)
     {
         if (is_null($logo_url)) {
-            throw new \InvalidArgumentException('non-nullable logo_url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'logo_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('logo_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['logo_url'] = $logo_url;
 
@@ -593,7 +621,14 @@ class Brand implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setStatementDescriptor($statement_descriptor)
     {
         if (is_null($statement_descriptor)) {
-            throw new \InvalidArgumentException('non-nullable statement_descriptor cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'statement_descriptor');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('statement_descriptor', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['statement_descriptor'] = $statement_descriptor;
 
@@ -647,7 +682,14 @@ class Brand implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setBusinessId($business_id)
     {
         if (is_null($business_id)) {
-            throw new \InvalidArgumentException('non-nullable business_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'business_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('business_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['business_id'] = $business_id;
 

@@ -8,7 +8,6 @@ docs/Api/CheckoutApi.md
 docs/Api/CheckoutLinksApi.md
 docs/Api/CollectionsApi.md
 docs/Api/CustomersApi.md
-docs/Api/DefaultApi.md
 docs/Api/DeveloperApi.md
 docs/Api/DigitalFileApi.md
 docs/Api/DiscountsApi.md
@@ -168,7 +167,6 @@ lib/Api/CheckoutApi.php
 lib/Api/CheckoutLinksApi.php
 lib/Api/CollectionsApi.php
 lib/Api/CustomersApi.php
-lib/Api/DefaultApi.php
 lib/Api/DeveloperApi.php
 lib/Api/DigitalFileApi.php
 lib/Api/DiscountsApi.php

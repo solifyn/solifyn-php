@@ -98,13 +98,13 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'member_id' => false,
+        'member_id' => true,
         'email' => false,
-        'name' => false,
-        'username' => false,
-        'phone' => false,
-        'phone_number' => false,
-        'metadata' => false,
+        'name' => true,
+        'username' => true,
+        'phone' => true,
+        'phone_number' => true,
+        'metadata' => true,
         'created_at' => false,
         'updated_at' => false,
         'business_id' => false
@@ -421,7 +421,14 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     public function setMemberId($member_id)
     {
         if (is_null($member_id)) {
-            throw new \InvalidArgumentException('non-nullable member_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'member_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('member_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['member_id'] = $member_id;
 
@@ -475,7 +482,14 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     public function setName($name)
     {
         if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['name'] = $name;
 
@@ -502,7 +516,14 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     public function setUsername($username)
     {
         if (is_null($username)) {
-            throw new \InvalidArgumentException('non-nullable username cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'username');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('username', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['username'] = $username;
 
@@ -529,7 +550,14 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     public function setPhone($phone)
     {
         if (is_null($phone)) {
-            throw new \InvalidArgumentException('non-nullable phone cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'phone');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('phone', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['phone'] = $phone;
 
@@ -556,7 +584,14 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     public function setPhoneNumber($phone_number)
     {
         if (is_null($phone_number)) {
-            throw new \InvalidArgumentException('non-nullable phone_number cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'phone_number');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('phone_number', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['phone_number'] = $phone_number;
 
@@ -583,7 +618,14 @@ class CustomerResponseDto implements ModelInterface, ArrayAccess, \JsonSerializa
     public function setMetadata($metadata)
     {
         if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['metadata'] = $metadata;
 

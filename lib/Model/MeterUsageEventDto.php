@@ -93,7 +93,7 @@ class MeterUsageEventDto implements ModelInterface, ArrayAccess, \JsonSerializab
         'meter_id' => false,
         'customer_id' => false,
         'value' => false,
-        'metadata' => false,
+        'metadata' => true,
         'timestamp' => false,
         'processed_at' => false
     ];
@@ -477,7 +477,14 @@ class MeterUsageEventDto implements ModelInterface, ArrayAccess, \JsonSerializab
     public function setMetadata($metadata)
     {
         if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['metadata'] = $metadata;
 

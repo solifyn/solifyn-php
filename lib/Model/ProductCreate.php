@@ -140,8 +140,8 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'github_repo' => false,
         'github_permission' => false,
         'is_tax_inclusive' => false,
-        'activation_limit' => false,
-        'brand_id' => false,
+        'activation_limit' => true,
+        'brand_id' => true,
         'billing_period' => false,
         'trial_period_days' => false,
         'expiration_days' => false,
@@ -1119,7 +1119,14 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setActivationLimit($activation_limit)
     {
         if (is_null($activation_limit)) {
-            throw new \InvalidArgumentException('non-nullable activation_limit cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'activation_limit');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('activation_limit', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['activation_limit'] = $activation_limit;
 
@@ -1146,7 +1153,14 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setBrandId($brand_id)
     {
         if (is_null($brand_id)) {
-            throw new \InvalidArgumentException('non-nullable brand_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'brand_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('brand_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['brand_id'] = $brand_id;
 

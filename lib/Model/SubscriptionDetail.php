@@ -87,7 +87,7 @@ class SubscriptionDetail implements ModelInterface, ArrayAccess, \JsonSerializab
         'subscription' => false,
         'payments' => false,
         'purchased_addons' => false,
-        'product' => false
+        'product' => true
     ];
 
     /**
@@ -424,7 +424,14 @@ class SubscriptionDetail implements ModelInterface, ArrayAccess, \JsonSerializab
     public function setProduct($product)
     {
         if (is_null($product)) {
-            throw new \InvalidArgumentException('non-nullable product cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'product');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('product', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['product'] = $product;
 

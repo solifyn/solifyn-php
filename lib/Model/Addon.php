@@ -87,8 +87,8 @@ class Addon implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'product_id' => false,
         'min_quantity' => false,
-        'max_quantity' => false,
-        'price_override' => false,
+        'max_quantity' => true,
+        'price_override' => true,
         'is_seat_addon' => false
     ];
 
@@ -406,7 +406,14 @@ class Addon implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setMaxQuantity($max_quantity)
     {
         if (is_null($max_quantity)) {
-            throw new \InvalidArgumentException('non-nullable max_quantity cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'max_quantity');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_quantity', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['max_quantity'] = $max_quantity;
 
@@ -433,7 +440,14 @@ class Addon implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPriceOverride($price_override)
     {
         if (is_null($price_override)) {
-            throw new \InvalidArgumentException('non-nullable price_override cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'price_override');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('price_override', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['price_override'] = $price_override;
 
