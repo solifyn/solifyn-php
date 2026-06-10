@@ -332,4 +332,3 @@ lib/Model/WebhookRefundPayload.php
 lib/Model/WebhookSubscriptionPayload.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Api/DefaultApiTest.php
