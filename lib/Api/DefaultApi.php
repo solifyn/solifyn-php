@@ -80,6 +80,18 @@ class DefaultApi
         'disputeWonPost' => [
             'application/json',
         ],
+        'entitlementGrantCreatedPost' => [
+            'application/json',
+        ],
+        'entitlementGrantDeliveredPost' => [
+            'application/json',
+        ],
+        'entitlementGrantFailedPost' => [
+            'application/json',
+        ],
+        'entitlementGrantRevokedPost' => [
+            'application/json',
+        ],
         'licenseCreatedPost' => [
             'application/json',
         ],
@@ -749,6 +761,862 @@ class DefaultApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_dispute_payload));
             } else {
                 $httpBody = $webhook_dispute_payload;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (API Key) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation entitlementGrantCreatedPost
+     *
+     * Entitlement Grant Created
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantCreatedPost'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function entitlementGrantCreatedPost($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantCreatedPost'][0])
+    {
+        $this->entitlementGrantCreatedPostWithHttpInfo($webhook_entitlement_grant_payload, $contentType);
+    }
+
+    /**
+     * Operation entitlementGrantCreatedPostWithHttpInfo
+     *
+     * Entitlement Grant Created
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantCreatedPost'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function entitlementGrantCreatedPostWithHttpInfo($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantCreatedPost'][0])
+    {
+        $request = $this->entitlementGrantCreatedPostRequest($webhook_entitlement_grant_payload, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation entitlementGrantCreatedPostAsync
+     *
+     * Entitlement Grant Created
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantCreatedPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function entitlementGrantCreatedPostAsync($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantCreatedPost'][0])
+    {
+        return $this->entitlementGrantCreatedPostAsyncWithHttpInfo($webhook_entitlement_grant_payload, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation entitlementGrantCreatedPostAsyncWithHttpInfo
+     *
+     * Entitlement Grant Created
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantCreatedPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function entitlementGrantCreatedPostAsyncWithHttpInfo($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantCreatedPost'][0])
+    {
+        $returnType = '';
+        $request = $this->entitlementGrantCreatedPostRequest($webhook_entitlement_grant_payload, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'entitlementGrantCreatedPost'
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantCreatedPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function entitlementGrantCreatedPostRequest($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantCreatedPost'][0])
+    {
+
+
+
+        $resourcePath = '/entitlement_grant.created';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            [],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($webhook_entitlement_grant_payload)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_entitlement_grant_payload));
+            } else {
+                $httpBody = $webhook_entitlement_grant_payload;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (API Key) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation entitlementGrantDeliveredPost
+     *
+     * Entitlement Grant Delivered
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantDeliveredPost'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function entitlementGrantDeliveredPost($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantDeliveredPost'][0])
+    {
+        $this->entitlementGrantDeliveredPostWithHttpInfo($webhook_entitlement_grant_payload, $contentType);
+    }
+
+    /**
+     * Operation entitlementGrantDeliveredPostWithHttpInfo
+     *
+     * Entitlement Grant Delivered
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantDeliveredPost'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function entitlementGrantDeliveredPostWithHttpInfo($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantDeliveredPost'][0])
+    {
+        $request = $this->entitlementGrantDeliveredPostRequest($webhook_entitlement_grant_payload, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation entitlementGrantDeliveredPostAsync
+     *
+     * Entitlement Grant Delivered
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantDeliveredPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function entitlementGrantDeliveredPostAsync($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantDeliveredPost'][0])
+    {
+        return $this->entitlementGrantDeliveredPostAsyncWithHttpInfo($webhook_entitlement_grant_payload, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation entitlementGrantDeliveredPostAsyncWithHttpInfo
+     *
+     * Entitlement Grant Delivered
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantDeliveredPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function entitlementGrantDeliveredPostAsyncWithHttpInfo($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantDeliveredPost'][0])
+    {
+        $returnType = '';
+        $request = $this->entitlementGrantDeliveredPostRequest($webhook_entitlement_grant_payload, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'entitlementGrantDeliveredPost'
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantDeliveredPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function entitlementGrantDeliveredPostRequest($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantDeliveredPost'][0])
+    {
+
+
+
+        $resourcePath = '/entitlement_grant.delivered';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            [],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($webhook_entitlement_grant_payload)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_entitlement_grant_payload));
+            } else {
+                $httpBody = $webhook_entitlement_grant_payload;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (API Key) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation entitlementGrantFailedPost
+     *
+     * Entitlement Grant Failed
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantFailedPost'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function entitlementGrantFailedPost($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantFailedPost'][0])
+    {
+        $this->entitlementGrantFailedPostWithHttpInfo($webhook_entitlement_grant_payload, $contentType);
+    }
+
+    /**
+     * Operation entitlementGrantFailedPostWithHttpInfo
+     *
+     * Entitlement Grant Failed
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantFailedPost'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function entitlementGrantFailedPostWithHttpInfo($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantFailedPost'][0])
+    {
+        $request = $this->entitlementGrantFailedPostRequest($webhook_entitlement_grant_payload, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation entitlementGrantFailedPostAsync
+     *
+     * Entitlement Grant Failed
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantFailedPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function entitlementGrantFailedPostAsync($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantFailedPost'][0])
+    {
+        return $this->entitlementGrantFailedPostAsyncWithHttpInfo($webhook_entitlement_grant_payload, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation entitlementGrantFailedPostAsyncWithHttpInfo
+     *
+     * Entitlement Grant Failed
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantFailedPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function entitlementGrantFailedPostAsyncWithHttpInfo($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantFailedPost'][0])
+    {
+        $returnType = '';
+        $request = $this->entitlementGrantFailedPostRequest($webhook_entitlement_grant_payload, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'entitlementGrantFailedPost'
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantFailedPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function entitlementGrantFailedPostRequest($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantFailedPost'][0])
+    {
+
+
+
+        $resourcePath = '/entitlement_grant.failed';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            [],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($webhook_entitlement_grant_payload)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_entitlement_grant_payload));
+            } else {
+                $httpBody = $webhook_entitlement_grant_payload;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (API Key) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation entitlementGrantRevokedPost
+     *
+     * Entitlement Grant Revoked
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantRevokedPost'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function entitlementGrantRevokedPost($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantRevokedPost'][0])
+    {
+        $this->entitlementGrantRevokedPostWithHttpInfo($webhook_entitlement_grant_payload, $contentType);
+    }
+
+    /**
+     * Operation entitlementGrantRevokedPostWithHttpInfo
+     *
+     * Entitlement Grant Revoked
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantRevokedPost'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function entitlementGrantRevokedPostWithHttpInfo($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantRevokedPost'][0])
+    {
+        $request = $this->entitlementGrantRevokedPostRequest($webhook_entitlement_grant_payload, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation entitlementGrantRevokedPostAsync
+     *
+     * Entitlement Grant Revoked
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantRevokedPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function entitlementGrantRevokedPostAsync($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantRevokedPost'][0])
+    {
+        return $this->entitlementGrantRevokedPostAsyncWithHttpInfo($webhook_entitlement_grant_payload, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation entitlementGrantRevokedPostAsyncWithHttpInfo
+     *
+     * Entitlement Grant Revoked
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantRevokedPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function entitlementGrantRevokedPostAsyncWithHttpInfo($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantRevokedPost'][0])
+    {
+        $returnType = '';
+        $request = $this->entitlementGrantRevokedPostRequest($webhook_entitlement_grant_payload, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'entitlementGrantRevokedPost'
+     *
+     * @param  \Solifyn\Model\WebhookEntitlementGrantPayload $webhook_entitlement_grant_payload (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantRevokedPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function entitlementGrantRevokedPostRequest($webhook_entitlement_grant_payload = null, string $contentType = self::contentTypes['entitlementGrantRevokedPost'][0])
+    {
+
+
+
+        $resourcePath = '/entitlement_grant.revoked';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            [],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($webhook_entitlement_grant_payload)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($webhook_entitlement_grant_payload));
+            } else {
+                $httpBody = $webhook_entitlement_grant_payload;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

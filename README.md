@@ -332,6 +332,7 @@ Class | Method | HTTP request | Description
 - [WebhookDeliveryResponseDto](docs/Model/WebhookDeliveryResponseDto.md)
 - [WebhookDisputePayload](docs/Model/WebhookDisputePayload.md)
 - [WebhookEndpointResponseDto](docs/Model/WebhookEndpointResponseDto.md)
+- [WebhookEntitlementGrantPayload](docs/Model/WebhookEntitlementGrantPayload.md)
 - [WebhookLicensePayload](docs/Model/WebhookLicensePayload.md)
 - [WebhookPaymentPayload](docs/Model/WebhookPaymentPayload.md)
 - [WebhookPaymentPayloadBillingAddress](docs/Model/WebhookPaymentPayloadBillingAddress.md)

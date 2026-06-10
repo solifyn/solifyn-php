@@ -7,6 +7,10 @@ All URIs are relative to https://api.solifyn.com, except if the operation define
 | [**disputeCreatedPost()**](DefaultApi.md#disputeCreatedPost) | **POST** /dispute.created | Dispute Created |
 | [**disputeLostPost()**](DefaultApi.md#disputeLostPost) | **POST** /dispute.lost | Dispute Lost |
 | [**disputeWonPost()**](DefaultApi.md#disputeWonPost) | **POST** /dispute.won | Dispute Won |
+| [**entitlementGrantCreatedPost()**](DefaultApi.md#entitlementGrantCreatedPost) | **POST** /entitlement_grant.created | Entitlement Grant Created |
+| [**entitlementGrantDeliveredPost()**](DefaultApi.md#entitlementGrantDeliveredPost) | **POST** /entitlement_grant.delivered | Entitlement Grant Delivered |
+| [**entitlementGrantFailedPost()**](DefaultApi.md#entitlementGrantFailedPost) | **POST** /entitlement_grant.failed | Entitlement Grant Failed |
+| [**entitlementGrantRevokedPost()**](DefaultApi.md#entitlementGrantRevokedPost) | **POST** /entitlement_grant.revoked | Entitlement Grant Revoked |
 | [**licenseCreatedPost()**](DefaultApi.md#licenseCreatedPost) | **POST** /license.created | License Created |
 | [**licenseRevokedPost()**](DefaultApi.md#licenseRevokedPost) | **POST** /license.revoked | License Revoked |
 | [**paymentCreatedPost()**](DefaultApi.md#paymentCreatedPost) | **POST** /payment.created | Payment Created |
@@ -178,6 +182,242 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **webhook_dispute_payload** | [**\Solifyn\Model\WebhookDisputePayload**](../Model/WebhookDisputePayload.md)|  | [optional] |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `entitlementGrantCreatedPost()`
+
+```php
+entitlementGrantCreatedPost($webhook_entitlement_grant_payload)
+```
+
+Entitlement Grant Created
+
+Occurs when a new entitlement grant is created (e.g., at checkout completion if the product has GitHub access). The collaborator invitation is pending.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Solifyn\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$webhook_entitlement_grant_payload = new \Solifyn\Model\WebhookEntitlementGrantPayload(); // \Solifyn\Model\WebhookEntitlementGrantPayload
+
+try {
+    $apiInstance->entitlementGrantCreatedPost($webhook_entitlement_grant_payload);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->entitlementGrantCreatedPost: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **webhook_entitlement_grant_payload** | [**\Solifyn\Model\WebhookEntitlementGrantPayload**](../Model/WebhookEntitlementGrantPayload.md)|  | [optional] |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `entitlementGrantDeliveredPost()`
+
+```php
+entitlementGrantDeliveredPost($webhook_entitlement_grant_payload)
+```
+
+Entitlement Grant Delivered
+
+Occurs when the customer successfully connects their GitHub account and the collaborator invitation is successfully delivered.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Solifyn\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$webhook_entitlement_grant_payload = new \Solifyn\Model\WebhookEntitlementGrantPayload(); // \Solifyn\Model\WebhookEntitlementGrantPayload
+
+try {
+    $apiInstance->entitlementGrantDeliveredPost($webhook_entitlement_grant_payload);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->entitlementGrantDeliveredPost: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **webhook_entitlement_grant_payload** | [**\Solifyn\Model\WebhookEntitlementGrantPayload**](../Model/WebhookEntitlementGrantPayload.md)|  | [optional] |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `entitlementGrantFailedPost()`
+
+```php
+entitlementGrantFailedPost($webhook_entitlement_grant_payload)
+```
+
+Entitlement Grant Failed
+
+Occurs when invitation delivery fails (e.g., if the user GitHub account is flagged or invitation limit is reached).
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Solifyn\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$webhook_entitlement_grant_payload = new \Solifyn\Model\WebhookEntitlementGrantPayload(); // \Solifyn\Model\WebhookEntitlementGrantPayload
+
+try {
+    $apiInstance->entitlementGrantFailedPost($webhook_entitlement_grant_payload);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->entitlementGrantFailedPost: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **webhook_entitlement_grant_payload** | [**\Solifyn\Model\WebhookEntitlementGrantPayload**](../Model/WebhookEntitlementGrantPayload.md)|  | [optional] |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `entitlementGrantRevokedPost()`
+
+```php
+entitlementGrantRevokedPost($webhook_entitlement_grant_payload)
+```
+
+Entitlement Grant Revoked
+
+Occurs when the customer access is removed from the repository (manually or automatically via subscription cancel/refund).
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (API Key) authorization: ApiKeyAuth
+$config = Solifyn\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new Solifyn\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$webhook_entitlement_grant_payload = new \Solifyn\Model\WebhookEntitlementGrantPayload(); // \Solifyn\Model\WebhookEntitlementGrantPayload
+
+try {
+    $apiInstance->entitlementGrantRevokedPost($webhook_entitlement_grant_payload);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->entitlementGrantRevokedPost: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **webhook_entitlement_grant_payload** | [**\Solifyn\Model\WebhookEntitlementGrantPayload**](../Model/WebhookEntitlementGrantPayload.md)|  | [optional] |
 
 ### Return type
 

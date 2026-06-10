@@ -156,6 +156,7 @@ docs/Model/UpdateWebhookEndpointDto.md
 docs/Model/WebhookDeliveryResponseDto.md
 docs/Model/WebhookDisputePayload.md
 docs/Model/WebhookEndpointResponseDto.md
+docs/Model/WebhookEntitlementGrantPayload.md
 docs/Model/WebhookLicensePayload.md
 docs/Model/WebhookPaymentPayload.md
 docs/Model/WebhookPaymentPayloadBillingAddress.md
@@ -319,6 +320,7 @@ lib/Model/UpdateWebhookEndpointDto.php
 lib/Model/WebhookDeliveryResponseDto.php
 lib/Model/WebhookDisputePayload.php
 lib/Model/WebhookEndpointResponseDto.php
+lib/Model/WebhookEntitlementGrantPayload.php
 lib/Model/WebhookLicensePayload.php
 lib/Model/WebhookPaymentPayload.php
 lib/Model/WebhookPaymentPayloadBillingAddress.php
