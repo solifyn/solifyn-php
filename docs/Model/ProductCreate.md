@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **github_repo** | **string** | GitHub repository to grant access to (format: owner/repo). | [optional]
 **github_permission** | **string** | GitHub collaborator permission level. | [optional]
 **is_tax_inclusive** | **bool** | Whether tax is included in the base price. | [optional] [default to false]
-**activation_limit** | **int** | Maximum concurrent activated instances allowed per license key. | [optional]
+**activation_limit** | **int** | Maximum concurrent activated instances allowed per license key. | [optional] [default to null]
 **brand_id** | **string** | Brand id for the product, if not provided will default to primary brand. | [optional]
 **billing_period** | **int** | Billing period in days (for Subscription products). | [optional]
 **trial_period_days** | **int** | Trial duration in days. | [optional]
