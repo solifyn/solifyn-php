@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **has_discord_access** | **bool** | Whether the purchase includes Discord server role access. | [optional] [default to false]
 **discord_guild_id** | **string** | Discord Guild (Server) ID to grant access to. | [optional]
 **discord_role_id** | **string** | Discord Role ID to assign to the user. | [optional]
+**has_framer_access** | **bool** | Whether the purchase includes Framer Template access. | [optional] [default to false]
+**framer_template_id** | **string** | Framer Template ID to grant access to. | [optional]
 **is_tax_inclusive** | **bool** | Whether tax is included in the base price. | [optional] [default to false]
 **activation_limit** | **int** | Maximum concurrent activated instances allowed per license key. | [optional]
 **brand_id** | **string** | Brand id for the product, if not provided will default to primary brand. | [optional]

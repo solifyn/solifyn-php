@@ -72,6 +72,8 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_discord_access' => 'bool',
         'discord_guild_id' => 'string',
         'discord_role_id' => 'string',
+        'has_framer_access' => 'bool',
+        'framer_template_id' => 'string',
         'is_tax_inclusive' => 'bool',
         'activation_limit' => 'int',
         'brand_id' => 'string',
@@ -112,6 +114,8 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_discord_access' => null,
         'discord_guild_id' => null,
         'discord_role_id' => null,
+        'has_framer_access' => null,
+        'framer_template_id' => null,
         'is_tax_inclusive' => null,
         'activation_limit' => null,
         'brand_id' => null,
@@ -150,6 +154,8 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_discord_access' => false,
         'discord_guild_id' => false,
         'discord_role_id' => false,
+        'has_framer_access' => false,
+        'framer_template_id' => false,
         'is_tax_inclusive' => false,
         'activation_limit' => false,
         'brand_id' => false,
@@ -268,6 +274,8 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_discord_access' => 'hasDiscordAccess',
         'discord_guild_id' => 'discordGuildId',
         'discord_role_id' => 'discordRoleId',
+        'has_framer_access' => 'hasFramerAccess',
+        'framer_template_id' => 'framerTemplateId',
         'is_tax_inclusive' => 'isTaxInclusive',
         'activation_limit' => 'activationLimit',
         'brand_id' => 'brandId',
@@ -306,6 +314,8 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_discord_access' => 'setHasDiscordAccess',
         'discord_guild_id' => 'setDiscordGuildId',
         'discord_role_id' => 'setDiscordRoleId',
+        'has_framer_access' => 'setHasFramerAccess',
+        'framer_template_id' => 'setFramerTemplateId',
         'is_tax_inclusive' => 'setIsTaxInclusive',
         'activation_limit' => 'setActivationLimit',
         'brand_id' => 'setBrandId',
@@ -344,6 +354,8 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_discord_access' => 'getHasDiscordAccess',
         'discord_guild_id' => 'getDiscordGuildId',
         'discord_role_id' => 'getDiscordRoleId',
+        'has_framer_access' => 'getHasFramerAccess',
+        'framer_template_id' => 'getFramerTemplateId',
         'is_tax_inclusive' => 'getIsTaxInclusive',
         'activation_limit' => 'getActivationLimit',
         'brand_id' => 'getBrandId',
@@ -648,6 +660,8 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('has_discord_access', $data ?? [], false);
         $this->setIfExists('discord_guild_id', $data ?? [], null);
         $this->setIfExists('discord_role_id', $data ?? [], null);
+        $this->setIfExists('has_framer_access', $data ?? [], false);
+        $this->setIfExists('framer_template_id', $data ?? [], null);
         $this->setIfExists('is_tax_inclusive', $data ?? [], false);
         $this->setIfExists('activation_limit', $data ?? [], null);
         $this->setIfExists('brand_id', $data ?? [], null);
@@ -1165,6 +1179,60 @@ class ProductUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable discord_role_id cannot be null');
         }
         $this->container['discord_role_id'] = $discord_role_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_framer_access
+     *
+     * @return bool|null
+     */
+    public function getHasFramerAccess()
+    {
+        return $this->container['has_framer_access'];
+    }
+
+    /**
+     * Sets has_framer_access
+     *
+     * @param bool|null $has_framer_access Whether the purchase includes Framer Template access.
+     *
+     * @return self
+     */
+    public function setHasFramerAccess($has_framer_access)
+    {
+        if (is_null($has_framer_access)) {
+            throw new \InvalidArgumentException('non-nullable has_framer_access cannot be null');
+        }
+        $this->container['has_framer_access'] = $has_framer_access;
+
+        return $this;
+    }
+
+    /**
+     * Gets framer_template_id
+     *
+     * @return string|null
+     */
+    public function getFramerTemplateId()
+    {
+        return $this->container['framer_template_id'];
+    }
+
+    /**
+     * Sets framer_template_id
+     *
+     * @param string|null $framer_template_id Framer Template ID to grant access to.
+     *
+     * @return self
+     */
+    public function setFramerTemplateId($framer_template_id)
+    {
+        if (is_null($framer_template_id)) {
+            throw new \InvalidArgumentException('non-nullable framer_template_id cannot be null');
+        }
+        $this->container['framer_template_id'] = $framer_template_id;
 
         return $this;
     }
