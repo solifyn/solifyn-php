@@ -1,6 +1,6 @@
 <?php
 /**
- * EntitlementGrantResponseDto
+ * CreateEntitlementDto
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Solifyn\ObjectSerializer;
 
 /**
- * EntitlementGrantResponseDto Class Doc Comment
+ * CreateEntitlementDto Class Doc Comment
  *
  * @category Class
  * @package  Solifyn
@@ -40,7 +40,7 @@ use \Solifyn\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateEntitlementDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'EntitlementGrantResponseDto';
+    protected static $openAPIModelName = 'CreateEntitlementDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,27 +57,19 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'business_id' => 'string',
-        'customer_id' => 'string',
-        'payment_id' => 'string',
-        'product_id' => 'string',
+        'name' => 'string',
         'type' => 'string',
         'github_repo' => 'string',
         'github_permission' => 'string',
-        'github_username' => 'string',
         'discord_guild_id' => 'string',
         'discord_role_id' => 'string',
-        'discord_username' => 'string',
-        'discord_user_id' => 'string',
         'framer_template_id' => 'string',
-        'framer_remix_link' => 'string',
-        'status' => 'string',
-        'oauth_url' => 'string',
-        'error_details' => 'string',
-        'metadata' => 'object',
-        'created_at' => 'string',
-        'updated_at' => 'string'
+        'license_key' => 'string',
+        'activation_limit' => 'float',
+        'activation_message' => 'string',
+        'expiry_hours' => 'float',
+        'digital_link' => 'string',
+        'instructions' => 'string'
     ];
 
     /**
@@ -88,27 +80,19 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'business_id' => 'uuid',
-        'customer_id' => 'uuid',
-        'payment_id' => 'uuid',
-        'product_id' => 'uuid',
+        'name' => null,
         'type' => null,
         'github_repo' => null,
         'github_permission' => null,
-        'github_username' => null,
         'discord_guild_id' => null,
         'discord_role_id' => null,
-        'discord_username' => null,
-        'discord_user_id' => null,
-        'framer_template_id' => 'uuid',
-        'framer_remix_link' => null,
-        'status' => null,
-        'oauth_url' => null,
-        'error_details' => null,
-        'metadata' => null,
-        'created_at' => null,
-        'updated_at' => null
+        'framer_template_id' => null,
+        'license_key' => null,
+        'activation_limit' => null,
+        'activation_message' => null,
+        'expiry_hours' => null,
+        'digital_link' => null,
+        'instructions' => null
     ];
 
     /**
@@ -117,27 +101,19 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'business_id' => false,
-        'customer_id' => false,
-        'payment_id' => false,
-        'product_id' => false,
+        'name' => false,
         'type' => false,
         'github_repo' => false,
         'github_permission' => false,
-        'github_username' => false,
         'discord_guild_id' => false,
         'discord_role_id' => false,
-        'discord_username' => false,
-        'discord_user_id' => false,
         'framer_template_id' => false,
-        'framer_remix_link' => false,
-        'status' => false,
-        'oauth_url' => false,
-        'error_details' => false,
-        'metadata' => false,
-        'created_at' => false,
-        'updated_at' => false
+        'license_key' => false,
+        'activation_limit' => false,
+        'activation_message' => false,
+        'expiry_hours' => false,
+        'digital_link' => false,
+        'instructions' => false
     ];
 
     /**
@@ -226,27 +202,19 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'business_id' => 'businessId',
-        'customer_id' => 'customerId',
-        'payment_id' => 'paymentId',
-        'product_id' => 'productId',
+        'name' => 'name',
         'type' => 'type',
         'github_repo' => 'githubRepo',
         'github_permission' => 'githubPermission',
-        'github_username' => 'githubUsername',
         'discord_guild_id' => 'discordGuildId',
         'discord_role_id' => 'discordRoleId',
-        'discord_username' => 'discordUsername',
-        'discord_user_id' => 'discordUserId',
         'framer_template_id' => 'framerTemplateId',
-        'framer_remix_link' => 'framerRemixLink',
-        'status' => 'status',
-        'oauth_url' => 'oauthUrl',
-        'error_details' => 'errorDetails',
-        'metadata' => 'metadata',
-        'created_at' => 'createdAt',
-        'updated_at' => 'updatedAt'
+        'license_key' => 'licenseKey',
+        'activation_limit' => 'activationLimit',
+        'activation_message' => 'activationMessage',
+        'expiry_hours' => 'expiryHours',
+        'digital_link' => 'digitalLink',
+        'instructions' => 'instructions'
     ];
 
     /**
@@ -255,27 +223,19 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'business_id' => 'setBusinessId',
-        'customer_id' => 'setCustomerId',
-        'payment_id' => 'setPaymentId',
-        'product_id' => 'setProductId',
+        'name' => 'setName',
         'type' => 'setType',
         'github_repo' => 'setGithubRepo',
         'github_permission' => 'setGithubPermission',
-        'github_username' => 'setGithubUsername',
         'discord_guild_id' => 'setDiscordGuildId',
         'discord_role_id' => 'setDiscordRoleId',
-        'discord_username' => 'setDiscordUsername',
-        'discord_user_id' => 'setDiscordUserId',
         'framer_template_id' => 'setFramerTemplateId',
-        'framer_remix_link' => 'setFramerRemixLink',
-        'status' => 'setStatus',
-        'oauth_url' => 'setOauthUrl',
-        'error_details' => 'setErrorDetails',
-        'metadata' => 'setMetadata',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'license_key' => 'setLicenseKey',
+        'activation_limit' => 'setActivationLimit',
+        'activation_message' => 'setActivationMessage',
+        'expiry_hours' => 'setExpiryHours',
+        'digital_link' => 'setDigitalLink',
+        'instructions' => 'setInstructions'
     ];
 
     /**
@@ -284,27 +244,19 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'business_id' => 'getBusinessId',
-        'customer_id' => 'getCustomerId',
-        'payment_id' => 'getPaymentId',
-        'product_id' => 'getProductId',
+        'name' => 'getName',
         'type' => 'getType',
         'github_repo' => 'getGithubRepo',
         'github_permission' => 'getGithubPermission',
-        'github_username' => 'getGithubUsername',
         'discord_guild_id' => 'getDiscordGuildId',
         'discord_role_id' => 'getDiscordRoleId',
-        'discord_username' => 'getDiscordUsername',
-        'discord_user_id' => 'getDiscordUserId',
         'framer_template_id' => 'getFramerTemplateId',
-        'framer_remix_link' => 'getFramerRemixLink',
-        'status' => 'getStatus',
-        'oauth_url' => 'getOauthUrl',
-        'error_details' => 'getErrorDetails',
-        'metadata' => 'getMetadata',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'license_key' => 'getLicenseKey',
+        'activation_limit' => 'getActivationLimit',
+        'activation_message' => 'getActivationMessage',
+        'expiry_hours' => 'getExpiryHours',
+        'digital_link' => 'getDigitalLink',
+        'instructions' => 'getInstructions'
     ];
 
     /**
@@ -348,6 +300,27 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
         return self::$openAPIModelName;
     }
 
+    public const TYPE_GITHUB = 'GITHUB';
+    public const TYPE_DISCORD = 'DISCORD';
+    public const TYPE_FRAMER = 'FRAMER';
+    public const TYPE_LICENSE = 'LICENSE';
+    public const TYPE_DIGITAL = 'DIGITAL';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTypeAllowableValues()
+    {
+        return [
+            self::TYPE_GITHUB,
+            self::TYPE_DISCORD,
+            self::TYPE_FRAMER,
+            self::TYPE_LICENSE,
+            self::TYPE_DIGITAL,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -364,27 +337,19 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('business_id', $data ?? [], null);
-        $this->setIfExists('customer_id', $data ?? [], null);
-        $this->setIfExists('payment_id', $data ?? [], null);
-        $this->setIfExists('product_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('github_repo', $data ?? [], null);
-        $this->setIfExists('github_permission', $data ?? [], null);
-        $this->setIfExists('github_username', $data ?? [], null);
+        $this->setIfExists('github_permission', $data ?? [], 'pull');
         $this->setIfExists('discord_guild_id', $data ?? [], null);
         $this->setIfExists('discord_role_id', $data ?? [], null);
-        $this->setIfExists('discord_username', $data ?? [], null);
-        $this->setIfExists('discord_user_id', $data ?? [], null);
         $this->setIfExists('framer_template_id', $data ?? [], null);
-        $this->setIfExists('framer_remix_link', $data ?? [], null);
-        $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('oauth_url', $data ?? [], null);
-        $this->setIfExists('error_details', $data ?? [], null);
-        $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('license_key', $data ?? [], null);
+        $this->setIfExists('activation_limit', $data ?? [], null);
+        $this->setIfExists('activation_message', $data ?? [], null);
+        $this->setIfExists('expiry_hours', $data ?? [], null);
+        $this->setIfExists('digital_link', $data ?? [], null);
+        $this->setIfExists('instructions', $data ?? [], null);
     }
 
     /**
@@ -414,30 +379,21 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['business_id'] === null) {
-            $invalidProperties[] = "'business_id' can't be null";
-        }
-        if ($this->container['customer_id'] === null) {
-            $invalidProperties[] = "'customer_id' can't be null";
-        }
-        if ($this->container['product_id'] === null) {
-            $invalidProperties[] = "'product_id' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
         }
         if ($this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
         }
-        if ($this->container['status'] === null) {
-            $invalidProperties[] = "'status' can't be null";
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'type', must be one of '%s'",
+                $this->container['type'],
+                implode("', '", $allowedValues)
+            );
         }
-        if ($this->container['created_at'] === null) {
-            $invalidProperties[] = "'created_at' can't be null";
-        }
-        if ($this->container['updated_at'] === null) {
-            $invalidProperties[] = "'updated_at' can't be null";
-        }
+
         return $invalidProperties;
     }
 
@@ -454,136 +410,28 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets id
+     * Gets name
      *
      * @return string
      */
-    public function getId()
+    public function getName()
     {
-        return $this->container['id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets id
+     * Sets name
      *
-     * @param string $id The unique entitlement grant ID.
+     * @param string $name The user-friendly name of the entitlement
      *
      * @return self
      */
-    public function setId($id)
+    public function setName($name)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets business_id
-     *
-     * @return string
-     */
-    public function getBusinessId()
-    {
-        return $this->container['business_id'];
-    }
-
-    /**
-     * Sets business_id
-     *
-     * @param string $business_id The business ID context.
-     *
-     * @return self
-     */
-    public function setBusinessId($business_id)
-    {
-        if (is_null($business_id)) {
-            throw new \InvalidArgumentException('non-nullable business_id cannot be null');
-        }
-        $this->container['business_id'] = $business_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets customer_id
-     *
-     * @return string
-     */
-    public function getCustomerId()
-    {
-        return $this->container['customer_id'];
-    }
-
-    /**
-     * Sets customer_id
-     *
-     * @param string $customer_id The customer ID.
-     *
-     * @return self
-     */
-    public function setCustomerId($customer_id)
-    {
-        if (is_null($customer_id)) {
-            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
-        }
-        $this->container['customer_id'] = $customer_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets payment_id
-     *
-     * @return string|null
-     */
-    public function getPaymentId()
-    {
-        return $this->container['payment_id'];
-    }
-
-    /**
-     * Sets payment_id
-     *
-     * @param string|null $payment_id Associated payment transaction ID.
-     *
-     * @return self
-     */
-    public function setPaymentId($payment_id)
-    {
-        if (is_null($payment_id)) {
-            throw new \InvalidArgumentException('non-nullable payment_id cannot be null');
-        }
-        $this->container['payment_id'] = $payment_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets product_id
-     *
-     * @return string
-     */
-    public function getProductId()
-    {
-        return $this->container['product_id'];
-    }
-
-    /**
-     * Sets product_id
-     *
-     * @param string $product_id The purchased product ID.
-     *
-     * @return self
-     */
-    public function setProductId($product_id)
-    {
-        if (is_null($product_id)) {
-            throw new \InvalidArgumentException('non-nullable product_id cannot be null');
-        }
-        $this->container['product_id'] = $product_id;
+        $this->container['name'] = $name;
 
         return $this;
     }
@@ -601,7 +449,7 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets type
      *
-     * @param string $type The type of entitlement (e.g. GITHUB, DISCORD, TELEGRAM).
+     * @param string $type The type of access to grant
      *
      * @return self
      */
@@ -609,6 +457,16 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
     {
         if (is_null($type)) {
             throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!in_array($type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'type', must be one of '%s'",
+                    $type,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
         $this->container['type'] = $type;
 
@@ -628,7 +486,7 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets github_repo
      *
-     * @param string|null $github_repo Target GitHub repository (owner/repo) if type is GITHUB.
+     * @param string|null $github_repo The GitHub repository (e.g., owner/repo)
      *
      * @return self
      */
@@ -655,7 +513,7 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets github_permission
      *
-     * @param string|null $github_permission GitHub access permission level if type is GITHUB.
+     * @param string|null $github_permission The GitHub repository permission level
      *
      * @return self
      */
@@ -665,33 +523,6 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable github_permission cannot be null');
         }
         $this->container['github_permission'] = $github_permission;
-
-        return $this;
-    }
-
-    /**
-     * Gets github_username
-     *
-     * @return string|null
-     */
-    public function getGithubUsername()
-    {
-        return $this->container['github_username'];
-    }
-
-    /**
-     * Sets github_username
-     *
-     * @param string|null $github_username The connected customer GitHub username.
-     *
-     * @return self
-     */
-    public function setGithubUsername($github_username)
-    {
-        if (is_null($github_username)) {
-            throw new \InvalidArgumentException('non-nullable github_username cannot be null');
-        }
-        $this->container['github_username'] = $github_username;
 
         return $this;
     }
@@ -709,7 +540,7 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets discord_guild_id
      *
-     * @param string|null $discord_guild_id Target Discord Guild ID if type is DISCORD.
+     * @param string|null $discord_guild_id The Discord Guild/Server ID
      *
      * @return self
      */
@@ -736,7 +567,7 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets discord_role_id
      *
-     * @param string|null $discord_role_id Target Discord Role ID if type is DISCORD.
+     * @param string|null $discord_role_id The Discord Role ID to assign
      *
      * @return self
      */
@@ -746,60 +577,6 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable discord_role_id cannot be null');
         }
         $this->container['discord_role_id'] = $discord_role_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets discord_username
-     *
-     * @return string|null
-     */
-    public function getDiscordUsername()
-    {
-        return $this->container['discord_username'];
-    }
-
-    /**
-     * Sets discord_username
-     *
-     * @param string|null $discord_username The connected customer Discord username.
-     *
-     * @return self
-     */
-    public function setDiscordUsername($discord_username)
-    {
-        if (is_null($discord_username)) {
-            throw new \InvalidArgumentException('non-nullable discord_username cannot be null');
-        }
-        $this->container['discord_username'] = $discord_username;
-
-        return $this;
-    }
-
-    /**
-     * Gets discord_user_id
-     *
-     * @return string|null
-     */
-    public function getDiscordUserId()
-    {
-        return $this->container['discord_user_id'];
-    }
-
-    /**
-     * Sets discord_user_id
-     *
-     * @param string|null $discord_user_id The connected customer Discord user ID.
-     *
-     * @return self
-     */
-    public function setDiscordUserId($discord_user_id)
-    {
-        if (is_null($discord_user_id)) {
-            throw new \InvalidArgumentException('non-nullable discord_user_id cannot be null');
-        }
-        $this->container['discord_user_id'] = $discord_user_id;
 
         return $this;
     }
@@ -817,7 +594,7 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets framer_template_id
      *
-     * @param string|null $framer_template_id The Framer template ID if type is FRAMER.
+     * @param string|null $framer_template_id The associated Framer Template ID
      *
      * @return self
      */
@@ -832,190 +609,163 @@ class EntitlementGrantResponseDto implements ModelInterface, ArrayAccess, \JsonS
     }
 
     /**
-     * Gets framer_remix_link
+     * Gets license_key
      *
      * @return string|null
      */
-    public function getFramerRemixLink()
+    public function getLicenseKey()
     {
-        return $this->container['framer_remix_link'];
+        return $this->container['license_key'];
     }
 
     /**
-     * Sets framer_remix_link
+     * Sets license_key
      *
-     * @param string|null $framer_remix_link The single-use remix link generated for the customer if type is FRAMER.
+     * @param string|null $license_key The static License Key (if not dynamically generated)
      *
      * @return self
      */
-    public function setFramerRemixLink($framer_remix_link)
+    public function setLicenseKey($license_key)
     {
-        if (is_null($framer_remix_link)) {
-            throw new \InvalidArgumentException('non-nullable framer_remix_link cannot be null');
+        if (is_null($license_key)) {
+            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
         }
-        $this->container['framer_remix_link'] = $framer_remix_link;
+        $this->container['license_key'] = $license_key;
 
         return $this;
     }
 
     /**
-     * Gets status
+     * Gets activation_limit
      *
-     * @return string
+     * @return float|null
      */
-    public function getStatus()
+    public function getActivationLimit()
     {
-        return $this->container['status'];
+        return $this->container['activation_limit'];
     }
 
     /**
-     * Sets status
+     * Sets activation_limit
      *
-     * @param string $status Delivery status of the collaborator invite (PENDING, DELIVERED, FAILED, REVOKED).
+     * @param float|null $activation_limit The maximum activation limit for licenses
      *
      * @return self
      */
-    public function setStatus($status)
+    public function setActivationLimit($activation_limit)
     {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        if (is_null($activation_limit)) {
+            throw new \InvalidArgumentException('non-nullable activation_limit cannot be null');
         }
-        $this->container['status'] = $status;
+        $this->container['activation_limit'] = $activation_limit;
 
         return $this;
     }
 
     /**
-     * Gets oauth_url
+     * Gets activation_message
      *
      * @return string|null
      */
-    public function getOauthUrl()
+    public function getActivationMessage()
     {
-        return $this->container['oauth_url'];
+        return $this->container['activation_message'];
     }
 
     /**
-     * Sets oauth_url
+     * Sets activation_message
      *
-     * @param string|null $oauth_url OAuth URL to redirect the customer to.
+     * @param string|null $activation_message A message shown to the user upon license activation
      *
      * @return self
      */
-    public function setOauthUrl($oauth_url)
+    public function setActivationMessage($activation_message)
     {
-        if (is_null($oauth_url)) {
-            throw new \InvalidArgumentException('non-nullable oauth_url cannot be null');
+        if (is_null($activation_message)) {
+            throw new \InvalidArgumentException('non-nullable activation_message cannot be null');
         }
-        $this->container['oauth_url'] = $oauth_url;
+        $this->container['activation_message'] = $activation_message;
 
         return $this;
     }
 
     /**
-     * Gets error_details
+     * Gets expiry_hours
+     *
+     * @return float|null
+     */
+    public function getExpiryHours()
+    {
+        return $this->container['expiry_hours'];
+    }
+
+    /**
+     * Sets expiry_hours
+     *
+     * @param float|null $expiry_hours The number of hours until the entitlement expires
+     *
+     * @return self
+     */
+    public function setExpiryHours($expiry_hours)
+    {
+        if (is_null($expiry_hours)) {
+            throw new \InvalidArgumentException('non-nullable expiry_hours cannot be null');
+        }
+        $this->container['expiry_hours'] = $expiry_hours;
+
+        return $this;
+    }
+
+    /**
+     * Gets digital_link
      *
      * @return string|null
      */
-    public function getErrorDetails()
+    public function getDigitalLink()
     {
-        return $this->container['error_details'];
+        return $this->container['digital_link'];
     }
 
     /**
-     * Sets error_details
+     * Sets digital_link
      *
-     * @param string|null $error_details Error message if invitation delivery failed.
+     * @param string|null $digital_link The digital download URL or redirect link
      *
      * @return self
      */
-    public function setErrorDetails($error_details)
+    public function setDigitalLink($digital_link)
     {
-        if (is_null($error_details)) {
-            throw new \InvalidArgumentException('non-nullable error_details cannot be null');
+        if (is_null($digital_link)) {
+            throw new \InvalidArgumentException('non-nullable digital_link cannot be null');
         }
-        $this->container['error_details'] = $error_details;
+        $this->container['digital_link'] = $digital_link;
 
         return $this;
     }
 
     /**
-     * Gets metadata
+     * Gets instructions
      *
-     * @return object|null
+     * @return string|null
      */
-    public function getMetadata()
+    public function getInstructions()
     {
-        return $this->container['metadata'];
+        return $this->container['instructions'];
     }
 
     /**
-     * Sets metadata
+     * Sets instructions
      *
-     * @param object|null $metadata Platform-specific metadata.
+     * @param string|null $instructions Custom setup instructions for the user
      *
      * @return self
      */
-    public function setMetadata($metadata)
+    public function setInstructions($instructions)
     {
-        if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
+        if (is_null($instructions)) {
+            throw new \InvalidArgumentException('non-nullable instructions cannot be null');
         }
-        $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return string
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param string $created_at Creation timestamp.
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return string
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param string $updated_at Modification timestamp.
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
+        $this->container['instructions'] = $instructions;
 
         return $this;
     }

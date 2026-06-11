@@ -85,7 +85,8 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => 'int',
         'is_listed' => 'bool',
         'is_free' => 'bool',
-        'addons' => '\Solifyn\Model\ProductCreateAddonsInner[]'
+        'addons' => '\Solifyn\Model\ProductCreateAddonsInner[]',
+        'entitlement_ids' => 'string[]'
     ];
 
     /**
@@ -124,7 +125,8 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => null,
         'is_listed' => null,
         'is_free' => null,
-        'addons' => null
+        'addons' => null,
+        'entitlement_ids' => null
     ];
 
     /**
@@ -161,7 +163,8 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => false,
         'is_listed' => false,
         'is_free' => false,
-        'addons' => false
+        'addons' => false,
+        'entitlement_ids' => false
     ];
 
     /**
@@ -278,7 +281,8 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => 'stock',
         'is_listed' => 'isListed',
         'is_free' => 'isFree',
-        'addons' => 'addons'
+        'addons' => 'addons',
+        'entitlement_ids' => 'entitlementIds'
     ];
 
     /**
@@ -315,7 +319,8 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => 'setStock',
         'is_listed' => 'setIsListed',
         'is_free' => 'setIsFree',
-        'addons' => 'setAddons'
+        'addons' => 'setAddons',
+        'entitlement_ids' => 'setEntitlementIds'
     ];
 
     /**
@@ -352,7 +357,8 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         'stock' => 'getStock',
         'is_listed' => 'getIsListed',
         'is_free' => 'getIsFree',
-        'addons' => 'getAddons'
+        'addons' => 'getAddons',
+        'entitlement_ids' => 'getEntitlementIds'
     ];
 
     /**
@@ -656,6 +662,7 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('is_listed', $data ?? [], true);
         $this->setIfExists('is_free', $data ?? [], false);
         $this->setIfExists('addons', $data ?? [], null);
+        $this->setIfExists('entitlement_ids', $data ?? [], null);
     }
 
     /**
@@ -1548,6 +1555,33 @@ class ProductCreate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable addons cannot be null');
         }
         $this->container['addons'] = $addons;
+
+        return $this;
+    }
+
+    /**
+     * Gets entitlement_ids
+     *
+     * @return string[]|null
+     */
+    public function getEntitlementIds()
+    {
+        return $this->container['entitlement_ids'];
+    }
+
+    /**
+     * Sets entitlement_ids
+     *
+     * @param string[]|null $entitlement_ids Array of independent entitlement IDs to link to this product.
+     *
+     * @return self
+     */
+    public function setEntitlementIds($entitlement_ids)
+    {
+        if (is_null($entitlement_ids)) {
+            throw new \InvalidArgumentException('non-nullable entitlement_ids cannot be null');
+        }
+        $this->container['entitlement_ids'] = $entitlement_ids;
 
         return $this;
     }

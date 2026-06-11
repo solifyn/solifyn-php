@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **discord_role_id** | **string** | Target Discord Role ID if type is DISCORD. | [optional]
 **discord_username** | **string** | The connected customer Discord username. | [optional]
 **discord_user_id** | **string** | The connected customer Discord user ID. | [optional]
+**framer_template_id** | **string** | The Framer template ID if type is FRAMER. | [optional]
+**framer_remix_link** | **string** | The single-use remix link generated for the customer if type is FRAMER. | [optional]
 **status** | **string** | Delivery status of the collaborator invite (PENDING, DELIVERED, FAILED, REVOKED). |
 **oauth_url** | **string** | OAuth URL to redirect the customer to. | [optional]
 **error_details** | **string** | Error message if invitation delivery failed. | [optional]

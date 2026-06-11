@@ -1,6 +1,6 @@
 <?php
 /**
- * EntitlementGrantsApi
+ * FramerIntegrationApi
  * PHP version 7.4
  *
  * @category Class
@@ -40,14 +40,14 @@ use Solifyn\HeaderSelector;
 use Solifyn\ObjectSerializer;
 
 /**
- * EntitlementGrantsApi Class Doc Comment
+ * FramerIntegrationApi Class Doc Comment
  *
  * @category Class
  * @package  Solifyn
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class EntitlementGrantsApi
+class FramerIntegrationApi
 {
     /**
      * @var ClientInterface
@@ -71,16 +71,19 @@ class EntitlementGrantsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'entitlementGrantsGet' => [
+        'framerCreateTemplate' => [
             'application/json',
         ],
-        'entitlementGrantsList' => [
+        'framerDeleteTemplate' => [
             'application/json',
         ],
-        'entitlementGrantsRetry' => [
+        'framerGetTemplate' => [
             'application/json',
         ],
-        'entitlementGrantsRevoke' => [
+        'framerListTemplates' => [
+            'application/json',
+        ],
+        'framerUpdateTemplate' => [
             'application/json',
         ],
     ];
@@ -132,38 +135,38 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Operation entitlementGrantsGet
+     * Operation framerCreateTemplate
      *
-     * Retrieve Entitlement Grant
+     * Create Framer Template
      *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsGet'] to see the possible values for this operation
+     * @param  \Solifyn\Model\CreateFramerTemplateDto $create_framer_template_dto create_framer_template_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerCreateTemplate'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Solifyn\Model\EntitlementGrantResponseDto
+     * @return \Solifyn\Model\FramerTemplateResponseDto
      */
-    public function entitlementGrantsGet($id, string $contentType = self::contentTypes['entitlementGrantsGet'][0])
+    public function framerCreateTemplate($create_framer_template_dto, string $contentType = self::contentTypes['framerCreateTemplate'][0])
     {
-        list($response) = $this->entitlementGrantsGetWithHttpInfo($id, $contentType);
+        list($response) = $this->framerCreateTemplateWithHttpInfo($create_framer_template_dto, $contentType);
         return $response;
     }
 
     /**
-     * Operation entitlementGrantsGetWithHttpInfo
+     * Operation framerCreateTemplateWithHttpInfo
      *
-     * Retrieve Entitlement Grant
+     * Create Framer Template
      *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsGet'] to see the possible values for this operation
+     * @param  \Solifyn\Model\CreateFramerTemplateDto $create_framer_template_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerCreateTemplate'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Solifyn\Model\EntitlementGrantResponseDto, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Solifyn\Model\FramerTemplateResponseDto, HTTP status code, HTTP response headers (array of strings)
      */
-    public function entitlementGrantsGetWithHttpInfo($id, string $contentType = self::contentTypes['entitlementGrantsGet'][0])
+    public function framerCreateTemplateWithHttpInfo($create_framer_template_dto, string $contentType = self::contentTypes['framerCreateTemplate'][0])
     {
-        $request = $this->entitlementGrantsGetRequest($id, $contentType);
+        $request = $this->framerCreateTemplateRequest($create_framer_template_dto, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -189,12 +192,12 @@ class EntitlementGrantsApi
 
 
             switch($statusCode) {
-                case 200:
-                    if ('\Solifyn\Model\EntitlementGrantResponseDto' === '\SplFileObject') {
+                case 201:
+                    if ('\Solifyn\Model\FramerTemplateResponseDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Solifyn\Model\EntitlementGrantResponseDto' !== 'string') {
+                        if ('\Solifyn\Model\FramerTemplateResponseDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -212,7 +215,7 @@ class EntitlementGrantsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Solifyn\Model\EntitlementGrantResponseDto', []),
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\FramerTemplateResponseDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -231,7 +234,7 @@ class EntitlementGrantsApi
                 );
             }
 
-            $returnType = '\Solifyn\Model\EntitlementGrantResponseDto';
+            $returnType = '\Solifyn\Model\FramerTemplateResponseDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -261,10 +264,10 @@ class EntitlementGrantsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Solifyn\Model\EntitlementGrantResponseDto',
+                        '\Solifyn\Model\FramerTemplateResponseDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -275,19 +278,19 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Operation entitlementGrantsGetAsync
+     * Operation framerCreateTemplateAsync
      *
-     * Retrieve Entitlement Grant
+     * Create Framer Template
      *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsGet'] to see the possible values for this operation
+     * @param  \Solifyn\Model\CreateFramerTemplateDto $create_framer_template_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerCreateTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entitlementGrantsGetAsync($id, string $contentType = self::contentTypes['entitlementGrantsGet'][0])
+    public function framerCreateTemplateAsync($create_framer_template_dto, string $contentType = self::contentTypes['framerCreateTemplate'][0])
     {
-        return $this->entitlementGrantsGetAsyncWithHttpInfo($id, $contentType)
+        return $this->framerCreateTemplateAsyncWithHttpInfo($create_framer_template_dto, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -296,20 +299,20 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Operation entitlementGrantsGetAsyncWithHttpInfo
+     * Operation framerCreateTemplateAsyncWithHttpInfo
      *
-     * Retrieve Entitlement Grant
+     * Create Framer Template
      *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsGet'] to see the possible values for this operation
+     * @param  \Solifyn\Model\CreateFramerTemplateDto $create_framer_template_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerCreateTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entitlementGrantsGetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['entitlementGrantsGet'][0])
+    public function framerCreateTemplateAsyncWithHttpInfo($create_framer_template_dto, string $contentType = self::contentTypes['framerCreateTemplate'][0])
     {
-        $returnType = '\Solifyn\Model\EntitlementGrantResponseDto';
-        $request = $this->entitlementGrantsGetRequest($id, $contentType);
+        $returnType = '\Solifyn\Model\FramerTemplateResponseDto';
+        $request = $this->framerCreateTemplateRequest($create_framer_template_dto, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -348,26 +351,558 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Create request for operation 'entitlementGrantsGet'
+     * Create request for operation 'framerCreateTemplate'
      *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsGet'] to see the possible values for this operation
+     * @param  \Solifyn\Model\CreateFramerTemplateDto $create_framer_template_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerCreateTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function entitlementGrantsGetRequest($id, string $contentType = self::contentTypes['entitlementGrantsGet'][0])
+    public function framerCreateTemplateRequest($create_framer_template_dto, string $contentType = self::contentTypes['framerCreateTemplate'][0])
+    {
+
+        // verify the required parameter 'create_framer_template_dto' is set
+        if ($create_framer_template_dto === null || (is_array($create_framer_template_dto) && count($create_framer_template_dto) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_framer_template_dto when calling framerCreateTemplate'
+            );
+        }
+
+
+        $resourcePath = '/v1/framer/templates';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($create_framer_template_dto)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_framer_template_dto));
+            } else {
+                $httpBody = $create_framer_template_dto;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (API Key) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation framerDeleteTemplate
+     *
+     * Delete Framer Template
+     *
+     * @param  string $id The Framer template ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerDeleteTemplate'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function framerDeleteTemplate($id, string $contentType = self::contentTypes['framerDeleteTemplate'][0])
+    {
+        $this->framerDeleteTemplateWithHttpInfo($id, $contentType);
+    }
+
+    /**
+     * Operation framerDeleteTemplateWithHttpInfo
+     *
+     * Delete Framer Template
+     *
+     * @param  string $id The Framer template ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerDeleteTemplate'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function framerDeleteTemplateWithHttpInfo($id, string $contentType = self::contentTypes['framerDeleteTemplate'][0])
+    {
+        $request = $this->framerDeleteTemplateRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation framerDeleteTemplateAsync
+     *
+     * Delete Framer Template
+     *
+     * @param  string $id The Framer template ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerDeleteTemplate'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function framerDeleteTemplateAsync($id, string $contentType = self::contentTypes['framerDeleteTemplate'][0])
+    {
+        return $this->framerDeleteTemplateAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation framerDeleteTemplateAsyncWithHttpInfo
+     *
+     * Delete Framer Template
+     *
+     * @param  string $id The Framer template ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerDeleteTemplate'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function framerDeleteTemplateAsyncWithHttpInfo($id, string $contentType = self::contentTypes['framerDeleteTemplate'][0])
+    {
+        $returnType = '';
+        $request = $this->framerDeleteTemplateRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'framerDeleteTemplate'
+     *
+     * @param  string $id The Framer template ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerDeleteTemplate'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function framerDeleteTemplateRequest($id, string $contentType = self::contentTypes['framerDeleteTemplate'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling entitlementGrantsGet'
+                'Missing the required parameter $id when calling framerDeleteTemplate'
             );
         }
 
 
-        $resourcePath = '/v1/entitlement-grants/{id}';
+        $resourcePath = '/v1/framer/templates/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            [],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (API Key) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation framerGetTemplate
+     *
+     * Retrieve Framer Template
+     *
+     * @param  string $id The Framer template ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerGetTemplate'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Solifyn\Model\FramerTemplateResponseDto
+     */
+    public function framerGetTemplate($id, string $contentType = self::contentTypes['framerGetTemplate'][0])
+    {
+        list($response) = $this->framerGetTemplateWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation framerGetTemplateWithHttpInfo
+     *
+     * Retrieve Framer Template
+     *
+     * @param  string $id The Framer template ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerGetTemplate'] to see the possible values for this operation
+     *
+     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Solifyn\Model\FramerTemplateResponseDto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function framerGetTemplateWithHttpInfo($id, string $contentType = self::contentTypes['framerGetTemplate'][0])
+    {
+        $request = $this->framerGetTemplateRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Solifyn\Model\FramerTemplateResponseDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Solifyn\Model\FramerTemplateResponseDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\FramerTemplateResponseDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Solifyn\Model\FramerTemplateResponseDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Solifyn\Model\FramerTemplateResponseDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation framerGetTemplateAsync
+     *
+     * Retrieve Framer Template
+     *
+     * @param  string $id The Framer template ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerGetTemplate'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function framerGetTemplateAsync($id, string $contentType = self::contentTypes['framerGetTemplate'][0])
+    {
+        return $this->framerGetTemplateAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation framerGetTemplateAsyncWithHttpInfo
+     *
+     * Retrieve Framer Template
+     *
+     * @param  string $id The Framer template ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerGetTemplate'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function framerGetTemplateAsyncWithHttpInfo($id, string $contentType = self::contentTypes['framerGetTemplate'][0])
+    {
+        $returnType = '\Solifyn\Model\FramerTemplateResponseDto';
+        $request = $this->framerGetTemplateRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'framerGetTemplate'
+     *
+     * @param  string $id The Framer template ID (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerGetTemplate'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function framerGetTemplateRequest($id, string $contentType = self::contentTypes['framerGetTemplate'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling framerGetTemplate'
+            );
+        }
+
+
+        $resourcePath = '/v1/framer/templates/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -444,42 +979,36 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Operation entitlementGrantsList
+     * Operation framerListTemplates
      *
-     * List Entitlement Grants
+     * List Framer Templates
      *
-     * @param  string $status Filter by status (PENDING, DELIVERED, FAILED, REVOKED) (optional)
-     * @param  string $entitlement_id Filter by entitlement config ID (optional)
-     * @param  string $product_id Filter by product ID (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsList'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerListTemplates'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Solifyn\Model\EntitlementGrantResponseDto[]
+     * @return \Solifyn\Model\FramerTemplateResponseDto[]
      */
-    public function entitlementGrantsList($status = null, $entitlement_id = null, $product_id = null, string $contentType = self::contentTypes['entitlementGrantsList'][0])
+    public function framerListTemplates(string $contentType = self::contentTypes['framerListTemplates'][0])
     {
-        list($response) = $this->entitlementGrantsListWithHttpInfo($status, $entitlement_id, $product_id, $contentType);
+        list($response) = $this->framerListTemplatesWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation entitlementGrantsListWithHttpInfo
+     * Operation framerListTemplatesWithHttpInfo
      *
-     * List Entitlement Grants
+     * List Framer Templates
      *
-     * @param  string $status Filter by status (PENDING, DELIVERED, FAILED, REVOKED) (optional)
-     * @param  string $entitlement_id Filter by entitlement config ID (optional)
-     * @param  string $product_id Filter by product ID (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsList'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerListTemplates'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Solifyn\Model\EntitlementGrantResponseDto[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Solifyn\Model\FramerTemplateResponseDto[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function entitlementGrantsListWithHttpInfo($status = null, $entitlement_id = null, $product_id = null, string $contentType = self::contentTypes['entitlementGrantsList'][0])
+    public function framerListTemplatesWithHttpInfo(string $contentType = self::contentTypes['framerListTemplates'][0])
     {
-        $request = $this->entitlementGrantsListRequest($status, $entitlement_id, $product_id, $contentType);
+        $request = $this->framerListTemplatesRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -506,11 +1035,11 @@ class EntitlementGrantsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Solifyn\Model\EntitlementGrantResponseDto[]' === '\SplFileObject') {
+                    if ('\Solifyn\Model\FramerTemplateResponseDto[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Solifyn\Model\EntitlementGrantResponseDto[]' !== 'string') {
+                        if ('\Solifyn\Model\FramerTemplateResponseDto[]' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -528,7 +1057,7 @@ class EntitlementGrantsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Solifyn\Model\EntitlementGrantResponseDto[]', []),
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\FramerTemplateResponseDto[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -547,7 +1076,7 @@ class EntitlementGrantsApi
                 );
             }
 
-            $returnType = '\Solifyn\Model\EntitlementGrantResponseDto[]';
+            $returnType = '\Solifyn\Model\FramerTemplateResponseDto[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -580,7 +1109,7 @@ class EntitlementGrantsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Solifyn\Model\EntitlementGrantResponseDto[]',
+                        '\Solifyn\Model\FramerTemplateResponseDto[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -591,21 +1120,18 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Operation entitlementGrantsListAsync
+     * Operation framerListTemplatesAsync
      *
-     * List Entitlement Grants
+     * List Framer Templates
      *
-     * @param  string $status Filter by status (PENDING, DELIVERED, FAILED, REVOKED) (optional)
-     * @param  string $entitlement_id Filter by entitlement config ID (optional)
-     * @param  string $product_id Filter by product ID (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsList'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerListTemplates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entitlementGrantsListAsync($status = null, $entitlement_id = null, $product_id = null, string $contentType = self::contentTypes['entitlementGrantsList'][0])
+    public function framerListTemplatesAsync(string $contentType = self::contentTypes['framerListTemplates'][0])
     {
-        return $this->entitlementGrantsListAsyncWithHttpInfo($status, $entitlement_id, $product_id, $contentType)
+        return $this->framerListTemplatesAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -614,22 +1140,19 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Operation entitlementGrantsListAsyncWithHttpInfo
+     * Operation framerListTemplatesAsyncWithHttpInfo
      *
-     * List Entitlement Grants
+     * List Framer Templates
      *
-     * @param  string $status Filter by status (PENDING, DELIVERED, FAILED, REVOKED) (optional)
-     * @param  string $entitlement_id Filter by entitlement config ID (optional)
-     * @param  string $product_id Filter by product ID (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsList'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerListTemplates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entitlementGrantsListAsyncWithHttpInfo($status = null, $entitlement_id = null, $product_id = null, string $contentType = self::contentTypes['entitlementGrantsList'][0])
+    public function framerListTemplatesAsyncWithHttpInfo(string $contentType = self::contentTypes['framerListTemplates'][0])
     {
-        $returnType = '\Solifyn\Model\EntitlementGrantResponseDto[]';
-        $request = $this->entitlementGrantsListRequest($status, $entitlement_id, $product_id, $contentType);
+        $returnType = '\Solifyn\Model\FramerTemplateResponseDto[]';
+        $request = $this->framerListTemplatesRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -668,57 +1191,24 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Create request for operation 'entitlementGrantsList'
+     * Create request for operation 'framerListTemplates'
      *
-     * @param  string $status Filter by status (PENDING, DELIVERED, FAILED, REVOKED) (optional)
-     * @param  string $entitlement_id Filter by entitlement config ID (optional)
-     * @param  string $product_id Filter by product ID (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsList'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerListTemplates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function entitlementGrantsListRequest($status = null, $entitlement_id = null, $product_id = null, string $contentType = self::contentTypes['entitlementGrantsList'][0])
+    public function framerListTemplatesRequest(string $contentType = self::contentTypes['framerListTemplates'][0])
     {
 
 
-
-
-
-        $resourcePath = '/v1/entitlement-grants';
+        $resourcePath = '/v1/framer/templates';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $status,
-            'status', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $entitlement_id,
-            'entitlementId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $product_id,
-            'productId', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
 
 
 
@@ -781,38 +1271,40 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Operation entitlementGrantsRetry
+     * Operation framerUpdateTemplate
      *
-     * Retry Entitlement Grant Delivery
+     * Update Framer Template
      *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsRetry'] to see the possible values for this operation
+     * @param  string $id The Framer template ID (required)
+     * @param  \Solifyn\Model\UpdateFramerTemplateDto $update_framer_template_dto update_framer_template_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerUpdateTemplate'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Solifyn\Model\EntitlementGrantResponseDto
+     * @return \Solifyn\Model\FramerTemplateResponseDto
      */
-    public function entitlementGrantsRetry($id, string $contentType = self::contentTypes['entitlementGrantsRetry'][0])
+    public function framerUpdateTemplate($id, $update_framer_template_dto, string $contentType = self::contentTypes['framerUpdateTemplate'][0])
     {
-        list($response) = $this->entitlementGrantsRetryWithHttpInfo($id, $contentType);
+        list($response) = $this->framerUpdateTemplateWithHttpInfo($id, $update_framer_template_dto, $contentType);
         return $response;
     }
 
     /**
-     * Operation entitlementGrantsRetryWithHttpInfo
+     * Operation framerUpdateTemplateWithHttpInfo
      *
-     * Retry Entitlement Grant Delivery
+     * Update Framer Template
      *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsRetry'] to see the possible values for this operation
+     * @param  string $id The Framer template ID (required)
+     * @param  \Solifyn\Model\UpdateFramerTemplateDto $update_framer_template_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerUpdateTemplate'] to see the possible values for this operation
      *
      * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Solifyn\Model\EntitlementGrantResponseDto, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Solifyn\Model\FramerTemplateResponseDto, HTTP status code, HTTP response headers (array of strings)
      */
-    public function entitlementGrantsRetryWithHttpInfo($id, string $contentType = self::contentTypes['entitlementGrantsRetry'][0])
+    public function framerUpdateTemplateWithHttpInfo($id, $update_framer_template_dto, string $contentType = self::contentTypes['framerUpdateTemplate'][0])
     {
-        $request = $this->entitlementGrantsRetryRequest($id, $contentType);
+        $request = $this->framerUpdateTemplateRequest($id, $update_framer_template_dto, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -839,11 +1331,11 @@ class EntitlementGrantsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Solifyn\Model\EntitlementGrantResponseDto' === '\SplFileObject') {
+                    if ('\Solifyn\Model\FramerTemplateResponseDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Solifyn\Model\EntitlementGrantResponseDto' !== 'string') {
+                        if ('\Solifyn\Model\FramerTemplateResponseDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -861,7 +1353,7 @@ class EntitlementGrantsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Solifyn\Model\EntitlementGrantResponseDto', []),
+                        ObjectSerializer::deserialize($content, '\Solifyn\Model\FramerTemplateResponseDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -880,7 +1372,7 @@ class EntitlementGrantsApi
                 );
             }
 
-            $returnType = '\Solifyn\Model\EntitlementGrantResponseDto';
+            $returnType = '\Solifyn\Model\FramerTemplateResponseDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -913,7 +1405,7 @@ class EntitlementGrantsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Solifyn\Model\EntitlementGrantResponseDto',
+                        '\Solifyn\Model\FramerTemplateResponseDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -924,19 +1416,20 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Operation entitlementGrantsRetryAsync
+     * Operation framerUpdateTemplateAsync
      *
-     * Retry Entitlement Grant Delivery
+     * Update Framer Template
      *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsRetry'] to see the possible values for this operation
+     * @param  string $id The Framer template ID (required)
+     * @param  \Solifyn\Model\UpdateFramerTemplateDto $update_framer_template_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerUpdateTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entitlementGrantsRetryAsync($id, string $contentType = self::contentTypes['entitlementGrantsRetry'][0])
+    public function framerUpdateTemplateAsync($id, $update_framer_template_dto, string $contentType = self::contentTypes['framerUpdateTemplate'][0])
     {
-        return $this->entitlementGrantsRetryAsyncWithHttpInfo($id, $contentType)
+        return $this->framerUpdateTemplateAsyncWithHttpInfo($id, $update_framer_template_dto, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -945,20 +1438,21 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Operation entitlementGrantsRetryAsyncWithHttpInfo
+     * Operation framerUpdateTemplateAsyncWithHttpInfo
      *
-     * Retry Entitlement Grant Delivery
+     * Update Framer Template
      *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsRetry'] to see the possible values for this operation
+     * @param  string $id The Framer template ID (required)
+     * @param  \Solifyn\Model\UpdateFramerTemplateDto $update_framer_template_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerUpdateTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function entitlementGrantsRetryAsyncWithHttpInfo($id, string $contentType = self::contentTypes['entitlementGrantsRetry'][0])
+    public function framerUpdateTemplateAsyncWithHttpInfo($id, $update_framer_template_dto, string $contentType = self::contentTypes['framerUpdateTemplate'][0])
     {
-        $returnType = '\Solifyn\Model\EntitlementGrantResponseDto';
-        $request = $this->entitlementGrantsRetryRequest($id, $contentType);
+        $returnType = '\Solifyn\Model\FramerTemplateResponseDto';
+        $request = $this->framerUpdateTemplateRequest($id, $update_framer_template_dto, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -997,26 +1491,34 @@ class EntitlementGrantsApi
     }
 
     /**
-     * Create request for operation 'entitlementGrantsRetry'
+     * Create request for operation 'framerUpdateTemplate'
      *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsRetry'] to see the possible values for this operation
+     * @param  string $id The Framer template ID (required)
+     * @param  \Solifyn\Model\UpdateFramerTemplateDto $update_framer_template_dto (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['framerUpdateTemplate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function entitlementGrantsRetryRequest($id, string $contentType = self::contentTypes['entitlementGrantsRetry'][0])
+    public function framerUpdateTemplateRequest($id, $update_framer_template_dto, string $contentType = self::contentTypes['framerUpdateTemplate'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling entitlementGrantsRetry'
+                'Missing the required parameter $id when calling framerUpdateTemplate'
+            );
+        }
+
+        // verify the required parameter 'update_framer_template_dto' is set
+        if ($update_framer_template_dto === null || (is_array($update_framer_template_dto) && count($update_framer_template_dto) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $update_framer_template_dto when calling framerUpdateTemplate'
             );
         }
 
 
-        $resourcePath = '/v1/entitlement-grants/{id}/retry';
+        $resourcePath = '/v1/framer/templates/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1042,7 +1544,14 @@ class EntitlementGrantsApi
         );
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($update_framer_template_dto)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_framer_template_dto));
+            } else {
+                $httpBody = $update_framer_template_dto;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -1085,319 +1594,7 @@ class EntitlementGrantsApi
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation entitlementGrantsRevoke
-     *
-     * Manually Revoke Entitlement Grant
-     *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsRevoke'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Solifyn\Model\EntitlementGrantResponseDto
-     */
-    public function entitlementGrantsRevoke($id, string $contentType = self::contentTypes['entitlementGrantsRevoke'][0])
-    {
-        list($response) = $this->entitlementGrantsRevokeWithHttpInfo($id, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation entitlementGrantsRevokeWithHttpInfo
-     *
-     * Manually Revoke Entitlement Grant
-     *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsRevoke'] to see the possible values for this operation
-     *
-     * @throws \Solifyn\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Solifyn\Model\EntitlementGrantResponseDto, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function entitlementGrantsRevokeWithHttpInfo($id, string $contentType = self::contentTypes['entitlementGrantsRevoke'][0])
-    {
-        $request = $this->entitlementGrantsRevokeRequest($id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Solifyn\Model\EntitlementGrantResponseDto' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Solifyn\Model\EntitlementGrantResponseDto' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Solifyn\Model\EntitlementGrantResponseDto', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Solifyn\Model\EntitlementGrantResponseDto';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Solifyn\Model\EntitlementGrantResponseDto',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation entitlementGrantsRevokeAsync
-     *
-     * Manually Revoke Entitlement Grant
-     *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsRevoke'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function entitlementGrantsRevokeAsync($id, string $contentType = self::contentTypes['entitlementGrantsRevoke'][0])
-    {
-        return $this->entitlementGrantsRevokeAsyncWithHttpInfo($id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation entitlementGrantsRevokeAsyncWithHttpInfo
-     *
-     * Manually Revoke Entitlement Grant
-     *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsRevoke'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function entitlementGrantsRevokeAsyncWithHttpInfo($id, string $contentType = self::contentTypes['entitlementGrantsRevoke'][0])
-    {
-        $returnType = '\Solifyn\Model\EntitlementGrantResponseDto';
-        $request = $this->entitlementGrantsRevokeRequest($id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'entitlementGrantsRevoke'
-     *
-     * @param  string $id The unique grant ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['entitlementGrantsRevoke'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function entitlementGrantsRevokeRequest($id, string $contentType = self::contentTypes['entitlementGrantsRevoke'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling entitlementGrantsRevoke'
-            );
-        }
-
-
-        $resourcePath = '/v1/entitlement-grants/{id}/revoke';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer (API Key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
+            'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

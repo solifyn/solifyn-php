@@ -33,5 +33,6 @@ Name | Type | Description | Notes
 **is_listed** | **bool** | Whether the product is publicly visible. | [optional] [default to true]
 **is_free** | **bool** | Whether the product is free of charge. | [optional] [default to false]
 **addons** | [**\Solifyn\Model\ProductCreateAddonsInner[]**](ProductCreateAddonsInner.md) | Product addons configurations. | [optional]
+**entitlement_ids** | **string[]** | Array of independent entitlement IDs to link to this product. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

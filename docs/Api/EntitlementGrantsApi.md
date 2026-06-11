@@ -73,7 +73,7 @@ try {
 ## `entitlementGrantsList()`
 
 ```php
-entitlementGrantsList($status): \Solifyn\Model\EntitlementGrantResponseDto[]
+entitlementGrantsList($status, $entitlement_id, $product_id): \Solifyn\Model\EntitlementGrantResponseDto[]
 ```
 
 List Entitlement Grants
@@ -98,9 +98,11 @@ $apiInstance = new Solifyn\Api\EntitlementGrantsApi(
     $config
 );
 $status = 'status_example'; // string | Filter by status (PENDING, DELIVERED, FAILED, REVOKED)
+$entitlement_id = 'entitlement_id_example'; // string | Filter by entitlement config ID
+$product_id = 'product_id_example'; // string | Filter by product ID
 
 try {
-    $result = $apiInstance->entitlementGrantsList($status);
+    $result = $apiInstance->entitlementGrantsList($status, $entitlement_id, $product_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling EntitlementGrantsApi->entitlementGrantsList: ', $e->getMessage(), PHP_EOL;
@@ -112,6 +114,8 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **status** | **string**| Filter by status (PENDING, DELIVERED, FAILED, REVOKED) | [optional] |
+| **entitlement_id** | **string**| Filter by entitlement config ID | [optional] |
+| **product_id** | **string**| Filter by product ID | [optional] |
 
 ### Return type
 

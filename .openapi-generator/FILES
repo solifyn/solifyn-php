@@ -15,6 +15,8 @@ docs/Api/DiscordIntegrationApi.md
 docs/Api/DiscountsApi.md
 docs/Api/DisputesApi.md
 docs/Api/EntitlementGrantsApi.md
+docs/Api/EntitlementsApi.md
+docs/Api/FramerIntegrationApi.md
 docs/Api/GitHubIntegrationApi.md
 docs/Api/LicenseApi.md
 docs/Api/LicenseKeysApi.md
@@ -57,6 +59,8 @@ docs/Model/CreateCheckoutLinkDto.md
 docs/Model/CreateCollectionCheckoutDto.md
 docs/Model/CreateCollectionDto.md
 docs/Model/CreateCustomerDto.md
+docs/Model/CreateEntitlementDto.md
+docs/Model/CreateFramerTemplateDto.md
 docs/Model/CreateMeterDto.md
 docs/Model/CreateSetupCheckoutDto.md
 docs/Model/CreateWebhookEndpointDto.md
@@ -78,7 +82,9 @@ docs/Model/DisputeEvidenceUpdate.md
 docs/Model/DisputeFileUpload.md
 docs/Model/DisputeList.md
 docs/Model/DisputeListMetaDto.md
+docs/Model/EntitlementDetailResponseDto.md
 docs/Model/EntitlementGrantResponseDto.md
+docs/Model/FramerTemplateResponseDto.md
 docs/Model/GithubReposResponseDto.md
 docs/Model/Instance.md
 docs/Model/Invoice.md
@@ -92,6 +98,7 @@ docs/Model/LicensesDeactivateRequest.md
 docs/Model/LicensesUpdateInstancePostRequest.md
 docs/Model/LicensesUpdateRequest.md
 docs/Model/LicensesVerifyRequest.md
+docs/Model/LinkedProductDto.md
 docs/Model/MeterDetailResponseDto.md
 docs/Model/MeterEventsResponseDto.md
 docs/Model/MeterIngestEventDto.md
@@ -152,6 +159,8 @@ docs/Model/UpdateCheckoutLinkDto.md
 docs/Model/UpdateCollectionDto.md
 docs/Model/UpdateCollectionProductDto.md
 docs/Model/UpdateCustomerDto.md
+docs/Model/UpdateEntitlementDto.md
+docs/Model/UpdateFramerTemplateDto.md
 docs/Model/UpdateInstanceDto.md
 docs/Model/UpdateMeterDto.md
 docs/Model/UpdateWebhookEndpointDto.md
@@ -177,6 +186,8 @@ lib/Api/DiscordIntegrationApi.php
 lib/Api/DiscountsApi.php
 lib/Api/DisputesApi.php
 lib/Api/EntitlementGrantsApi.php
+lib/Api/EntitlementsApi.php
+lib/Api/FramerIntegrationApi.php
 lib/Api/GitHubIntegrationApi.php
 lib/Api/LicenseApi.php
 lib/Api/LicenseKeysApi.php
@@ -222,6 +233,8 @@ lib/Model/CreateCheckoutLinkDto.php
 lib/Model/CreateCollectionCheckoutDto.php
 lib/Model/CreateCollectionDto.php
 lib/Model/CreateCustomerDto.php
+lib/Model/CreateEntitlementDto.php
+lib/Model/CreateFramerTemplateDto.php
 lib/Model/CreateMeterDto.php
 lib/Model/CreateSetupCheckoutDto.php
 lib/Model/CreateWebhookEndpointDto.php
@@ -243,7 +256,9 @@ lib/Model/DisputeEvidenceUpdate.php
 lib/Model/DisputeFileUpload.php
 lib/Model/DisputeList.php
 lib/Model/DisputeListMetaDto.php
+lib/Model/EntitlementDetailResponseDto.php
 lib/Model/EntitlementGrantResponseDto.php
+lib/Model/FramerTemplateResponseDto.php
 lib/Model/GithubReposResponseDto.php
 lib/Model/Instance.php
 lib/Model/Invoice.php
@@ -257,6 +272,7 @@ lib/Model/LicensesDeactivateRequest.php
 lib/Model/LicensesUpdateInstancePostRequest.php
 lib/Model/LicensesUpdateRequest.php
 lib/Model/LicensesVerifyRequest.php
+lib/Model/LinkedProductDto.php
 lib/Model/MeterDetailResponseDto.php
 lib/Model/MeterEventsResponseDto.php
 lib/Model/MeterIngestEventDto.php
@@ -318,6 +334,8 @@ lib/Model/UpdateCheckoutLinkDto.php
 lib/Model/UpdateCollectionDto.php
 lib/Model/UpdateCollectionProductDto.php
 lib/Model/UpdateCustomerDto.php
+lib/Model/UpdateEntitlementDto.php
+lib/Model/UpdateFramerTemplateDto.php
 lib/Model/UpdateInstanceDto.php
 lib/Model/UpdateMeterDto.php
 lib/Model/UpdateWebhookEndpointDto.php
